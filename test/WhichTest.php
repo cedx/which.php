@@ -28,7 +28,7 @@ class WhichTest extends TestCase {
       expect($checkFileExtension->call($which, '/home/logger.txt'))->to->be->false;
       expect($checkFileExtension->call($which, 'C:\\Program Files\\FooBar\\FooBar.dll'))->to->be->false;
 
-      $which->setPathExt('.EXE');
+      $which->setPathExt('.BAR');
       expect($checkFileExtension->call($which, 'foo.exe'))->to->be->false;
     });
 

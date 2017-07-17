@@ -39,16 +39,16 @@ class Which {
   public function __construct($path = '', $pathExt = '', string $pathSeparator = '') {
     if (mb_strtoupper(mb_substr(PHP_OS, 0, 3)) == 'WIN') $this->isWindows = true;
     else {
-      $osType = getenv('OSTYPE');
+      $osType = (string) getenv('OSTYPE');
       $this->isWindows = $osType == 'cygwin' || $osType == 'msys';
     }
 
     $this->path = new \ArrayObject;
     $this->pathExt = new \ArrayObject;
+    $this->setPathSeparator($pathSeparator);
 
     $this->setPath($path);
     $this->setPathExt($pathExt);
-    $this->setPathSeparator($pathSeparator);
   }
 
   /**
@@ -109,13 +109,14 @@ class Which {
   /**
    * Gets a value indicating whether the specified file is executable.
    * @param string $file The path of the file to be checked.
-   * @return bool `true` if the specified file is executable, otherwise `false`.
+   * @return Observable `true` if the specified file is executable, otherwise `false`.
    */
-  public function isExecutable(string $file): bool {
-    if (is_executable($file)) return true;
-    return $this->isWindows() ?
-      (is_file($file) || is_link($file)) && $this->checkFileExtension($file) :
-      is_file($file) && $this->checkFileMode($file);
+  public function isExecutable(string $file): Observable {
+    return Observable::of($file)->flatMap(function(string $path): Observable {
+      if (is_executable($path)) return Observable::of(true);
+      if ($this->isWindows()) return Observable::of(is_file($path) || is_link($path) ? $this->checkFileExtension($path) : false);
+      return is_file($path) ? $this->checkFileMode($path) : Observable::of(false);
+    });
   }
 
   /**
@@ -129,12 +130,11 @@ class Which {
   /**
    * Resolves the path to the specified executable.
    * @param string $command
-   * @param string $path
-   * @param string $pathExt
    * @param bool $all
+   * @return Observable
    */
-  public function resolvePath(string $command, string $path = '', string $pathExt = '', bool $all = false) {
-    return 'TODO';
+  public function resolvePath(string $command, bool $all = false): Observable {
+    return Observable::of('TODO');
   }
 
   /**
@@ -143,7 +143,14 @@ class Which {
    * @return Which This instance.
    */
   public function setPath($value): self {
-    if (!is_array($value)) $value = explode($this->getPathSeparator(), mb_strlen($value) ? $value : (string) getenv('PATH'));
+    $pathSep = $this->getPathSeparator();
+    if (!is_array($value)) $value = mb_strlen($value) ? explode($pathSep, $value) : [];
+
+    if (!$value) {
+      $path = (string) getenv('PATH');
+      if (mb_strlen($path)) $value = explode($pathSep, $path);
+    }
+
     $this->getPath()->exchangeArray($value);
     return $this;
   }
@@ -154,13 +161,12 @@ class Which {
    * @return Which This instance.
    */
   public function setPathExt($value): self {
-    if (!is_array($value)) {
-      if (mb_strlen($value)) $value = explode($this->getPathSeparator(), $value);
-      else if (!$this->isWindows()) $value = [''];
-      else {
-        $pathExt = (string) getenv('PATHEXT');
-        $value = explode(';', mb_strlen($pathExt) ? $pathExt : '.EXE;.CMD;.BAT;.COM');
-      }
+    $pathSep = $this->getPathSeparator();
+    if (!is_array($value)) $value = mb_strlen($value) ? explode($pathSep, $value) : [];
+
+    if (!$value && $this->isWindows()) {
+      $pathExt = (string) getenv('PATHEXT');
+      $value = mb_strlen($pathExt) ? explode($pathSep, $pathExt) : ['.EXE', '.CMD', '.BAT', '.COM'];
     }
 
     $this->getPathExt()->exchangeArray(array_map(function(string $extension): string {
@@ -183,7 +189,7 @@ class Which {
   /**
    * Checks that the specified file is executable according to the executable file extensions.
    * @param string $file The path of the file to be checked.
-   * @return bool Whether the specified file is executable.
+   * @return bool Value indicating whether the specified file is executable.
    */
   private function checkFileExtension(string $file): bool {
     if (!mb_strlen(pathinfo($file, PATHINFO_FILENAME))) return false;
@@ -194,28 +200,32 @@ class Which {
   /**
    * Checks that the specified file is executable according to its mode.
    * @param string $file The path of the file to be checked.
-   * @return bool Whether the specified file is executable.
-   * @throws \RuntimeException TODO
+   * @return Observable A boolean value indicating whether the specified file is executable.
    */
-  private function checkFileMode(string $file): bool {
-    $stats = @stat($file);
-    if (!is_array($stats)) throw new \RuntimeException('TODO file not found');
+  private function checkFileMode(string $file): Observable {
+    return Observable::of($file)
+      ->map(function(string $path): array {
+        $stats = stat($path);
+        if (!is_array($stats)) throw new \RuntimeException('TODO file not accessible'); // TODO file not accessible
+        return $stats;
+      })
+      ->map(function(array $stats): bool {
+        $uid = function_exists('posix_getuid') ? posix_getuid() : getmyuid();
+        $gid = function_exists('posix_getgid') ? posix_getgid() : getmygid();
 
-    $uid = function_exists('posix_getuid') ? posix_getuid() : getmyuid();
-    $gid = function_exists('posix_getgid') ? posix_getgid() : getmygid();
+        $othersExecute = $stats['mode'] & 0001;
+        if ($othersExecute) return true;
 
-    $othersExecute = $stats['mode'] & 0001;
-    if ($othersExecute) return true;
+        $groupExecute = $stats['mode'] & 0010;
+        if ($groupExecute) return $gid === $stats['gid'];
 
-    $groupExecute = $stats['mode'] & 0010;
-    if ($groupExecute) return $gid === $stats['gid'];
+        $userExecute = $stats['mode'] & 0100;
+        if ($userExecute) return $uid === $stats['uid'];
 
-    $userExecute = $stats['mode'] & 0100;
-    if ($userExecute) return $uid === $stats['uid'];
+        $userGroupExecute = $stats['mode'] & (0100 | 0010);
+        if ($userGroupExecute) return $uid === 0;
 
-    $userGroupExecute = $stats['mode'] & (0100 | 0010);
-    if ($userGroupExecute) return $uid === 0;
-
-    return false;
+        return false;
+      });
   }
 }
