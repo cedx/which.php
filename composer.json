@@ -27,11 +27,12 @@
   ],
   "require": {
     "php": ">=7.0.0",
+    "ext-mbstring": "*",
+    "ext-spl": "*",
     "reactivex/rxphp": "^2.0.2"
   },
   "require-dev": {
-    "apigen/apigen": "^5.0.0-RC2",
-    "cedx/coveralls": "^1.0.0",
+    "apigen/apigen": "^5.0.0-RC3",
     "cedx/phpunit-expect": "^0.2.0",
     "phing/phing": "^2.16.0",
     "roave/better-reflection": "@dev"
