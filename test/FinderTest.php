@@ -22,9 +22,7 @@ class FinderTest extends TestCase {
     it('should return `false` if the file has not an executable file extension', function() use ($checkFileExtension) {
       $finder = new Finder('', ['.EXE', '.CMD', '.BAT']);
       expect($checkFileExtension->call($finder, ''))->to->be->false;
-      expect($checkFileExtension->call($finder, '.exe'))->to->be->false;
       expect($checkFileExtension->call($finder, 'exe.'))->to->be->false;
-
       expect($checkFileExtension->call($finder, 'foo.bar'))->to->be->false;
       expect($checkFileExtension->call($finder, '/home/logger.txt'))->to->be->false;
       expect($checkFileExtension->call($finder, 'C:\\Program Files\\FooBar\\FooBar.dll'))->to->be->false;
@@ -35,6 +33,7 @@ class FinderTest extends TestCase {
 
     it('should return `true` if the file has an executable file extension', function() use ($checkFileExtension) {
       $finder = new Finder('', ['.EXE', '.CMD', '.BAT']);
+      expect($checkFileExtension->call($finder, '.exe'))->to->be->true;
       expect($checkFileExtension->call($finder, 'foo.exe'))->to->be->true;
       expect($checkFileExtension->call($finder, '/home/logger.bat'))->to->be->true;
       expect($checkFileExtension->call($finder, 'C:\\Program Files\\FooBar\\FooBar.cmd'))->to->be->true;

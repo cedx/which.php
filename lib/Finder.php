@@ -10,11 +10,6 @@ use Rx\{Observable};
 class Finder {
 
   /**
-   * @var bool Value indicating whether the current plateform is Windows.
-   */
-  private static $isWindows;
-
-  /**
    * @var \ArrayObject The list of executable file extensions.
    */
   private $extensions;
@@ -103,9 +98,11 @@ class Finder {
    */
   public function isExecutable(string $file): Observable {
     return Observable::of($file)->flatMap(function(string $path): Observable {
-      if (is_executable($path)) return Observable::of(true);
-      if (static::isWindows()) return Observable::of(is_file($path) || is_link($path) ? $this->checkFileExtension($path) : false);
-      return is_file($path) ? $this->checkFileMode($path) : Observable::of(false);
+      $fileInfo = new \SplFileInfo($path);
+      if ($fileInfo->isExecutable()) return Observable::of(true);
+
+      if (static::isWindows()) return Observable::of($fileInfo->isFile() || $fileInfo->isLink() ? $this->checkFileExtension($path) : false);
+      return $fileInfo->isFile() ? $this->checkFileMode($path) : Observable::of(false);
     });
   }
 
@@ -114,15 +111,17 @@ class Finder {
    * @return bool `true` if the current platform is Windows, otherwise `false`.
    */
   public static function isWindows(): bool {
-    if (!isset(static::$isWindows)) {
-      if (mb_strtoupper(mb_substr(PHP_OS, 0, 3)) == 'WIN') static::$isWindows = true;
+    static $isWindows;
+
+    if (!isset($isWindows)) {
+      if (mb_strtoupper(mb_substr(PHP_OS, 0, 3)) == 'WIN') $isWindows = true;
       else {
         $osType = (string) getenv('OSTYPE');
-        static::$isWindows = $osType == 'cygwin' || $osType == 'msys';
+        $isWindows = $osType == 'cygwin' || $osType == 'msys';
       }
     }
 
-    return static::$isWindows;
+    return $isWindows;
   }
 
   /**
@@ -190,8 +189,8 @@ class Finder {
    * @return bool Value indicating whether the specified file is executable.
    */
   private function checkFileExtension(string $file): bool {
-    if (!mb_strlen(pathinfo($file, PATHINFO_FILENAME))) return false;
-    $extension = mb_strtoupper(pathinfo($file, PATHINFO_EXTENSION));
+    $fileInfo = new \SplFileInfo($file);
+    $extension = mb_strtoupper($fileInfo->getExtension());
     return mb_strlen($extension) ? in_array(".$extension", $this->getExtensions()->getArrayCopy()) : false;
   }
 
@@ -202,25 +201,22 @@ class Finder {
    */
   private function checkFileMode(string $file): Observable {
     return Observable::of($file)->map(function(string $path): bool {
-      $stats = new \SplFileInfo($path);
-      $perms = $stats->getPerms();
+      $fileInfo = new \SplFileInfo($path);
 
-      $uid = function_exists('posix_getuid') ? posix_getuid() : getmyuid();
+      // Others.
+      $perms = $fileInfo->getPerms();
+      if ($perms & 0001) return true;
+
+      // Group.
       $gid = function_exists('posix_getgid') ? posix_getgid() : getmygid();
+      if ($perms & 0010) return $gid === $fileInfo->getGroup();
 
-      $othersExecute = $perms & 0001;
-      if ($othersExecute) return true;
+      // Owner.
+      $uid = function_exists('posix_getuid') ? posix_getuid() : getmyuid();
+      if ($perms & 0100) return $uid === $fileInfo->getOwner();
 
-      $groupExecute = $perms & 0010;
-      if ($groupExecute) return $gid === $stats->getGroup();
-
-      $userExecute = $perms & 0100;
-      if ($userExecute) return $uid === $stats->getOwner();
-
-      $userGroupExecute = $perms & (0100 | 0010);
-      if ($userGroupExecute) return $uid === 0;
-
-      return false;
+      // Root.
+      return $perms & (0100 | 0010) ? $uid === 0 : false;
     });
   }
 }
