@@ -12,17 +12,17 @@ class Finder {
   /**
    * @var bool Value indicating whether the current plateform is Windows.
    */
-  private $isWindows;
+  private static $isWindows;
 
   /**
-   * @var \ArrayObject
+   * @var \ArrayObject The list of executable file extensions.
+   */
+  private $extensions;
+
+  /**
+   * @var \ArrayObject The list of system paths.
    */
   private $path;
-
-  /**
-   * @var \ArrayObject
-   */
-  private $pathExt;
 
   /**
    * @var string The character used to separate paths in the system path.
@@ -32,22 +32,24 @@ class Finder {
   /**
    * Initializes a new instance of the class.
    * @param array|string $path The system path. Defaults to the `PATH` environment variable.
-   * @param array|string $pathExt The executable file extensions. Defaults to the `PATHEXT` environment variable.
+   * @param array|string $extensions The executable file extensions. Defaults to the `PATHEXT` environment variable.
    * @param string $pathSeparator The character used to separate paths in the system path. Defaults to the `PATH_SEPARATOR` constant.
    */
-  public function __construct($path = '', $pathExt = '', string $pathSeparator = '') {
-    if (mb_strtoupper(mb_substr(PHP_OS, 0, 3)) == 'WIN') $this->isWindows = true;
-    else {
-      $osType = (string) getenv('OSTYPE');
-      $this->isWindows = $osType == 'cygwin' || $osType == 'msys';
-    }
-
+  public function __construct($path = '', $extensions = '', string $pathSeparator = '') {
+    $this->extensions = new \ArrayObject;
     $this->path = new \ArrayObject;
-    $this->pathExt = new \ArrayObject;
     $this->setPathSeparator($pathSeparator);
 
+    $this->setExtensions($extensions);
     $this->setPath($path);
-    $this->setPathExt($pathExt);
+  }
+
+  /**
+   * Gets the list of executable file extensions.
+   * @return \ArrayObject The list of executable file extensions.
+   */
+  public function getExtensions(): \ArrayObject {
+    return $this->extensions;
   }
 
   /**
@@ -59,42 +61,31 @@ class Finder {
   }
 
   /**
-   * Gets the list of executable file extensions.
-   * @return \ArrayObject The list of executable file extensions.
-   */
-  public function getPathExt(): \ArrayObject {
-    return $this->pathExt;
-  }
-
-  /**
    * gets information about the
    * @param string $command
-   * @param string $path
-   * @param string $pathExt
-   * @param string $pathSep
    * @return PathInfo
    */
   public function getPathInfo(string $command): PathInfo {
     $path = $this->getPath()->getArrayCopy();
-    $pathExt = $this->getPathExt()->getArrayCopy();
+    $extensions = $this->getExtensions()->getArrayCopy();
     $pathSep = $this->getPathSeparator();
 
-    if (!$this->isWindows) {
+    if (!static::isWindows()) {
       $pathExtExe = '';
-      $pathExt = [''];
+      $extensions = [''];
     }
     else {
       array_unshift($path, getcwd());
 
-      $pathExtExe = mb_strlen($pathExt) ? $pathExt : (string) getenv('PATHEXT');
+      $pathExtExe = mb_strlen($extensions) ? $extensions : (string) getenv('PATHEXT');
       if (!mb_strlen($pathExtExe)) $pathExtExe = '.EXE;.CMD;.BAT;.COM';
 
-      $pathExt = explode($pathSep, $pathExtExe);
-      if (strpos($command, '.') !== false && $pathExt[0] != '') array_unshift($pathExt, '');
+      $extensions = explode($pathSep, $pathExtExe);
+      if (strpos($command, '.') !== false && $extensions[0] != '') array_unshift($extensions, '');
     }
 
-    if (preg_match('/\//', $command) || ($this->isWindows && preg_match('/\\/', $command))) $path = [''];
-    return new PathInfo($path, $pathExt, $pathExtExe);
+    if (preg_match('/\//', $command) || (static::isWindows() && preg_match('/\\/', $command))) $path = [''];
+    return new PathInfo($path, $extensions, $pathExtExe);
   }
 
   /**
@@ -113,9 +104,25 @@ class Finder {
   public function isExecutable(string $file): Observable {
     return Observable::of($file)->flatMap(function(string $path): Observable {
       if (is_executable($path)) return Observable::of(true);
-      if ($this->isWindows) return Observable::of(is_file($path) || is_link($path) ? $this->checkFileExtension($path) : false);
+      if (static::isWindows()) return Observable::of(is_file($path) || is_link($path) ? $this->checkFileExtension($path) : false);
       return is_file($path) ? $this->checkFileMode($path) : Observable::of(false);
     });
+  }
+
+  /**
+   * Gets a value indicating whether the current platform is Windows.
+   * @return bool `true` if the current platform is Windows, otherwise `false`.
+   */
+  public static function isWindows(): bool {
+    if (!isset(static::$isWindows)) {
+      if (mb_strtoupper(mb_substr(PHP_OS, 0, 3)) == 'WIN') static::$isWindows = true;
+      else {
+        $osType = (string) getenv('OSTYPE');
+        static::$isWindows = $osType == 'cygwin' || $osType == 'msys';
+      }
+    }
+
+    return static::$isWindows;
   }
 
   /**
@@ -124,8 +131,29 @@ class Finder {
    * @param bool $all Value indicating whether to return all matches, instead of just the first one.
    * @return Observable
    */
-  public function resolvePath(string $command, bool $all = false): Observable {
+  public function resolve(string $command, bool $all = false): Observable {
     return Observable::of('TODO');
+  }
+
+  /**
+   * Sets the list of executable file extensions.
+   * @param array|string $value The new executable file extensions, or an empty string to use the `PATHEXT` environment variable.
+   * @return Finder This instance.
+   */
+  public function setExtensions($value): self {
+    $pathSep = $this->getPathSeparator();
+    if (!is_array($value)) $value = mb_strlen($value) ? explode($pathSep, $value) : [];
+
+    if (!$value && static::isWindows()) {
+      $pathExt = (string) getenv('PATHEXT');
+      $value = mb_strlen($pathExt) ? explode($pathSep, $pathExt) : ['.EXE', '.CMD', '.BAT', '.COM'];
+    }
+
+    $this->getExtensions()->exchangeArray(array_map(function(string $extension): string {
+      return mb_strtoupper($extension);
+    }, $value));
+
+    return $this;
   }
 
   /**
@@ -147,33 +175,12 @@ class Finder {
   }
 
   /**
-   * Sets the list of executable file extensions.
-   * @param array|string $value The new executable file extensions, or an empty string to use the `PATHEXT` environment variable.
-   * @return Finder This instance.
-   */
-  public function setPathExt($value): self {
-    $pathSep = $this->getPathSeparator();
-    if (!is_array($value)) $value = mb_strlen($value) ? explode($pathSep, $value) : [];
-
-    if (!$value && $this->isWindows) {
-      $pathExt = (string) getenv('PATHEXT');
-      $value = mb_strlen($pathExt) ? explode($pathSep, $pathExt) : ['.EXE', '.CMD', '.BAT', '.COM'];
-    }
-
-    $this->getPathExt()->exchangeArray(array_map(function(string $extension): string {
-      return mb_strtoupper($extension);
-    }, $value));
-
-    return $this;
-  }
-
-  /**
    * Sets the character used to separate paths in the system path.
    * @param string $value The new path separator, or an empty string to use the `PATH_SEPARATOR` constant.
    * @return Finder This instance.
    */
   public function setPathSeparator(string $value): self {
-    $this->pathSeparator = mb_strlen($value) ? $value : ($this->isWindows ? ';' : PATH_SEPARATOR);
+    $this->pathSeparator = mb_strlen($value) ? $value : (static::isWindows() ? ';' : PATH_SEPARATOR);
     return $this;
   }
 
@@ -185,7 +192,7 @@ class Finder {
   private function checkFileExtension(string $file): bool {
     if (!mb_strlen(pathinfo($file, PATHINFO_FILENAME))) return false;
     $extension = mb_strtoupper(pathinfo($file, PATHINFO_EXTENSION));
-    return mb_strlen($extension) ? in_array(".$extension", $this->getPathExt()->getArrayCopy()) : false;
+    return mb_strlen($extension) ? in_array(".$extension", $this->getExtensions()->getArrayCopy()) : false;
   }
 
   /**
@@ -194,29 +201,26 @@ class Finder {
    * @return Observable A boolean value indicating whether the specified file is executable.
    */
   private function checkFileMode(string $file): Observable {
-    return Observable::of($file)
-      ->map(function(string $path): array {
-        $stats = @stat($path); // TODO: replace with `SplFileInfo`
-        if (!is_array($stats)) throw new \RuntimeException('The specified file is not accessible.');
-        return $stats;
-      })
-      ->map(function(array $stats): bool {
-        $uid = function_exists('posix_getuid') ? posix_getuid() : getmyuid();
-        $gid = function_exists('posix_getgid') ? posix_getgid() : getmygid();
+    return Observable::of($file)->map(function(string $path): bool {
+      $stats = new \SplFileInfo($path);
+      $perms = $stats->getPerms();
 
-        $othersExecute = $stats['mode'] & 0001;
-        if ($othersExecute) return true;
+      $uid = function_exists('posix_getuid') ? posix_getuid() : getmyuid();
+      $gid = function_exists('posix_getgid') ? posix_getgid() : getmygid();
 
-        $groupExecute = $stats['mode'] & 0010;
-        if ($groupExecute) return $gid === $stats['gid'];
+      $othersExecute = $perms & 0001;
+      if ($othersExecute) return true;
 
-        $userExecute = $stats['mode'] & 0100;
-        if ($userExecute) return $uid === $stats['uid'];
+      $groupExecute = $perms & 0010;
+      if ($groupExecute) return $gid === $stats->getGroup();
 
-        $userGroupExecute = $stats['mode'] & (0100 | 0010);
-        if ($userGroupExecute) return $uid === 0;
+      $userExecute = $perms & 0100;
+      if ($userExecute) return $uid === $stats->getOwner();
 
-        return false;
-      });
+      $userGroupExecute = $perms & (0100 | 0010);
+      if ($userGroupExecute) return $uid === 0;
+
+      return false;
+    });
   }
 }

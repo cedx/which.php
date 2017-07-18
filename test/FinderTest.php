@@ -29,7 +29,7 @@ class FinderTest extends TestCase {
       expect($checkFileExtension->call($finder, '/home/logger.txt'))->to->be->false;
       expect($checkFileExtension->call($finder, 'C:\\Program Files\\FooBar\\FooBar.dll'))->to->be->false;
 
-      $finder->setPathExt('.BAR');
+      $finder->setExtensions('.BAR');
       expect($checkFileExtension->call($finder, 'foo.exe'))->to->be->false;
     });
 
@@ -39,7 +39,7 @@ class FinderTest extends TestCase {
       expect($checkFileExtension->call($finder, '/home/logger.bat'))->to->be->true;
       expect($checkFileExtension->call($finder, 'C:\\Program Files\\FooBar\\FooBar.cmd'))->to->be->true;
 
-      $finder->setPathExt('.BAR');
+      $finder->setExtensions('.BAR');
       expect($checkFileExtension->call($finder, 'foo.bar'))->to->be->true;
     });
   }
@@ -48,8 +48,7 @@ class FinderTest extends TestCase {
    * @test Finder::checkFileMode
    */
   public function testCheckFileMode() {
-    if (mb_strtoupper(mb_substr(PHP_OS, 0, 3)) == 'WIN') $this->markTestSkipped('Not supported on Windows.');
-    // TODO: `skip` ??? but not the same behavior of `markTestSkipped`
+    if (Finder::isWindows()) $this->markTestSkipped('Not supported on Windows.');
 
     $checkFileMode = function(string $file): Observable {
       return $this->checkFileMode($file);

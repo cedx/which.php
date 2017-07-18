@@ -11,5 +11,5 @@ use Rx\{Observable};
  * Time: 13:27
  */
 function which(string $command, bool $all = false): Observable {
-  return (new Finder)->resolvePath($command, $all);
+  return (new Finder)->resolve($command, $all);
 }
