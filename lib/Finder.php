@@ -5,10 +5,9 @@ namespace which;
 use Rx\{Observable};
 
 /**
- * Class Which
- * @package which
+ * Finds the first instance of an executable in the system path.
  */
-class Which {
+class Finder {
 
   /**
    * @var bool Value indicating whether the current plateform is Windows.
@@ -120,9 +119,9 @@ class Which {
   }
 
   /**
-   * Resolves the path to the specified executable.
-   * @param string $command
-   * @param bool $all
+   * Resolves the path to the specified executable command.
+   * @param string $command The command to be resolved.
+   * @param bool $all Value indicating whether to return all matches, instead of just the first one.
    * @return Observable
    */
   public function resolvePath(string $command, bool $all = false): Observable {
@@ -132,7 +131,7 @@ class Which {
   /**
    * Sets the list of system paths.
    * @param array|string $value The new system path, or an empty string to use the `PATH` environment variable.
-   * @return Which This instance.
+   * @return Finder This instance.
    */
   public function setPath($value): self {
     $pathSep = $this->getPathSeparator();
@@ -150,7 +149,7 @@ class Which {
   /**
    * Sets the list of executable file extensions.
    * @param array|string $value The new executable file extensions, or an empty string to use the `PATHEXT` environment variable.
-   * @return Which This instance.
+   * @return Finder This instance.
    */
   public function setPathExt($value): self {
     $pathSep = $this->getPathSeparator();
@@ -171,7 +170,7 @@ class Which {
   /**
    * Sets the character used to separate paths in the system path.
    * @param string $value The new path separator, or an empty string to use the `PATH_SEPARATOR` constant.
-   * @return Which This instance.
+   * @return Finder This instance.
    */
   public function setPathSeparator(string $value): self {
     $this->pathSeparator = mb_strlen($value) ? $value : ($this->isWindows ? ';' : PATH_SEPARATOR);
