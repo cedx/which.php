@@ -80,7 +80,7 @@ class Which {
     $pathExt = $this->getPathExt()->getArrayCopy();
     $pathSep = $this->getPathSeparator();
 
-    if (!$this->isWindows()) {
+    if (!$this->isWindows) {
       $pathExtExe = '';
       $pathExt = [''];
     }
@@ -94,7 +94,7 @@ class Which {
       if (strpos($command, '.') !== false && $pathExt[0] != '') array_unshift($pathExt, '');
     }
 
-    if (preg_match('/\//', $command) || ($this->isWindows() && preg_match('/\\/', $command))) $path = [''];
+    if (preg_match('/\//', $command) || ($this->isWindows && preg_match('/\\/', $command))) $path = [''];
     return new PathInfo($path, $pathExt, $pathExtExe);
   }
 
@@ -114,17 +114,9 @@ class Which {
   public function isExecutable(string $file): Observable {
     return Observable::of($file)->flatMap(function(string $path): Observable {
       if (is_executable($path)) return Observable::of(true);
-      if ($this->isWindows()) return Observable::of(is_file($path) || is_link($path) ? $this->checkFileExtension($path) : false);
+      if ($this->isWindows) return Observable::of(is_file($path) || is_link($path) ? $this->checkFileExtension($path) : false);
       return is_file($path) ? $this->checkFileMode($path) : Observable::of(false);
     });
-  }
-
-  /**
-   * Gets a value indicating whether the current plateform is Windows.
-   * @return bool `true` if the currrent platform is Windows, otherwise `false`.
-   */
-  public function isWindows(): bool {
-    return $this->isWindows;
   }
 
   /**
@@ -164,7 +156,7 @@ class Which {
     $pathSep = $this->getPathSeparator();
     if (!is_array($value)) $value = mb_strlen($value) ? explode($pathSep, $value) : [];
 
-    if (!$value && $this->isWindows()) {
+    if (!$value && $this->isWindows) {
       $pathExt = (string) getenv('PATHEXT');
       $value = mb_strlen($pathExt) ? explode($pathSep, $pathExt) : ['.EXE', '.CMD', '.BAT', '.COM'];
     }
@@ -182,7 +174,7 @@ class Which {
    * @return Which This instance.
    */
   public function setPathSeparator(string $value): self {
-    $this->pathSeparator = mb_strlen($value) ? $value : ($this->isWindows() ? ';' : PATH_SEPARATOR);
+    $this->pathSeparator = mb_strlen($value) ? $value : ($this->isWindows ? ';' : PATH_SEPARATOR);
     return $this;
   }
 
@@ -205,8 +197,8 @@ class Which {
   private function checkFileMode(string $file): Observable {
     return Observable::of($file)
       ->map(function(string $path): array {
-        $stats = stat($path);
-        if (!is_array($stats)) throw new \RuntimeException('TODO file not accessible'); // TODO file not accessible
+        $stats = @stat($path);
+        if (!is_array($stats)) throw new \RuntimeException('The specified file is not accessible.');
         return $stats;
       })
       ->map(function(array $stats): bool {
