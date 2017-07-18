@@ -3,9 +3,10 @@ declare(strict_types=1);
 namespace which;
 
 use Rx\{Observable};
+use Webmozart\PathUtil\{Path};
 
 /**
- * Finds the first instance of an executable in the system path.
+ * Finds the instances of an executable in the system path.
  */
 class Finder {
 
@@ -26,8 +27,8 @@ class Finder {
 
   /**
    * Initializes a new instance of the class.
-   * @param array|string $path The system path. Defaults to the `PATH` environment variable.
-   * @param array|string $extensions The executable file extensions. Defaults to the `PATHEXT` environment variable.
+   * @param string|string[] $path The system path. Defaults to the `PATH` environment variable.
+   * @param string|string[] $extensions The executable file extensions. Defaults to the `PATHEXT` environment variable.
    * @param string $pathSeparator The character used to separate paths in the system path. Defaults to the `PATH_SEPARATOR` constant.
    */
   public function __construct($path = '', $extensions = '', string $pathSeparator = '') {
@@ -37,6 +38,19 @@ class Finder {
 
     $this->setExtensions($extensions);
     $this->setPath($path);
+  }
+
+  /**
+   * Finds all the instances of an executable in the system path.
+   * @param string $command The command to be resolved.
+   * @return Observable A stream of the paths of the found executables.
+   */
+  public function find(string $command): Observable {
+    return Observable::fromArray($this->getPath()->getArrayCopy())
+      ->map(function(string $path) use($command): Observable {
+        return $this->findExecutables($path, $command);
+      })
+      ->mergeAll();
   }
 
   /**
@@ -53,34 +67,6 @@ class Finder {
    */
   public function getPath(): \ArrayObject {
     return $this->path;
-  }
-
-  /**
-   * gets information about the
-   * @param string $command
-   * @return PathInfo
-   */
-  public function getPathInfo(string $command): PathInfo {
-    $path = $this->getPath()->getArrayCopy();
-    $extensions = $this->getExtensions()->getArrayCopy();
-    $pathSep = $this->getPathSeparator();
-
-    if (!static::isWindows()) {
-      $pathExtExe = '';
-      $extensions = [''];
-    }
-    else {
-      array_unshift($path, getcwd());
-
-      $pathExtExe = mb_strlen($extensions) ? $extensions : (string) getenv('PATHEXT');
-      if (!mb_strlen($pathExtExe)) $pathExtExe = '.EXE;.CMD;.BAT;.COM';
-
-      $extensions = explode($pathSep, $pathExtExe);
-      if (strpos($command, '.') !== false && $extensions[0] != '') array_unshift($extensions, '');
-    }
-
-    if (preg_match('/\//', $command) || (static::isWindows() && preg_match('/\\/', $command))) $path = [''];
-    return new PathInfo($path, $extensions, $pathExtExe);
   }
 
   /**
@@ -102,7 +88,7 @@ class Finder {
       if ($fileInfo->isExecutable()) return Observable::of(true);
 
       if (static::isWindows()) return Observable::of($fileInfo->isFile() || $fileInfo->isLink() ? $this->checkFileExtension($path) : false);
-      return $fileInfo->isFile() ? $this->checkFileMode($path) : Observable::of(false);
+      return $fileInfo->isFile() ? $this->checkFilePermissions($path) : Observable::of(false);
     });
   }
 
@@ -125,24 +111,8 @@ class Finder {
   }
 
   /**
-   * Resolves the path to the specified executable command.
-   * @param string $command The command to be resolved.
-   * @param bool $all Value indicating whether to return all matches, instead of just the first one.
-   * @return Observable
-   */
-  public function resolve(string $command, bool $all = false): Observable {
-    foreach ($this->getPath() as $path) {
-
-    }
-
-
-
-    return Observable::of('TODO');
-  }
-
-  /**
    * Sets the list of executable file extensions.
-   * @param array|string $value The new executable file extensions, or an empty string to use the `PATHEXT` environment variable.
+   * @param string|string[] $value The new executable file extensions, or an empty string to use the `PATHEXT` environment variable.
    * @return Finder This instance.
    */
   public function setExtensions($value): self {
@@ -163,7 +133,7 @@ class Finder {
 
   /**
    * Sets the list of system paths.
-   * @param array|string $value The new system path, or an empty string to use the `PATH` environment variable.
+   * @param string|string[] $value The new system path, or an empty string to use the `PATH` environment variable.
    * @return Finder This instance.
    */
   public function setPath($value): self {
@@ -208,7 +178,7 @@ class Finder {
    * @param string $file The path of the file to be checked.
    * @return Observable A boolean value indicating whether the specified file is executable.
    */
-  private function checkFileMode(string $file): Observable {
+  private function checkFilePermissions(string $file): Observable {
     return Observable::of($file)->map(function(string $path): bool {
       $fileInfo = new \SplFileInfo($path);
 
@@ -227,5 +197,27 @@ class Finder {
       // Root.
       return $perms & (0100 | 0010) ? $uid === 0 : false;
     });
+  }
+
+  /**
+   * Finds all the instances of an executable in the specified directory.
+   * @param string $directory The directory path.
+   * @param string $command The command to be resolved.
+   * @return Observable A stream of the paths of the found executables.
+   */
+  private function findExecutables(string $directory, string $command): Observable {
+    $extensions = $this->getExtensions();
+    $path = Path::join($directory, $command);
+
+    return Observable::fromArray(count($extensions) ? $extensions->getArrayCopy() : [''])
+      ->flatMap(function(string $extension) use($path): Observable {
+        $resolvedPath = $path . mb_strtolower($extension);
+        return $this->isExecutable($resolvedPath)->map(function(bool $isExecutable) use($resolvedPath): string {
+          return $isExecutable ? $resolvedPath : '';
+        });
+      })
+      ->filter(function(string $resolvedPath): bool {
+        return mb_strlen($resolvedPath) > 0;
+      });
   }
 }

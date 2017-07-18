@@ -44,23 +44,23 @@ class FinderTest extends TestCase {
   }
 
   /**
-   * @test Finder::checkFileMode
+   * @test Finder::checkFilePermissions
    */
-  public function testCheckFileMode() {
+  public function testCheckFilePermissions() {
     if (Finder::isWindows()) $this->markTestSkipped('Not supported on Windows.');
 
-    $checkFileMode = function(string $file): Observable {
-      return $this->checkFileMode($file);
+    $checkFilePermissions = function(string $file): Observable {
+      return $this->checkFilePermissions($file);
     };
 
-    it('it should return `false` if the file is not executable at all', function() use ($checkFileMode) {
-      $checkFileMode->call(new Finder, 'test/fixtures/not_executable.sh')->subscribe(function($isExecutable) {
+    it('it should return `false` if the file is not executable at all', function() use ($checkFilePermissions) {
+      $checkFilePermissions->call(new Finder, 'test/fixtures/not_executable.sh')->subscribe(function(bool $isExecutable) {
         expect($isExecutable)->to->be->false;
       });
     });
 
-    it('it should return `true` if the file is executable by everyone', function() use ($checkFileMode) {
-      $checkFileMode->call(new Finder, 'test/fixtures/executable.sh')->subscribe(function($isExecutable) {
+    it('it should return `true` if the file is executable by everyone', function() use ($checkFilePermissions) {
+      $checkFilePermissions->call(new Finder, 'test/fixtures/executable.sh')->subscribe(function(bool $isExecutable) {
         expect($isExecutable)->to->be->true;
       });
     });
