@@ -65,4 +65,53 @@ class FinderTest extends TestCase {
       });
     });
   }
+
+  /**
+   * @test Finder::setExtensions
+   */
+  public function testSetExtensions() {
+    it('should be the value of the `PATHEXT` environment variable by default', function() {
+      $pathExt = (string) getenv('PATHEXT');
+      $extensions = mb_strlen($pathExt) ? explode(PATH_SEPARATOR, $pathExt) : [];
+      expect((new Finder)->getExtensions()->getArrayCopy())->to->equal($extensions);
+    });
+
+    it('should split the extension list using the path separator', function() {
+      $extensions = ['.EXE', '.CMD', '.BAT'];
+      $finder = (new Finder)->setExtensions(implode(PATH_SEPARATOR, $extensions));
+      expect($finder->getExtensions()->getArrayCopy())->to->equal($extensions);
+    });
+  }
+
+  /**
+   * @test Finder::setPath
+   */
+  public function testSetPath() {
+    it('should be the value of the `PATH` environment variable by default', function() {
+      $pathEnv = (string) getenv('PATH');
+      $paths = mb_strlen($pathEnv) ? explode(PATH_SEPARATOR, $pathEnv) : [];
+      expect((new Finder)->getPath()->getArrayCopy())->to->equal($paths);
+    });
+
+    it('should split the input path using the path separator', function() {
+      $paths = ['/usr/local/bin', '/usr/bin'];
+      $finder = (new Finder)->setPath(implode(PATH_SEPARATOR, $paths));
+      expect($finder->getPath()->getArrayCopy())->to->equal($paths);
+    });
+  }
+
+  /**
+   * @test Finder::setPathSeparator
+   */
+  public function testSetPathSeparator() {
+    it('should be the value of the `PATH_SEPARATOR` constant by default', function() {
+      expect((new Finder)->getPathSeparator())->to->equal(PATH_SEPARATOR);
+    });
+
+    it('should properly set the path separator', function() {
+      $finder = (new Finder)->setPathSeparator('#');
+      expect($finder->getPathSeparator())->to->equal('#');
+      expect($finder->setPathSeparator('')->getPathSeparator())->to->equal(PATH_SEPARATOR);
+    });
+  }
 }

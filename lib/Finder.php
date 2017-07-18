@@ -131,6 +131,12 @@ class Finder {
    * @return Observable
    */
   public function resolve(string $command, bool $all = false): Observable {
+    foreach ($this->getPath() as $path) {
+
+    }
+
+
+
     return Observable::of('TODO');
   }
 
@@ -165,11 +171,14 @@ class Finder {
     if (!is_array($value)) $value = mb_strlen($value) ? explode($pathSep, $value) : [];
 
     if (!$value) {
-      $path = (string) getenv('PATH');
-      if (mb_strlen($path)) $value = explode($pathSep, $path);
+      $pathEnv = (string) getenv('PATH');
+      if (mb_strlen($pathEnv)) $value = explode($pathSep, $pathEnv);
     }
 
-    $this->getPath()->exchangeArray($value);
+    $this->getPath()->exchangeArray(array_map(function(string $path): string {
+      return trim($path, '"');
+    }, $value));
+
     return $this;
   }
 
