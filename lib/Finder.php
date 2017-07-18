@@ -196,7 +196,7 @@ class Finder {
   private function checkFileMode(string $file): Observable {
     return Observable::of($file)
       ->map(function(string $path): array {
-        $stats = @stat($path);
+        $stats = @stat($path); // TODO: replace with `SplFileInfo`
         if (!is_array($stats)) throw new \RuntimeException('The specified file is not accessible.');
         return $stats;
       })
