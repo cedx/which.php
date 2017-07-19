@@ -20,7 +20,7 @@ class FunctionsTest extends TestCase {
       which('executable', false, $options)->subscribe(
         function(string $executable) {
           if (!Finder::isWindows()) fail('Exception not thrown.');
-          else expect($executable)->to->contain('\\test\\fixtures\\executable.cmd');
+          else expect($executable)->to->endWith('\\test\\fixtures\\executable.cmd');
         },
         function(\Throwable $e) {
           if (!Finder::isWindows()) expect(true)->to->be->true;
@@ -33,7 +33,7 @@ class FunctionsTest extends TestCase {
           if (!Finder::isWindows()) fail('Exception not thrown.');
           else {
             expect($executables)->to->have->lengthOf(1);
-            expect($executables[0])->to->be->a('string')->that->contain('\\test\\fixtures\\executable.cmd');
+            expect($executables[0])->to->be->a('string')->and->to->endWith('\\test\\fixtures\\executable.cmd');
           }
         },
         function(\Throwable $e) {
@@ -49,7 +49,7 @@ class FunctionsTest extends TestCase {
       which('executable.sh', false, $options)->subscribe(
         function(string $executable) {
           if (Finder::isWindows()) fail('Exception not thrown.');
-          else expect($executable)->to->contain('/test/fixtures/executable.sh');
+          else expect($executable)->to->endWith('/test/fixtures/executable.sh');
         },
         function(\Throwable $e) {
           if (Finder::isWindows()) expect(true)->to->be->true;
@@ -62,7 +62,7 @@ class FunctionsTest extends TestCase {
           if (Finder::isWindows()) fail('Exception not thrown.');
           else {
             expect($executables)->to->have->lengthOf(1);
-            expect($executables[0])->to->be->a('string')->that->contain('/test/fixtures/executable.sh');
+            expect($executables[0])->to->be->a('string')->and->to->endWith('/test/fixtures/executable.sh');
           }
         },
         function(\Throwable $e) {
