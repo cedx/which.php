@@ -211,7 +211,7 @@ class Finder {
       ->flatMap(function(string $extension) use($directory, $command): Observable {
         $resolvedPath = Path::join($directory, $command) . mb_strtolower($extension);
         return $this->isExecutable($resolvedPath)->map(function(bool $isExecutable) use($resolvedPath): string {
-          return $isExecutable ? Path::makeAbsolute($resolvedPath, getcwd()) : '';
+          return $isExecutable ? str_replace('/', DIRECTORY_SEPARATOR, Path::makeAbsolute($resolvedPath, getcwd())) : '';
         });
       })
       ->filter(function(string $resolvedPath): bool {
