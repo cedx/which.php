@@ -43,7 +43,7 @@ class Finder {
   /**
    * Finds all the instances of an executable in the system path.
    * @param string $command The command to be resolved.
-   * @return Observable A stream of the paths of the found executables.
+   * @return Observable A stream of the paths of the executables found.
    */
   public function find(string $command): Observable {
     return Observable::fromArray($this->getPath()->getArrayCopy())
@@ -203,17 +203,15 @@ class Finder {
    * Finds all the instances of an executable in the specified directory.
    * @param string $directory The directory path.
    * @param string $command The command to be resolved.
-   * @return Observable A stream of the paths of the found executables.
+   * @return Observable A stream of the paths of the executables found.
    */
   private function findExecutables(string $directory, string $command): Observable {
     $extensions = $this->getExtensions();
-    $path = Path::join($directory, $command);
-
     return Observable::fromArray(count($extensions) ? $extensions->getArrayCopy() : [''])
-      ->flatMap(function(string $extension) use($path): Observable {
-        $resolvedPath = $path . mb_strtolower($extension);
+      ->flatMap(function(string $extension) use($directory, $command): Observable {
+        $resolvedPath = Path::join($directory, $command) . mb_strtolower($extension);
         return $this->isExecutable($resolvedPath)->map(function(bool $isExecutable) use($resolvedPath): string {
-          return $isExecutable ? $resolvedPath : '';
+          return $isExecutable ? Path::makeAbsolute($resolvedPath, getcwd()) : '';
         });
       })
       ->filter(function(string $resolvedPath): bool {
