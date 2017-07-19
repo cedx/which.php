@@ -6,7 +6,7 @@ use function PHPUnit\Expect\{expect, fail, it};
 use PHPUnit\Framework\{TestCase};
 
 /**
- * Tests the features of the `which` function.
+ * Tests the features of the functions.
  */
 class FunctionsTest extends TestCase {
 
@@ -18,6 +18,17 @@ class FunctionsTest extends TestCase {
       $options = ['path' => 'test/fixtures'];
 
       which('executable', false, $options)->subscribe(
+        function(string $executable) {
+          if (!Finder::isWindows()) fail('Exception not thrown.');
+          else expect($executable)->to->endWith('\\test\\fixtures\\executable.cmd');
+        },
+        function(\Throwable $e) {
+          if (!Finder::isWindows()) expect(true)->to->be->true;
+          else fail($e->getMessage());
+        }
+      );
+
+      which('executable.cmd', false, $options)->subscribe(
         function(string $executable) {
           if (!Finder::isWindows()) fail('Exception not thrown.');
           else expect($executable)->to->endWith('\\test\\fixtures\\executable.cmd');

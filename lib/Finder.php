@@ -206,8 +206,7 @@ class Finder {
    * @return Observable A stream of the paths of the executables found.
    */
   private function findExecutables(string $directory, string $command): Observable {
-    $extensions = $this->getExtensions();
-    return Observable::fromArray(count($extensions) ? $extensions->getArrayCopy() : [''])
+    return Observable::fromArray(array_merge([''], $this->getExtensions()->getArrayCopy()))
       ->flatMap(function(string $extension) use($directory, $command): Observable {
         $resolvedPath = Path::join($directory, $command) . mb_strtolower($extension);
         return $this->isExecutable($resolvedPath)->map(function(bool $isExecutable) use($resolvedPath): string {
