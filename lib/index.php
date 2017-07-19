@@ -19,8 +19,10 @@ function which(string $command, bool $all = false, array $options = []): Observa
   );
 
   $executables = $finder->find($command);
-  return $executables->isEmpty()->flatMap(function(bool $isEmpty) use ($all, $command, $executables): Observable {
-    if ($isEmpty) return Observable::error(new \RuntimeException("Command not found: $command"));
-    return $all ? $executables->toArray() : $executables->take(1);
-  });
+  return $executables
+    ->isEmpty()
+    ->flatMap(function(bool $isEmpty) use ($all, $command, $executables): Observable {
+      if ($isEmpty) return Observable::error(new \RuntimeException("Command not found: $command"));
+      return $all ? $executables->toArray() : $executables->take(1);
+    });
 }
