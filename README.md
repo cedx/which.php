@@ -17,7 +17,7 @@ $ composer require cedx/which
 ## Usage
 This package has an API based on [Observables](http://reactivex.io/intro.html).
 
-It provides a single function, `\which\which()`, allowing to locate a command in the system path:
+It provides a single function, `which\which()`, allowing to locate a command in the system path:
 
 ```php
 use function which\{which};
@@ -38,7 +38,7 @@ which('foobar')->subscribe(
 > When using [RxPHP](https://github.com/ReactiveX/RxPHP) within your own project, you'll need to set the default scheduler.
 
 ### Options
-The `\which\which()` accepts three parameters:
+The `which\which()` accepts three parameters:
 
 - `string $command`: The command to be resolved.
 - `bool $all = false`: A value indicating whether to return all executables found, instead of just the first one.
