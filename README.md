@@ -100,7 +100,7 @@ command
 For example:
 
 ```shell
-$ which php
+$ which --all php
 ```
 
 ## See also
