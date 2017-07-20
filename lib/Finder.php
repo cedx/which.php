@@ -46,11 +46,9 @@ class Finder {
    * @return Observable A stream of the paths of the executables found.
    */
   public function find(string $command): Observable {
-    return Observable::fromArray($this->getPath()->getArrayCopy())
-      ->map(function(string $path) use($command): Observable {
-        return $this->findExecutables($path, $command);
-      })
-      ->mergeAll();
+    return Observable::fromArray($this->getPath()->getArrayCopy())->flatMap(function(string $path) use($command): Observable {
+      return $this->findExecutables($path, $command);
+    });
   }
 
   /**
