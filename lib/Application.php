@@ -21,16 +21,11 @@ class Application {
   private $program;
 
   /**
-   * Initializes a new instance of the class.
-   */
-  public function __construct() {
-    $this->program = new Command;
-  }
-
-  /**
    * Initializes the application.
    */
   public function init() {
+    $this->program = new Command;
+
     $this->program->flag('a')->aka('all')
       ->description('List all instances of executables found (instead of just the first one).')
       ->boolean();
