@@ -1,0 +1,78 @@
+#!/usr/bin/env php
+<?php
+declare(strict_types=1);
+namespace which\cli;
+
+use function which\{which};
+use EventLoop\{EventLoop};
+use Rx\{Observable, Scheduler};
+use Rx\Scheduler\{EventLoopScheduler};
+
+/**
+ * @var string The version number of this package.
+ */
+const VERSION = '0.2.0';
+
+/**
+ * Application entry point.
+ * @return Observable Completes when the program is terminated.
+ */
+function main(): Observable {
+  // Initialize the application.
+  @cli_set_process_title('Which.php');
+
+  // Parse the command line arguments.
+  $options = getopt('ahsv', ['all', 'help', 'sum', 'version']);
+
+  if (isset($options['v']) || isset($options['version'])) {
+    echo VERSION, PHP_EOL;
+    exit(0);
+  }
+
+  if (isset($options['h']) || isset($options['help'])) printUsage();
+
+
+
+
+
+  // Run the program.
+  return which($command, true));
+}
+
+/**
+ * Prints the usage information.
+ */
+function printUsage() {
+  echo 'Find the instances of an executable in the system path.', PHP_EOL;
+  echo PHP_EOL;
+  echo 'Usage:', PHP_EOL;
+  echo 'which [options] <command>', PHP_EOL;
+  echo PHP_EOL;
+  echo 'Options:', PHP_EOL;
+  echo '-a, --all        list all instances of executables found (instead of just the first one)', PHP_EOL;
+  echo '-s, --silent     path to the coverage report', PHP_EOL;
+  echo '-h, --help       output usage information', PHP_EOL;
+  echo '-v, --version    output the version number', PHP_EOL;
+  exit(0);
+}
+
+// Start the application.
+$fileInfo = new \SplFileInfo(__DIR__.'/../vendor/autoload.php');
+require_once $fileInfo->isFile() ? $fileInfo->getPathname() : __DIR__.'/../../../autoload.php';
+
+Scheduler::setDefaultFactory(function() {
+  return new EventLoopScheduler(EventLoop::getLoop());
+});
+
+main()->subscribe(
+  function($next) {
+    echo '>>> Next... ', $next, PHP_EOL;
+  },
+  function(\Throwable $error) {
+    echo $error, PHP_EOL;
+    exit(1);
+  },
+  function() {
+    echo '>>> Done!', PHP_EOL;
+  }
+);
