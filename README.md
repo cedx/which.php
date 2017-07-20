@@ -67,6 +67,42 @@ which('foobar', false, '.FOO;.EXE;.CMD')->subscribe(function(string $path) {
 });
 ```
 
+## Command line interface
+From a command prompt, install the `which` executable:
+
+```shell
+$ composer global require cedx/which
+```
+
+> Consider adding the [`composer global`](https://getcomposer.org/doc/03-cli.md#global) executables directory to your system path.
+
+Then use it to find the instances of an executable:
+
+```shell
+$ which --help
+
+command
+     The program to find.
+
+-a/--all
+     List all instances of executables found (instead of just the first one).
+
+--help
+     Show the help page for this command.
+
+-s/--silent
+     Silence the output, just return the exit code (0 if any executable is found, otherwise 1).
+
+-v/--version
+     Output the version number.
+```
+
+For example:
+
+```shell
+$ which php
+```
+
 ## See also
 - [API reference](https://cedx.github.io/which.php)
 - [Code coverage](https://coveralls.io/github/cedx/which.php)
