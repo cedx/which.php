@@ -25,6 +25,7 @@ class Application {
    */
   public function init() {
     $this->program = new Command;
+    $this->program->setHelp('Find the instances of an executable in the system path.');
 
     $this->program->flag('a')->aka('all')
       ->description('List all instances of executables found (instead of just the first one).')

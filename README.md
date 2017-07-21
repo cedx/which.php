@@ -81,6 +81,8 @@ Then use it to find the instances of an executable:
 ```shell
 $ which --help
 
+Find the instances of an executable in the system path.
+
 command
      The program to find.
 
