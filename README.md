@@ -62,7 +62,8 @@ You can pass an associative array as the third parameter:
 The `extensions` option is only meaningful on the Windows platform, where the executability of a file is determined from its extension:
 
 ```php
-which('foobar', false, '.FOO;.EXE;.CMD')->subscribe(function(string $path) {
+$options = ['extensions' => '.FOO;.EXE;.CMD'];
+which('foobar', false, $options)->subscribe(function(string $path) {
   echo 'The "foobar" command is located at: ', $path;
 });
 ```
