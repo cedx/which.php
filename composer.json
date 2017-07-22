@@ -42,7 +42,7 @@
     "roave/better-reflection": "@dev"
   },
   "scripts": {
-    "coverage": "coveralls --file=var/coverage.xml",
+    "coverage": "coveralls var/coverage.xml",
     "test": "phpunit --colors=auto --verbose"
   },
   "support": {
