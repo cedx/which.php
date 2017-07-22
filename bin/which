@@ -19,7 +19,13 @@ function main(): Observable {
     return new EventLoopScheduler(EventLoop::getLoop());
   });
 
-  return (new Application)->run();
+  return (new Application)->run()
+    ->catch(function() {
+      exit(1);
+    })
+    ->map(function(int $status) {
+      exit($status);
+    });
 }
 
 // Start the application.
@@ -28,5 +34,5 @@ require_once $fileInfo->isFile() ? $fileInfo->getPathname() : __DIR__.'/../vendo
 
 main()->subscribe(null, function(\Throwable $e) {
   echo $e, PHP_EOL;
-  exit(2);
+  exit(3);
 });

@@ -22,9 +22,10 @@ class Application {
 
   /**
    * Initializes the application.
+   * @param array $args The command line arguments.
    */
-  public function init() {
-    $this->program = new Command;
+  public function init(array $args = []) {
+    $this->program = new Command($args);
     $this->program->setHelp('Find the instances of an executable in the system path.');
 
     $this->program->flag('a')->aka('all')
@@ -52,34 +53,31 @@ class Application {
 
   /**
    * Runs the application.
-   * @return Observable Completes when the application has been started.
+   * @param array $args The command line arguments.
+   * @return Observable The application exit code.
    */
-  public function run(): Observable {
-    $this->init();
+  public function run(array $args = []): Observable {
+    $this->init($args);
 
     // Parse the command line arguments.
     if ($this->program['version']) {
       $this->printVersion();
-      return Observable::empty();
+      return Observable::of(0);
     }
 
     if (!is_string($this->program[0])) {
       $this->program->printHelp();
-      exit(2);
+      return Observable::of(2);
     }
 
     // Run the program.
-    return which($this->program[0], $this->program['all'])
-      ->catch(function() {
-        exit(1);
-      })
-      ->do(function($results) {
-        if (!$this->program['silent']) {
-          if (!is_array($results)) $results = [$results];
-          foreach ($results as $path) echo $path, PHP_EOL;
-        }
+    return which($this->program[0], $this->program['all'])->map(function($results) {
+      if (!$this->program['silent']) {
+        if (!is_array($results)) $results = [$results];
+        foreach ($results as $path) echo $path, PHP_EOL;
+      }
 
-        exit(0);
-      });
+      return 0;
+    });
   }
 }
