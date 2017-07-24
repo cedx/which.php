@@ -8,7 +8,7 @@ use PHPUnit\Framework\{TestCase};
 /**
  * Tests the features of the functions.
  */
-class FunctionsTest extends TestCase {
+class WhichTest extends TestCase {
 
   /**
    * @test which
