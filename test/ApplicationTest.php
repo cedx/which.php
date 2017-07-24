@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace which;
 
-use function PHPUnit\Expect\{expect, fail, it};
+use function PHPUnit\Expect\{expect, it};
 use PHPUnit\Framework\{TestCase};
 
 /**

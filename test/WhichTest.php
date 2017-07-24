@@ -6,7 +6,7 @@ use function PHPUnit\Expect\{expect, fail, it};
 use PHPUnit\Framework\{TestCase};
 
 /**
- * Tests the features of the functions.
+ * Tests the features of the `which\which` function.
  */
 class WhichTest extends TestCase {
 
