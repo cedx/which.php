@@ -97,7 +97,7 @@ class FinderTest extends TestCase {
 
     it('should return `false` for a POSIX executable, when test is run on Windows', function() {
       (new Finder)->isExecutable('test/fixtures/executable.sh')->subscribe(function(bool $isExecutable) {
-        expect($isExecutable)->to->equal(!Finder::isWindows());
+        expect($isExecutable)->to->not->equal(Finder::isWindows());
       });
     });
 
