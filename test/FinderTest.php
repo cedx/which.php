@@ -73,14 +73,14 @@ class FinderTest extends TestCase {
     it('should return the path of the `executable.cmd` file on Windows', function() {
       (new Finder('test/fixtures'))->find('executable')->toArray()->subscribe(function(array $executables) {
         expect($executables)->to->be->an('array')->and->have->lengthOf(Finder::isWindows() ? 1 : 0);
-        if (Finder::isWindows()) expect($executables[0])->to->contain('\\test\\fixtures\\executable.cmd');
+        if (Finder::isWindows()) expect($executables[0])->to->endWith('\\test\\fixtures\\executable.cmd');
       });
     });
 
     it('should return the path of the `executable.sh` file on POSIX', function() {
       (new Finder('test/fixtures'))->find('executable.sh')->toArray()->subscribe(function(array $executables) {
         expect($executables)->to->be->an('array')->and->have->lengthOf(Finder::isWindows() ? 0 : 1);
-        if (!Finder::isWindows()) expect($executables[0])->to->contain('/test/fixtures/executable.sh');
+        if (!Finder::isWindows()) expect($executables[0])->to->endWith('/test/fixtures/executable.sh');
       });
     });
   }
