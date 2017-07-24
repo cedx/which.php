@@ -172,7 +172,7 @@ class Finder {
   }
 
   /**
-   * Checks that the specified file is executable according to its mode.
+   * Checks that the specified file is executable according to its permissions.
    * @param string $file The path of the file to be checked.
    * @return Observable A boolean value indicating whether the specified file is executable.
    */
