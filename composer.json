@@ -11,7 +11,7 @@
     "name": "Cédric Belin"
   }],
   "autoload": {
-    "files": ["lib/index.php"],
+    "files": ["lib/which.php"],
     "psr-4": {"which\\": "lib/"}
   },
   "config": {
