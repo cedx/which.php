@@ -38,7 +38,7 @@ which('foobar')->subscribe(
 > When using [RxPHP](https://github.com/ReactiveX/RxPHP) within your own project, you'll need to set the default scheduler.
 
 ### Options
-The `which\which()` accepts three parameters:
+The `which\which()` function accepts three parameters:
 
 - `string $command`: The command to be resolved.
 - `bool $all = false`: A value indicating whether to return all executables found, instead of just the first one.
