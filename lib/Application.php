@@ -24,7 +24,7 @@ class Application {
    * Initializes the application.
    * @param array $args The command line arguments.
    */
-  public function init(array $args = []) {
+  public function init(array $args) {
     $this->program = new Command($args);
     $this->program->setHelp('Find the instances of an executable in the system path.');
 
