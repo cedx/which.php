@@ -83,10 +83,9 @@ class Finder {
   public function isExecutable(string $file): Observable {
     return Observable::of($file)->flatMap(function(string $path): Observable {
       $fileInfo = new \SplFileInfo($path);
+      if (!$fileInfo->isFile()) return Observable::of(false);
       if ($fileInfo->isExecutable()) return Observable::of(true);
-
-      if (static::isWindows()) return Observable::of($fileInfo->isFile() || $fileInfo->isLink() ? $this->checkFileExtension($path) : false);
-      return $fileInfo->isFile() ? $this->checkFilePermissions($path) : Observable::of(false);
+      return static::isWindows() ? $this->checkFileExtension($path) : $this->checkFilePermissions($path);
     });
   }
 
