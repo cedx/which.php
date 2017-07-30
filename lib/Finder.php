@@ -85,7 +85,7 @@ class Finder {
       $fileInfo = new \SplFileInfo($path);
       if (!$fileInfo->isFile()) return Observable::of(false);
       if ($fileInfo->isExecutable()) return Observable::of(true);
-      return static::isWindows() ? $this->checkFileExtension($path) : $this->checkFilePermissions($path);
+      return static::isWindows() ? Observable::of($this->checkFileExtension($path)) : $this->checkFilePermissions($path);
     });
   }
 

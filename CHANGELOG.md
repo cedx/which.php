@@ -1,6 +1,9 @@
 # Changelog
 This file contains highlights of what changes on each version of the [Which for PHP](https://github.com/cedx/which.php) library.
 
+## Version 1.1.1
+- Fixed [issue #1](https://github.com/cedx/which.php/issues/1): the `Finder::isExecutable()` method did not returned an `Observable` on Windows.
+
 ## Version 1.1.0
 - Enabled the strict typing.
 - Updated the package dependencies.
