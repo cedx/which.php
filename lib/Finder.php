@@ -205,9 +205,9 @@ class Finder {
   private function findExecutables(string $directory, string $command): Observable {
     return Observable::fromArray(array_merge([''], $this->getExtensions()->getArrayCopy()))
       ->flatMap(function(string $extension) use($directory, $command): Observable {
-        $resolvedPath = Path::join($directory, $command) . mb_strtolower($extension);
+        $resolvedPath = Path::makeAbsolute(Path::join($directory, $command) . mb_strtolower($extension), getcwd());
         return $this->isExecutable($resolvedPath)->map(function(bool $isExecutable) use($resolvedPath): string {
-          return $isExecutable ? str_replace('/', DIRECTORY_SEPARATOR, Path::makeAbsolute($resolvedPath, getcwd())) : '';
+          return $isExecutable ? str_replace('/', DIRECTORY_SEPARATOR, $resolvedPath) : '';
         });
       })
       ->filter(function(string $resolvedPath): bool {
