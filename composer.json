@@ -1,11 +1,9 @@
 {
   "description": "Find the instances of an executable in the system path.",
   "homepage": "https://github.com/cedx/which.php",
-  "name": "cedx/which",
-
   "license": "Apache-2.0",
+  "name": "cedx/which",
   "type": "library",
-
   "authors": [{
     "email": "cedric@belin.io",
     "name": "Cédric Belin"
