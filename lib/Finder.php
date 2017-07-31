@@ -118,7 +118,7 @@ class Finder {
 
     if (!$value && static::isWindows()) {
       $pathExt = (string) getenv('PATHEXT');
-      $value = mb_strlen($pathExt) ? explode($pathSep, $pathExt) : ['.EXE', '.CMD', '.BAT', '.COM'];
+      $value = mb_strlen($pathExt) ? explode($pathSep, $pathExt) : ['.exe', '.cmd', '.bat', '.com'];
     }
 
     $this->getExtensions()->exchangeArray(array_map(function(string $extension): string {
