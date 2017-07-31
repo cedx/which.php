@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace which;
+namespace Which;
 
 use Commando\{Command};
 use Rx\{Observable};

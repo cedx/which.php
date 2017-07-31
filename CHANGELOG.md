@@ -1,6 +1,9 @@
 # Changelog
 This file contains highlights of what changes on each version of the [Which for PHP](https://github.com/cedx/which.php) library.
 
+## Version 2.0.0
+- Breaking change: renamed the `which` namespace to `Which`.
+
 ## Version 1.1.1
 - Fixed [issue #1](https://github.com/cedx/which.php/issues/1): the `Finder::isExecutable()` method did not return an `Observable` on Windows.
 

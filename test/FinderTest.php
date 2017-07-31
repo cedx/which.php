@@ -1,13 +1,12 @@
 <?php
 declare(strict_types=1);
-namespace which;
+namespace Which;
 
 use function PHPUnit\Expect\{expect, it};
 use PHPUnit\Framework\{TestCase};
-use Rx\{Observable};
 
 /**
- * Tests the features of the `which\Finder` class.
+ * Tests the features of the `Which\Finder` class.
  */
 class FinderTest extends TestCase {
 

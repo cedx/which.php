@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
-namespace which;
+namespace Which;
 
 use function PHPUnit\Expect\{expect, fail, it};
 use PHPUnit\Framework\{TestCase};
 
 /**
- * Tests the features of the `which\which` function.
+ * Tests the features of the `Which\which()` function.
  */
 class WhichTest extends TestCase {
 

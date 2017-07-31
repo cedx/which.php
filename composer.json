@@ -10,7 +10,7 @@
   }],
   "autoload": {
     "files": ["lib/which.php"],
-    "psr-4": {"which\\": "lib/"}
+    "psr-4": {"Which\\": "lib/"}
   },
   "config": {
     "optimize-autoloader": true

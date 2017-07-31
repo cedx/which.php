@@ -1,12 +1,11 @@
 #!/usr/bin/env php
 <?php
 declare(strict_types=1);
-namespace which\cli;
 
 use EventLoop\{EventLoop};
 use Rx\{Observable, Scheduler};
 use Rx\Scheduler\{EventLoopScheduler};
-use which\{Application};
+use Which\{Application};
 
 /**
  * Application entry point.
