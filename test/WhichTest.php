@@ -18,9 +18,9 @@ class WhichTest extends TestCase {
       $options = ['path' => 'test/fixtures'];
 
       which('executable', false, $options)->subscribe(
-        function(string $executable) {
+        function($executable) {
           if (!Finder::isWindows()) fail('Exception not thrown.');
-          else expect($executable)->to->endWith('\\test\\fixtures\\executable.cmd');
+          else expect($executable)->to->be->a('string')->and->endWith('\\test\\fixtures\\executable.cmd');
         },
         function(\Throwable $e) {
           if (!Finder::isWindows()) expect(true)->to->be->true;
@@ -29,10 +29,10 @@ class WhichTest extends TestCase {
       );
 
       which('executable', true, $options)->subscribe(
-        function(array $executables) {
+        function($executables) {
           if (!Finder::isWindows()) fail('Exception not thrown.');
           else {
-            expect($executables)->to->have->lengthOf(1);
+            expect($executables)->to->be->an('array')->and->have->lengthOf(1);
             expect($executables[0])->to->be->a('string')->and->endWith('\\test\\fixtures\\executable.cmd');
           }
         },
@@ -47,9 +47,9 @@ class WhichTest extends TestCase {
       $options = ['path' => 'test/fixtures'];
 
       which('executable.sh', false, $options)->subscribe(
-        function(string $executable) {
+        function($executable) {
           if (Finder::isWindows()) fail('Exception not thrown.');
-          else expect($executable)->to->endWith('/test/fixtures/executable.sh');
+          else expect($executable)->to->be->a('string')->and->endWith('/test/fixtures/executable.sh');
         },
         function(\Throwable $e) {
           if (Finder::isWindows()) expect(true)->to->be->true;
@@ -58,10 +58,10 @@ class WhichTest extends TestCase {
       );
 
       which('executable.sh', true, $options)->subscribe(
-        function(array $executables) {
+        function($executables) {
           if (Finder::isWindows()) fail('Exception not thrown.');
           else {
-            expect($executables)->to->have->lengthOf(1);
+            expect($executables)->to->be->an('array')->and->have->lengthOf(1);
             expect($executables[0])->to->be->a('string')->and->endWith('/test/fixtures/executable.sh');
           }
         },

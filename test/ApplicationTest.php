@@ -30,7 +30,7 @@ class ApplicationTest extends TestCase {
     it('should return `0` if a known option is requested', function() {
       ob_start();
       $args = [__FILE__, '--version'];
-      (new Application)->run($args)->subscribe(function(int $status) {
+      (new Application)->run($args)->subscribe(function($status) {
         ob_end_clean();
         expect($status)->to->equal(0);
       });
@@ -39,7 +39,7 @@ class ApplicationTest extends TestCase {
     it('should return `2` if a required argument is missing', function() {
       ob_start();
       $args = [__FILE__];
-      (new Application)->run($args)->subscribe(function(int $status) {
+      (new Application)->run($args)->subscribe(function($status) {
         ob_end_clean();
         expect($status)->to->equal(2);
       });
@@ -50,7 +50,7 @@ class ApplicationTest extends TestCase {
       putenv('PATH='.implode(DIRECTORY_SEPARATOR, ['test', 'fixtures']).PATH_SEPARATOR.getenv('PATH'));
 
       $args = [__FILE__, Finder::isWindows() ? 'executable.cmd' : 'executable.sh'];
-      (new Application)->run($args)->subscribe(function(int $status) {
+      (new Application)->run($args)->subscribe(function($status) {
         $output = rtrim(ob_get_clean());
         expect($output)->to->endWith(Finder::isWindows() ? '\\test\\fixtures\\executable.cmd' : '/test/fixtures/executable.sh');
         expect($status)->to->equal(0);

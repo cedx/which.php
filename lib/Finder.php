@@ -46,7 +46,7 @@ class Finder {
    * @return Observable A stream of the paths of the executables found.
    */
   public function find(string $command): Observable {
-    return Observable::fromArray($this->getPath()->getArrayCopy())->flatMap(function(string $path) use($command): Observable {
+    return Observable::fromArray($this->getPath()->getArrayCopy())->flatMap(function($path) use($command) {
       return $this->findExecutables($path, $command);
     });
   }
@@ -81,7 +81,7 @@ class Finder {
    * @return Observable `true` if the specified file is executable, otherwise `false`.
    */
   public function isExecutable(string $file): Observable {
-    return Observable::of($file)->flatMap(function(string $path): Observable {
+    return Observable::of($file)->flatMap(function($path) {
       $fileInfo = new \SplFileInfo($path);
       if (!$fileInfo->isFile()) return Observable::of(false);
       if ($fileInfo->isExecutable()) return Observable::of(true);
@@ -121,7 +121,7 @@ class Finder {
       $value = mb_strlen($pathExt) ? explode($pathSep, $pathExt) : ['.exe', '.cmd', '.bat', '.com'];
     }
 
-    $this->getExtensions()->exchangeArray(array_map(function(string $extension): string {
+    $this->getExtensions()->exchangeArray(array_map(function($extension) {
       return mb_strtoupper($extension);
     }, $value));
 
@@ -142,7 +142,7 @@ class Finder {
       if (mb_strlen($pathEnv)) $value = explode($pathSep, $pathEnv);
     }
 
-    $this->getPath()->exchangeArray(array_map(function(string $path): string {
+    $this->getPath()->exchangeArray(array_map(function($path) {
       return trim($path, '"');
     }, $value));
 
@@ -176,7 +176,7 @@ class Finder {
    * @return Observable A boolean value indicating whether the specified file is executable.
    */
   private function checkFilePermissions(string $file): Observable {
-    return Observable::of($file)->map(function(string $path): bool {
+    return Observable::of($file)->map(function($path) {
       $fileInfo = new \SplFileInfo($path);
 
       // Others.
@@ -204,13 +204,13 @@ class Finder {
    */
   private function findExecutables(string $directory, string $command): Observable {
     return Observable::fromArray(array_merge([''], $this->getExtensions()->getArrayCopy()))
-      ->flatMap(function(string $extension) use($directory, $command): Observable {
+      ->flatMap(function($extension) use($directory, $command) {
         $resolvedPath = Path::makeAbsolute(Path::join($directory, $command) . mb_strtolower($extension), getcwd());
-        return $this->isExecutable($resolvedPath)->map(function(bool $isExecutable) use($resolvedPath): string {
+        return $this->isExecutable($resolvedPath)->map(function($isExecutable) use($resolvedPath) {
           return $isExecutable ? str_replace('/', DIRECTORY_SEPARATOR, $resolvedPath) : '';
         });
       })
-      ->filter(function(string $resolvedPath): bool {
+      ->filter(function($resolvedPath) {
         return mb_strlen($resolvedPath) > 0;
       });
   }

@@ -17,17 +17,17 @@ $ composer require cedx/which
 ## Usage
 This package has an API based on [Observables](http://reactivex.io/intro.html).
 
-It provides a single function, `which\which()`, allowing to locate a command in the system path:
+It provides a single function, `Which\which()`, allowing to locate a command in the system path:
 
 ```php
-use function which\{which};
+use function Which\{which};
 
 which('foobar')->subscribe(
-  function(string $path) {
+  function($path) {
     // $path is the absolute path to the executable.
     echo 'The "foobar" command is located at: ', $path;
   },
-  function(\Throwable $e) {
+  function($error) {
     // The command was not found on the system path.
     echo 'The "foobar" command is not found.';
   }
@@ -38,7 +38,7 @@ which('foobar')->subscribe(
 > When using [RxPHP](https://github.com/ReactiveX/RxPHP) within your own project, you'll need to set the default scheduler.
 
 ### Options
-The `which\which()` function accepts three parameters:
+The `Which\which()` function accepts three parameters:
 
 - `string $command`: The command to be resolved.
 - `bool $all = false`: A value indicating whether to return all executables found, instead of just the first one.
@@ -47,7 +47,7 @@ The `which\which()` function accepts three parameters:
 If you pass the `true` value as the second parameter, the function will return an array of all paths found, instead of only the first path found:
 
 ```php
-which('foobar', true)->subscribe(function(array $paths) {
+which('foobar', true)->subscribe(function($paths) {
   echo 'The "foobar" command is located at:', PHP_EOL;
   print_r($paths);
 });
@@ -63,7 +63,7 @@ The `extensions` option is only meaningful on the Windows platform, where the ex
 
 ```php
 $options = ['extensions' => '.FOO;.EXE;.CMD'];
-which('foobar', false, $options)->subscribe(function(string $path) {
+which('foobar', false, $options)->subscribe(function($path) {
   echo 'The "foobar" command is located at: ', $path;
 });
 ```
