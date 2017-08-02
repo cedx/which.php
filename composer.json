@@ -19,6 +19,7 @@
     "find",
     "observable",
     "path",
+    "reactivex",
     "rxphp",
     "system",
     "utility",
