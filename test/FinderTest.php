@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace Which;
 
-use function PHPUnit\Expect\{await, expect, it};
+use function PHPUnit\Expect\{await, expect, fail, it};
 use PHPUnit\Framework\{TestCase};
 
 /**
@@ -53,15 +53,17 @@ class FinderTest extends TestCase {
     };
 
     it('it should return `false` if the file is not executable at all', await(function() use ($checkFilePermissions) {
-      $checkFilePermissions->call(new Finder, 'test/fixtures/not_executable.sh')->subscribe(function($isExecutable) {
-        expect($isExecutable)->to->be->false;
-      });
+      $checkFilePermissions->call(new Finder, 'test/fixtures/not_executable.sh')->subscribe(
+        function($isExecutable) { expect($isExecutable)->to->be->false; },
+        function(\Throwable $e) { fail($e->getMessage()); }
+      );
     }));
 
     it('it should return `true` if the file is executable by everyone', await(function() use ($checkFilePermissions) {
-      $checkFilePermissions->call(new Finder, 'test/fixtures/executable.sh')->subscribe(function($isExecutable) {
-        expect($isExecutable)->to->be->true;
-      });
+      $checkFilePermissions->call(new Finder, 'test/fixtures/executable.sh')->subscribe(
+        function($isExecutable) { expect($isExecutable)->to->be->true; },
+        function(\Throwable $e) { fail($e->getMessage()); }
+      );
     }));
   }
 
@@ -70,17 +72,27 @@ class FinderTest extends TestCase {
    */
   public function testFind() {
     it('should return the path of the `executable.cmd` file on Windows', await(function() {
-      (new Finder('test/fixtures'))->find('executable')->toArray()->subscribe(function($executables) {
-        expect($executables)->to->be->an('array')->and->have->lengthOf(Finder::isWindows() ? 1 : 0);
-        if (Finder::isWindows()) expect($executables[0])->to->endWith('\\test\\fixtures\\executable.cmd');
-      });
+      (new Finder('test/fixtures'))->find('executable')->toArray()->subscribe(
+        function($executables) {
+          expect($executables)->to->be->an('array')->and->have->lengthOf(Finder::isWindows() ? 1 : 0);
+          if (Finder::isWindows()) expect($executables[0])->to->endWith('\\test\\fixtures\\executable.cmd');
+        },
+        function(\Throwable $e) {
+          fail($e->getMessage());
+        }
+      );
     }));
 
     it('should return the path of the `executable.sh` file on POSIX', await(function() {
-      (new Finder('test/fixtures'))->find('executable.sh')->toArray()->subscribe(function($executables) {
-        expect($executables)->to->be->an('array')->and->have->lengthOf(Finder::isWindows() ? 0 : 1);
-        if (!Finder::isWindows()) expect($executables[0])->to->endWith('/test/fixtures/executable.sh');
-      });
+      (new Finder('test/fixtures'))->find('executable.sh')->toArray()->subscribe(
+        function($executables) {
+          expect($executables)->to->be->an('array')->and->have->lengthOf(Finder::isWindows() ? 0 : 1);
+          if (!Finder::isWindows()) expect($executables[0])->to->endWith('/test/fixtures/executable.sh');
+        },
+        function(\Throwable $e) {
+          fail($e->getMessage());
+        }
+      );
     }));
   }
 
@@ -89,21 +101,24 @@ class FinderTest extends TestCase {
    */
   public function testIsExecutable() {
     it('should return `false` for a non-executable file', await(function() {
-      (new Finder)->isExecutable(__FILE__)->subscribe(function($isExecutable) {
-        expect($isExecutable)->to->be->false;
-      });
+      (new Finder)->isExecutable(__FILE__)->subscribe(
+        function($isExecutable) {  expect($isExecutable)->to->be->false; },
+        function(\Throwable $e) { fail($e->getMessage()); }
+      );
     }));
 
     it('should return `false` for a POSIX executable, when test is run on Windows', await(function() {
-      (new Finder)->isExecutable('test/fixtures/executable.sh')->subscribe(function($isExecutable) {
-        expect($isExecutable)->to->not->equal(Finder::isWindows());
-      });
+      (new Finder)->isExecutable('test/fixtures/executable.sh')->subscribe(
+        function($isExecutable) { expect($isExecutable)->to->not->equal(Finder::isWindows()); },
+        function(\Throwable $e) { fail($e->getMessage()); }
+      );
     }));
 
     it('should return `false` for a Windows executable, when test is run on POSIX', await(function() {
-      (new Finder)->isExecutable('test/fixtures/executable.cmd')->subscribe(function($isExecutable) {
-        expect($isExecutable)->to->equal(Finder::isWindows());
-      });
+      (new Finder)->isExecutable('test/fixtures/executable.cmd')->subscribe(
+        function($isExecutable) { expect($isExecutable)->to->equal(Finder::isWindows()); },
+        function(\Throwable $e) { fail($e->getMessage()); }
+      );
     }));
   }
 
