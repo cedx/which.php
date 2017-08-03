@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace Which;
 
-use function PHPUnit\Expect\{expect, fail, it};
+use function PHPUnit\Expect\{await, expect, fail, it};
 use PHPUnit\Framework\{TestCase};
 
 /**
@@ -14,7 +14,7 @@ class WhichTest extends TestCase {
    * @test which
    */
   public function testWhich() {
-    it('should return the path of the `executable.cmd` file on Windows', function() {
+    it('should return the path of the `executable.cmd` file on Windows', await(function() {
       $options = ['path' => 'test/fixtures'];
 
       which('executable', false, $options)->subscribe(
@@ -41,9 +41,9 @@ class WhichTest extends TestCase {
           else fail($e->getMessage());
         }
       );
-    });
+    }));
 
-    it('should return the path of the `executable.sh` file on POSIX', function() {
+    it('should return the path of the `executable.sh` file on POSIX', await(function() {
       $options = ['path' => 'test/fixtures'];
 
       which('executable.sh', false, $options)->subscribe(
@@ -70,6 +70,6 @@ class WhichTest extends TestCase {
           else fail($e->getMessage());
         }
       );
-    });
+    }));
   }
 }

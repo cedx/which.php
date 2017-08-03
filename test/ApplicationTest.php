@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace Which;
 
-use function PHPUnit\Expect\{expect, it};
+use function PHPUnit\Expect\{await, expect, it};
 use PHPUnit\Framework\{TestCase};
 
 /**
@@ -27,25 +27,25 @@ class ApplicationTest extends TestCase {
    * @test Application::run
    */
   public function testRun() {
-    it('should return `0` if a known option is requested', function() {
+    it('should return `0` if a known option is requested', await(function() {
       ob_start();
       $args = [__FILE__, '--version'];
       (new Application)->run($args)->subscribe(function($status) {
         ob_end_clean();
         expect($status)->to->equal(0);
       });
-    });
+    }));
 
-    it('should return `2` if a required argument is missing', function() {
+    it('should return `2` if a required argument is missing', await(function() {
       ob_start();
       $args = [__FILE__];
       (new Application)->run($args)->subscribe(function($status) {
         ob_end_clean();
         expect($status)->to->equal(2);
       });
-    });
+    }));
 
-    it('should return `0` and output the resolved path if everything went fine', function() {
+    it('should return `0` and output the resolved path if everything went fine', await(function() {
       ob_start();
       putenv('PATH='.implode(DIRECTORY_SEPARATOR, ['test', 'fixtures']).PATH_SEPARATOR.getenv('PATH'));
 
@@ -55,6 +55,6 @@ class ApplicationTest extends TestCase {
         expect($output)->to->endWith(Finder::isWindows() ? '\\test\\fixtures\\executable.cmd' : '/test/fixtures/executable.sh');
         expect($status)->to->equal(0);
       });
-    });
+    }));
   }
 }
