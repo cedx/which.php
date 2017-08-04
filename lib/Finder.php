@@ -121,10 +121,7 @@ class Finder {
       $value = mb_strlen($pathExt) ? explode($pathSep, $pathExt) : ['.exe', '.cmd', '.bat', '.com'];
     }
 
-    $this->getExtensions()->exchangeArray(array_map(function($extension) {
-      return mb_strtoupper($extension);
-    }, $value));
-
+    $this->getExtensions()->exchangeArray(array_map('mb_strtoupper', $value));
     return $this;
   }
 
