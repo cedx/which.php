@@ -94,17 +94,10 @@ class Finder {
    * @return bool `true` if the current platform is Windows, otherwise `false`.
    */
   public static function isWindows(): bool {
-    static $isWindows;
+    if (mb_strtoupper(mb_substr(PHP_OS, 0, 3)) == 'WIN') return true;
 
-    if (!isset($isWindows)) {
-      if (mb_strtoupper(mb_substr(PHP_OS, 0, 3)) == 'WIN') $isWindows = true;
-      else {
-        $osType = (string) getenv('OSTYPE');
-        $isWindows = $osType == 'cygwin' || $osType == 'msys';
-      }
-    }
-
-    return $isWindows;
+    $osType = (string) getenv('OSTYPE');
+    return $osType == 'cygwin' || $osType == 'msys';
   }
 
   /**
