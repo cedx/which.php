@@ -81,11 +81,11 @@ class Finder {
    * @return Observable `true` if the specified file is executable, otherwise `false`.
    */
   public function isExecutable(string $file): Observable {
-    return Observable::of($file)->flatMap(function($path) {
+    return Observable::of($file)->map(function($path) {
       $fileInfo = new \SplFileInfo($path);
-      if (!$fileInfo->isFile()) return Observable::of(false);
-      if ($fileInfo->isExecutable()) return Observable::of(true);
-      return static::isWindows() ? Observable::of($this->checkFileExtension($path)) : $this->checkFilePermissions($path);
+      if (!$fileInfo->isFile()) return false;
+      if ($fileInfo->isExecutable()) return true;
+      return static::isWindows() ? $this->checkFileExtension($fileInfo) : $this->checkFilePermissions($fileInfo);
     });
   }
 
@@ -158,39 +158,34 @@ class Finder {
 
   /**
    * Checks that the specified file is executable according to the executable file extensions.
-   * @param string $file The path of the file to be checked.
+   * @param \SplFileInfo $fileInfo The file to be checked.
    * @return bool Value indicating whether the specified file is executable.
    */
-  private function checkFileExtension(string $file): bool {
-    $fileInfo = new \SplFileInfo($file);
+  private function checkFileExtension(\SplFileInfo $fileInfo): bool {
     $extension = mb_strtoupper($fileInfo->getExtension());
     return mb_strlen($extension) ? in_array(".$extension", $this->getExtensions()->getArrayCopy()) : false;
   }
 
   /**
    * Checks that the specified file is executable according to its permissions.
-   * @param string $file The path of the file to be checked.
-   * @return Observable A boolean value indicating whether the specified file is executable.
+   * @param \SplFileInfo $fileInfo The file to be checked.
+   * @return bool Value indicating whether the specified file is executable.
    */
-  private function checkFilePermissions(string $file): Observable {
-    return Observable::of($file)->map(function($path) {
-      $fileInfo = new \SplFileInfo($path);
+  private function checkFilePermissions(\SplFileInfo $fileInfo): bool {
+    // Others.
+    $perms = $fileInfo->getPerms();
+    if ($perms & 0001) return true;
 
-      // Others.
-      $perms = $fileInfo->getPerms();
-      if ($perms & 0001) return true;
+    // Group.
+    $gid = function_exists('posix_getgid') ? posix_getgid() : -1;
+    if ($perms & 0010) return $gid == $fileInfo->getGroup();
 
-      // Group.
-      $gid = function_exists('posix_getgid') ? posix_getgid() : -1;
-      if ($perms & 0010) return $gid == $fileInfo->getGroup();
+    // Owner.
+    $uid = function_exists('posix_getuid') ? posix_getuid() : -1;
+    if ($perms & 0100) return $uid == $fileInfo->getOwner();
 
-      // Owner.
-      $uid = function_exists('posix_getuid') ? posix_getuid() : -1;
-      if ($perms & 0100) return $uid == $fileInfo->getOwner();
-
-      // Root.
-      return $perms & (0100 | 0010) ? $uid == 0 : false;
-    });
+    // Root.
+    return $perms & (0100 | 0010) ? $uid == 0 : false;
   }
 
   /**

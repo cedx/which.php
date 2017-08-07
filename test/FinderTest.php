@@ -14,8 +14,8 @@ class FinderTest extends TestCase {
    * @test Finder::checkFileExtension
    */
   public function testCheckFileExtension() {
-    $checkFileExtension = function($file) {
-      return $this->checkFileExtension($file);
+    $checkFileExtension = function(string $file) {
+      return $this->checkFileExtension(new \SplFileInfo($file));
     };
 
     it('should return `false` if the file has not an executable file extension', function() use ($checkFileExtension) {
@@ -48,22 +48,16 @@ class FinderTest extends TestCase {
   public function testCheckFilePermissions() {
     if (Finder::isWindows()) $this->markTestSkipped('Not supported on Windows.');
 
-    $checkFilePermissions = function($file) {
-      return $this->checkFilePermissions($file);
+    $checkFilePermissions = function(string $file) {
+      return $this->checkFilePermissions(new \SplFileInfo($file));
     };
 
     it('it should return `false` if the file is not executable at all', await(function() use ($checkFilePermissions) {
-      $checkFilePermissions->call(new Finder, 'test/fixtures/not_executable.sh')->subscribe(
-        function($isExecutable) { expect($isExecutable)->to->be->false; },
-        function(\Throwable $e) { fail($e->getMessage()); }
-      );
+      expect($checkFilePermissions->call(new Finder, 'test/fixtures/not_executable.sh'))->to->be->false;
     }));
 
     it('it should return `true` if the file is executable by everyone', await(function() use ($checkFilePermissions) {
-      $checkFilePermissions->call(new Finder, 'test/fixtures/executable.sh')->subscribe(
-        function($isExecutable) { expect($isExecutable)->to->be->true; },
-        function(\Throwable $e) { fail($e->getMessage()); }
-      );
+      expect($checkFilePermissions->call(new Finder, 'test/fixtures/executable.sh'))->to->be->true;
     }));
   }
 
