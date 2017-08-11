@@ -59,7 +59,6 @@ class Application {
   public function run(array $args = []): Observable {
     $this->init($args);
 
-    // Parse the command line arguments.
     if ($this->program['version']) {
       $this->printVersion();
       return Observable::of(0);
@@ -70,7 +69,6 @@ class Application {
       return Observable::of(2);
     }
 
-    // Run the program.
     return which($this->program[0], $this->program['all'])->map(function($results) {
       if (!$this->program['silent']) {
         if (!is_array($results)) $results = [$results];
