@@ -11,19 +11,6 @@ use PHPUnit\Framework\{TestCase};
 class ApplicationTest extends TestCase {
 
   /**
-   * @test Application::printVersion
-   */
-  public function testPrintVersion() {
-    it('should output the version number of the application', function() {
-      ob_start();
-      (new Application)->printVersion();
-
-      $output = rtrim(ob_get_clean());
-      expect($output)->to->equal(Application::VERSION);
-    });
-  }
-
-  /**
    * @test Application::run
    */
   public function testRun() {
