@@ -45,13 +45,6 @@ class Application {
   }
 
   /**
-   * Prints the version number to the standard output.
-   */
-  public function printVersion() {
-    echo static::VERSION, PHP_EOL;
-  }
-
-  /**
    * Runs the application.
    * @param array $args The command line arguments.
    * @return Observable The application exit code.
@@ -60,7 +53,7 @@ class Application {
     $this->init($args);
 
     if ($this->program['version']) {
-      $this->printVersion();
+      echo static::VERSION, PHP_EOL;
       return Observable::of(0);
     }
 
