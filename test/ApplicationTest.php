@@ -28,13 +28,13 @@ class ApplicationTest extends TestCase {
       );
     }));
 
-    it('should return `2` if a required argument is missing', await(function() {
+    it('should return `64` if a required argument is missing', await(function() {
       ob_start();
       $args = [__FILE__];
       (new Application)->run($args)->subscribe(
         function($status) {
           ob_end_clean();
-          expect($status)->to->equal(2);
+          expect($status)->to->equal(64);
         },
         function(\Throwable $e) {
           fail($e->getMessage());

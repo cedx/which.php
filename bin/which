@@ -22,7 +22,7 @@ function main(): Observable {
     ->catch(function() {
       exit(1);
     })
-    ->map(function($status) {
+    ->do(function($status) {
       exit($status);
     });
 }

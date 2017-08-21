@@ -59,7 +59,7 @@ class Application {
 
     if (!is_string($this->program[0])) {
       $this->program->printHelp();
-      return Observable::of(2);
+      return Observable::of(64);
     }
 
     return which($this->program[0], $this->program['all'])->map(function($results) {
