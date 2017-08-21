@@ -33,5 +33,5 @@ require_once $fileInfo->isFile() ? $fileInfo->getPathname() : __DIR__.'/../vendo
 
 main()->subscribe(null, function($error) {
   echo $error, PHP_EOL;
-  exit(3);
+  exit(2);
 });
