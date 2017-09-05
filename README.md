@@ -112,4 +112,4 @@ $ which --all php
 - [Continuous integration](https://travis-ci.org/cedx/which.php)
 
 ## License
-[Which for PHP](https://github.com/cedx/which.php) is distributed under the Apache License, version 2.0.
+[Which for PHP](https://github.com/cedx/which.php) is distributed under the MIT License.

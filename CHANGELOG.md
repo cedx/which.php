@@ -1,6 +1,9 @@
 # Changelog
 This file contains highlights of what changes on each version of the [Which for PHP](https://github.com/cedx/which.php) library.
 
+## Version 3.0.0
+- Changed licensing for the [MIT License](https://opensource.org/licenses/MIT).
+
 ## Version 2.0.0
 - Breaking change: renamed the `which` namespace to `Which`.
 
