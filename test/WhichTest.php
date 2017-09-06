@@ -14,20 +14,22 @@ class WhichTest extends TestCase {
    * @test which
    */
   public function testWhich() {
-    it('should return the path of the `executable.cmd` file on Windows', function() {
-      $options = ['path' => 'test/fixtures'];
+    $options = ['path' => 'test/fixtures'];
 
+    it('should return the path of the `executable.cmd` file on Windows', function() use ($options) {
       try {
         $executable = which('executable', false, $options);
-        if (!Finder::isWindows()) fail('Exception not thrown.');
-        else expect($executable)->to->be->a('string')->and->endWith('\\test\\fixtures\\executable.cmd');
+        if (Finder::isWindows()) expect($executable)->to->be->a('string')->and->endWith('\\test\\fixtures\\executable.cmd');
+        else fail('Exception not thrown.');
       }
 
       catch (\Throwable $e) {
-        if (!Finder::isWindows()) expect(true)->to->be->true;
-        else fail($e->getMessage());
+        if (Finder::isWindows()) fail($e->getMessage());
+        else expect(true)->to->be->true;
       }
+    });
 
+    it('should return all the paths of the `executable.cmd` file on Windows', function() use ($options) {
       try {
         $executables = which('executable', true, $options);
         if (!Finder::isWindows()) fail('Exception not thrown.');
@@ -38,14 +40,12 @@ class WhichTest extends TestCase {
       }
 
       catch (\RuntimeException $e) {
-        if (!Finder::isWindows()) expect(true)->to->be->true;
-        else fail($e->getMessage());
+        if (Finder::isWindows()) fail($e->getMessage());
+        else expect(true)->to->be->true;
       }
     });
 
-    it('should return the path of the `executable.sh` file on POSIX', function() {
-      $options = ['path' => 'test/fixtures'];
-
+    it('should return the path of the `executable.sh` file on POSIX', function() use ($options) {
       try {
         $executable = which('executable.sh', false, $options);
         if (Finder::isWindows()) fail('Exception not thrown.');
@@ -56,7 +56,9 @@ class WhichTest extends TestCase {
         if (Finder::isWindows()) expect(true)->to->be->true;
         else fail($e->getMessage());
       }
+    });
 
+    it('should return all the paths of the `executable.sh` file on POSIX', function() use ($options) {
       try {
         $executables = which('executable.sh', true, $options);
         if (Finder::isWindows()) fail('Exception not thrown.');

@@ -195,11 +195,10 @@ class Finder {
     $executables = [];
 
     foreach(array_merge([''], $this->getExtensions()->getArrayCopy()) as $extension) {
-      $resolvedPath = Path::makeAbsolute(Path::join($directory, $command) . mb_strtolower($extension), getcwd());
+      $resolvedPath = Path::makeAbsolute(Path::join($directory, $command).mb_strtolower($extension), getcwd());
       if ($this->isExecutable($resolvedPath)) {
         $executables[] = str_replace('/', DIRECTORY_SEPARATOR, $resolvedPath);
         if (!$all) return $executables;
-
       }
     }
 
