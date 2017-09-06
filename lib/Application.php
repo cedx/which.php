@@ -3,7 +3,6 @@ declare(strict_types=1);
 namespace Which;
 
 use Commando\{Command};
-use Rx\{Observable};
 
 /**
  * Represents an application providing functionalities specific to console requests.
@@ -13,7 +12,7 @@ class Application {
   /**
    * @var string The version number of this package.
    */
-  const VERSION = '2.0.0';
+  const VERSION = '3.0.0';
 
   /**
    * @var Command The command line parser.
@@ -47,28 +46,33 @@ class Application {
   /**
    * Runs the application.
    * @param array $args The command line arguments.
-   * @return Observable The application exit code.
+   * @return int The application exit code.
    */
-  public function run(array $args = []): Observable {
+  public function run(array $args = []): int {
     $this->init($args);
 
     if ($this->program['version']) {
       echo static::VERSION, PHP_EOL;
-      return Observable::of(0);
+      return 0;
     }
 
     if (!is_string($this->program[0])) {
       $this->program->printHelp();
-      return Observable::of(64);
+      return 64;
     }
 
-    return which($this->program[0], $this->program['all'])->map(function($results) {
+    try {
+      $executables = which($this->program[0], $this->program['all']);
       if (!$this->program['silent']) {
-        if (!is_array($results)) $results = [$results];
-        foreach ($results as $path) echo $path, PHP_EOL;
+        if (!is_array($executables)) $executables = [$executables];
+        foreach ($executables as $path) echo $path, PHP_EOL;
       }
 
       return 0;
-    });
+    }
+
+    catch (\RuntimeException $e) {
+      return 1;
+    }
   }
 }

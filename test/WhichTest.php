@@ -2,7 +2,7 @@
 declare(strict_types=1);
 namespace Which;
 
-use function PHPUnit\Expect\{await, expect, fail, it};
+use function PHPUnit\Expect\{expect, fail, it};
 use PHPUnit\Framework\{TestCase};
 
 /**
@@ -14,62 +14,62 @@ class WhichTest extends TestCase {
    * @test which
    */
   public function testWhich() {
-    it('should return the path of the `executable.cmd` file on Windows', await(function() {
+    it('should return the path of the `executable.cmd` file on Windows', function() {
       $options = ['path' => 'test/fixtures'];
 
-      which('executable', false, $options)->subscribe(
-        function($executable) {
-          if (!Finder::isWindows()) fail('Exception not thrown.');
-          else expect($executable)->to->be->a('string')->and->endWith('\\test\\fixtures\\executable.cmd');
-        },
-        function(\Throwable $e) {
-          if (!Finder::isWindows()) expect(true)->to->be->true;
-          else fail($e->getMessage());
-        }
-      );
+      try {
+        $executable = which('executable', false, $options);
+        if (!Finder::isWindows()) fail('Exception not thrown.');
+        else expect($executable)->to->be->a('string')->and->endWith('\\test\\fixtures\\executable.cmd');
+      }
 
-      which('executable', true, $options)->subscribe(
-        function($executables) {
-          if (!Finder::isWindows()) fail('Exception not thrown.');
-          else {
-            expect($executables)->to->be->an('array')->and->have->lengthOf(1);
-            expect($executables[0])->to->be->a('string')->and->endWith('\\test\\fixtures\\executable.cmd');
-          }
-        },
-        function(\Throwable $e) {
-          if (!Finder::isWindows()) expect(true)->to->be->true;
-          else fail($e->getMessage());
-        }
-      );
-    }));
+      catch (\Throwable $e) {
+        if (!Finder::isWindows()) expect(true)->to->be->true;
+        else fail($e->getMessage());
+      }
 
-    it('should return the path of the `executable.sh` file on POSIX', await(function() {
+      try {
+        $executables = which('executable', true, $options);
+        if (!Finder::isWindows()) fail('Exception not thrown.');
+        else {
+          expect($executables)->to->be->an('array')->and->have->lengthOf(1);
+          expect($executables[0])->to->be->a('string')->and->endWith('\\test\\fixtures\\executable.cmd');
+        }
+      }
+
+      catch (\RuntimeException $e) {
+        if (!Finder::isWindows()) expect(true)->to->be->true;
+        else fail($e->getMessage());
+      }
+    });
+
+    it('should return the path of the `executable.sh` file on POSIX', function() {
       $options = ['path' => 'test/fixtures'];
 
-      which('executable.sh', false, $options)->subscribe(
-        function($executable) {
-          if (Finder::isWindows()) fail('Exception not thrown.');
-          else expect($executable)->to->be->a('string')->and->endWith('/test/fixtures/executable.sh');
-        },
-        function(\Throwable $e) {
-          if (Finder::isWindows()) expect(true)->to->be->true;
-          else fail($e->getMessage());
-        }
-      );
+      try {
+        $executable = which('executable.sh', false, $options);
+        if (Finder::isWindows()) fail('Exception not thrown.');
+        else expect($executable)->to->be->a('string')->and->endWith('/test/fixtures/executable.sh');
+      }
 
-      which('executable.sh', true, $options)->subscribe(
-        function($executables) {
-          if (Finder::isWindows()) fail('Exception not thrown.');
-          else {
-            expect($executables)->to->be->an('array')->and->have->lengthOf(1);
-            expect($executables[0])->to->be->a('string')->and->endWith('/test/fixtures/executable.sh');
-          }
-        },
-        function(\Throwable $e) {
-          if (Finder::isWindows()) expect(true)->to->be->true;
-          else fail($e->getMessage());
+      catch (\RuntimeException $e) {
+        if (Finder::isWindows()) expect(true)->to->be->true;
+        else fail($e->getMessage());
+      }
+
+      try {
+        $executables = which('executable.sh', true, $options);
+        if (Finder::isWindows()) fail('Exception not thrown.');
+        else {
+          expect($executables)->to->be->an('array')->and->have->lengthOf(1);
+          expect($executables[0])->to->be->a('string')->and->endWith('/test/fixtures/executable.sh');
         }
-      );
-    }));
+      }
+
+      catch (\RuntimeException $e) {
+        if (Finder::isWindows()) expect(true)->to->be->true;
+        else fail($e->getMessage());
+      }
+    });
   }
 }

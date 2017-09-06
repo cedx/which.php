@@ -2,6 +2,7 @@
 This file contains highlights of what changes on each version of the [Which for PHP](https://github.com/cedx/which.php) library.
 
 ## Version 3.0.0
+- Breaking change: moved from `Observable`-based to synchronous API.
 - Changed licensing for the [MIT License](https://opensource.org/licenses/MIT).
 
 ## Version 2.0.0

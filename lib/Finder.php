@@ -2,7 +2,6 @@
 declare(strict_types=1);
 namespace Which;
 
-use Rx\{Observable};
 use Webmozart\PathUtil\{Path};
 
 /**
@@ -41,14 +40,20 @@ class Finder {
   }
 
   /**
-   * Finds all the instances of an executable in the system path.
+   * Finds the instances of an executable in the system path.
    * @param string $command The command to be resolved.
-   * @return Observable A stream of the paths of the executables found.
+   * @param bool $all Value indicating whether to return all executables found, or just the first one.
+   * @return string[] The paths of the executables found, or an empty array if the command was not found.
    */
-  public function find(string $command): Observable {
-    return Observable::fromArray($this->getPath()->getArrayCopy())->flatMap(function($path) use($command) {
-      return $this->findExecutables($path, $command);
-    });
+  public function find(string $command, $all = true): array {
+    $executables = [];
+
+    foreach ($this->getPath()->getArrayCopy() as $path) {
+      $executables = array_merge($executables, $this->findExecutables($path, $command, $all));
+      if (!$all) return $executables;
+    }
+
+    return $executables;
   }
 
   /**
@@ -78,15 +83,13 @@ class Finder {
   /**
    * Gets a value indicating whether the specified file is executable.
    * @param string $file The path of the file to be checked.
-   * @return Observable `true` if the specified file is executable, otherwise `false`.
+   * @return bool `true` if the specified file is executable, otherwise `false`.
    */
-  public function isExecutable(string $file): Observable {
-    return Observable::of($file)->map(function($path) {
-      $fileInfo = new \SplFileInfo($path);
-      if (!$fileInfo->isFile()) return false;
-      if ($fileInfo->isExecutable()) return true;
-      return static::isWindows() ? $this->checkFileExtension($fileInfo) : $this->checkFilePermissions($fileInfo);
-    });
+  public function isExecutable(string $file): bool {
+    $fileInfo = new \SplFileInfo($file);
+    if (!$fileInfo->isFile()) return false;
+    if ($fileInfo->isExecutable()) return true;
+    return static::isWindows() ? $this->checkFileExtension($fileInfo) : $this->checkFilePermissions($fileInfo);
   }
 
   /**
@@ -182,21 +185,24 @@ class Finder {
   }
 
   /**
-   * Finds all the instances of an executable in the specified directory.
+   * Finds the instances of an executable in the specified directory.
    * @param string $directory The directory path.
    * @param string $command The command to be resolved.
-   * @return Observable A stream of the paths of the executables found.
+   * @param bool $all Value indicating whether to return all executables found, or just the first one.
+   * @return string[] The paths of the executables found, or an empty array if the command was not found.
    */
-  private function findExecutables(string $directory, string $command): Observable {
-    return Observable::fromArray(array_merge([''], $this->getExtensions()->getArrayCopy()))
-      ->flatMap(function($extension) use($directory, $command) {
-        $resolvedPath = Path::makeAbsolute(Path::join($directory, $command) . mb_strtolower($extension), getcwd());
-        return $this->isExecutable($resolvedPath)->map(function($isExecutable) use($resolvedPath) {
-          return $isExecutable ? str_replace('/', DIRECTORY_SEPARATOR, $resolvedPath) : '';
-        });
-      })
-      ->filter(function($resolvedPath) {
-        return mb_strlen($resolvedPath) > 0;
-      });
+  private function findExecutables(string $directory, string $command, $all = true): array {
+    $executables = [];
+
+    foreach(array_merge([''], $this->getExtensions()->getArrayCopy()) as $extension) {
+      $resolvedPath = Path::makeAbsolute(Path::join($directory, $command) . mb_strtolower($extension), getcwd());
+      if ($this->isExecutable($resolvedPath)) {
+        $executables[] = str_replace('/', DIRECTORY_SEPARATOR, $resolvedPath);
+        if (!$all) return $executables;
+
+      }
+    }
+
+    return $executables;
   }
 }

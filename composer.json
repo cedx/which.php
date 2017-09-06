@@ -17,10 +17,7 @@
   },
   "keywords": [
     "find",
-    "observable",
     "path",
-    "reactivex",
-    "rxphp",
     "system",
     "utility",
     "which"
@@ -30,8 +27,6 @@
     "ext-mbstring": "*",
     "ext-spl": "*",
     "nategood/commando": "^0.2.9",
-    "reactivex/rxphp": "^2.0.3",
-    "voryx/event-loop": "^2.0.2",
     "webmozart/path-util": "^2.3.0"
   },
   "require-dev": {
