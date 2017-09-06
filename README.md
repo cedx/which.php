@@ -15,27 +15,24 @@ $ composer require cedx/which
 ```
 
 ## Usage
-This package has an API based on [Observables](http://reactivex.io/intro.html).
-
-It provides a single function, `Which\which()`, allowing to locate a command in the system path:
+This package provides a single function, `Which\which()`, allowing to locate a command in the system path:
 
 ```php
 use function Which\{which};
 
-which('foobar')->subscribe(
-  function($path) {
-    // $path is the absolute path to the executable.
-    echo 'The "foobar" command is located at: ', $path;
-  },
-  function($error) {
-    // The command was not found on the system path.
-    echo 'The "foobar" command is not found.';
-  }
-);
+try {
+  // $path is the absolute path to the executable.
+  $path = which('foobar');
+  echo 'The "foobar" command is located at: ', $path;
+}
+
+catch (\RuntimeException $e) {
+  // The command was not found on the system path.
+  echo 'The "foobar" command is not found.';
+}
 ```
 
-> When running the tests, the scheduler is automatically bootstrapped.
-> When using [RxPHP](https://github.com/ReactiveX/RxPHP) within your own project, you'll need to set the default scheduler.
+The function throws a [`RuntimeException`](https://secure.php.net/manual/en/class.runtimeexception.php) if it could not locate the specified command.
 
 ### Options
 The `Which\which()` function accepts three parameters:
@@ -47,10 +44,9 @@ The `Which\which()` function accepts three parameters:
 If you pass the `true` value as the second parameter, the function will return an array of all paths found, instead of only the first path found:
 
 ```php
-which('foobar', true)->subscribe(function($paths) {
-  echo 'The "foobar" command is located at:', PHP_EOL;
-  print_r($paths);
-});
+$paths = which('foobar', true);
+echo 'The "foobar" command is located at:', PHP_EOL;
+foreach ($paths as $path) echo $path, PHP_EOL;
 ```
 
 You can pass an associative array as the third parameter:
@@ -63,9 +59,8 @@ The `extensions` option is only meaningful on the Windows platform, where the ex
 
 ```php
 $options = ['extensions' => '.FOO;.EXE;.CMD'];
-which('foobar', false, $options)->subscribe(function($path) {
-  echo 'The "foobar" command is located at: ', $path;
-});
+$path = which('foobar', false, $options);
+echo 'The "foobar" command is located at: ', $path;
 ```
 
 ## Command line interface
