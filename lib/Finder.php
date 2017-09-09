@@ -49,7 +49,7 @@ class Finder {
     $executables = [];
     foreach ($this->getPath()->getArrayCopy() as $path) {
       $executables = array_merge($executables, $this->findExecutables($path, $command, $all));
-      if (!$all) return $executables;
+      if (!$all && $executables) return $executables;
     }
 
     return $executables;
