@@ -47,7 +47,6 @@ class Finder {
    */
   public function find(string $command, $all = true): array {
     $executables = [];
-
     foreach ($this->getPath()->getArrayCopy() as $path) {
       $executables = array_merge($executables, $this->findExecutables($path, $command, $all));
       if (!$all) return $executables;

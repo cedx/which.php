@@ -15,7 +15,7 @@ function which(string $command, bool $all = false, array $options = []) {
     $options['path'] ?? '',
     $options['extensions'] ?? '',
     $options['pathSeparator'] ?? ''
-  ))->find($command);
+  ))->find($command, $all);
 
   if (!$executables) throw new \RuntimeException("Command not found: $command");
   return $all ? $executables : $executables[0];
