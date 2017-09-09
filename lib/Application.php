@@ -12,7 +12,7 @@ class Application {
   /**
    * @var string The version number of this package.
    */
-  const VERSION = '3.0.0';
+  const VERSION = '3.0.1';
 
   /**
    * @var Command The command line parser.

@@ -1,6 +1,9 @@
 # Changelog
 This file contains highlights of what changes on each version of the [Which for PHP](https://github.com/cedx/which.php) library.
 
+## Version 3.0.1
+- Fixed a regression: even with the `all` parameter set to `false`, all instances of a command were searched.
+
 ## Version 3.0.0
 - Breaking change: moved from `Observable`-based to synchronous API.
 - Changed licensing for the [MIT License](https://opensource.org/licenses/MIT).

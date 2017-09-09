@@ -32,7 +32,7 @@ catch (\RuntimeException $e) {
 }
 ```
 
-The function throws a [`RuntimeException`](https://secure.php.net/manual/en/class.runtimeexception.php) if it could not locate the specified command.
+The function returns a `string` specifying the path of the first instance of the executables found. If the command could not be located, a [`RuntimeException`](https://secure.php.net/manual/en/class.runtimeexception.php) is thrown.
 
 ### Options
 The `Which\which()` function accepts three parameters:
