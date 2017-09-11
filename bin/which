@@ -2,14 +2,59 @@
 <?php
 declare(strict_types=1);
 
-use Which\{Application};
+use Commando\{Command};
+use function Which\{which};
+
+/**
+ * @var string The version number of this package.
+ */
+const VERSION = '4.0.0';
 
 /**
  * Application entry point.
+ * @return int The application exit code.
  */
-function main() {
+function main(): int {
+  // Initialize the application.
   @cli_set_process_title('Which.php');
-  exit((new Application)->run());
+
+  // Parse the command line arguments.
+  $program = new Command;
+  $program->setHelp('Find the instances of an executable in the system path.');
+
+  $program->flag('a')->aka('all')
+    ->description('List all instances of executables found (instead of just the first one).')
+    ->boolean();
+
+  $program->flag('s')->aka('silent')
+    ->description('Silence the output, just return the exit code (0 if any executable is found, otherwise 1).')
+    ->boolean();
+
+  $program->flag('v')->aka('version')
+    ->description('Output the version number.')
+    ->boolean();
+
+  $program->argument()->referToAs('command')
+    ->description('The program to find.');
+
+  if ($program['version']) {
+    echo VERSION, PHP_EOL;
+    exit(0);
+  }
+
+  if (!is_string($program[0])) {
+    $program->printHelp();
+    exit(64);
+  }
+
+  // Run the program.
+  $executables = which($program[0], $program['all'], function() { exit(1); });
+  if (!$program['silent']) {
+    if (!is_array($executables)) $executables = [$executables];
+    foreach ($executables as $path) echo $path, PHP_EOL;
+  }
+
+  exit(0);
 }
 
 // Start the application.
