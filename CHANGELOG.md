@@ -3,6 +3,7 @@ This file contains highlights of what changes on each version of the [Which for 
 
 ## Version 4.0.0
 - Breaking change: removed the `Application` class.
+- Added the `onError` option.
 
 ## Version 3.0.0
 - Breaking change: moved from `Observable`-based to synchronous API.
