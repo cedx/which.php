@@ -14,11 +14,9 @@ class WhichTest extends TestCase {
    * @test which
    */
   public function testWhich() {
-    $options = ['path' => 'test/fixtures'];
-
-    it('should return the path of the `executable.cmd` file on Windows', function() use ($options) {
+    it('should return the path of the `executable.cmd` file on Windows', function() {
       try {
-        $executable = which('executable', false, $options);
+        $executable = which('executable', false, null, ['path' => 'test/fixtures']);
         if (Finder::isWindows()) expect($executable)->to->be->a('string')->and->endWith('\\test\\fixtures\\executable.cmd');
         else fail('Exception not thrown.');
       }
@@ -29,9 +27,9 @@ class WhichTest extends TestCase {
       }
     });
 
-    it('should return all the paths of the `executable.cmd` file on Windows', function() use ($options) {
+    it('should return all the paths of the `executable.cmd` file on Windows', function() {
       try {
-        $executables = which('executable', true, $options);
+        $executables = which('executable', true, null, ['path' => 'test/fixtures']);
         if (!Finder::isWindows()) fail('Exception not thrown.');
         else {
           expect($executables)->to->be->an('array')->and->have->lengthOf(1);
@@ -45,9 +43,9 @@ class WhichTest extends TestCase {
       }
     });
 
-    it('should return the path of the `executable.sh` file on POSIX', function() use ($options) {
+    it('should return the path of the `executable.sh` file on POSIX', function() {
       try {
-        $executable = which('executable.sh', false, $options);
+        $executable = which('executable.sh', false, null, ['path' => 'test/fixtures']);
         if (Finder::isWindows()) fail('Exception not thrown.');
         else expect($executable)->to->be->a('string')->and->endWith('/test/fixtures/executable.sh');
       }
@@ -58,9 +56,9 @@ class WhichTest extends TestCase {
       }
     });
 
-    it('should return all the paths of the `executable.sh` file on POSIX', function() use ($options) {
+    it('should return all the paths of the `executable.sh` file on POSIX', function() {
       try {
-        $executables = which('executable.sh', true, $options);
+        $executables = which('executable.sh', true, null, ['path' => 'test/fixtures']);
         if (Finder::isWindows()) fail('Exception not thrown.');
         else {
           expect($executables)->to->be->an('array')->and->have->lengthOf(1);
@@ -71,6 +69,17 @@ class WhichTest extends TestCase {
       catch (\RuntimeException $e) {
         if (Finder::isWindows()) expect(true)->to->be->true;
         else fail($e->getMessage());
+      }
+    });
+
+    it('should return the value of the `onError` handler', function() {
+      $executable = which('executable', false, function() { return 'foo'; }, ['path' => 'test/fixtures']);
+      if (!Finder::isWindows()) expect($executable)->to->equal('foo');
+
+      $executables = which('executable.sh', true, function() { return ['foo']; }, ['path' => 'test/fixtures']);
+      if (Finder::isWindows()) {
+        expect($executables)->to->be->an('array')->and->have->lengthOf(1);
+        expect($executables[0])->to->equal('foo');
       }
     });
   }
