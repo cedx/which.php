@@ -9,6 +9,6 @@ php: '7.1'
 install: composer install --no-interaction
 before_script: composer global require cedx/coveralls
 script: composer test
-after_script:
+after_success:
 - export COMPOSER_BIN=`composer global config bin-dir --absolute`
 - '"$COMPOSER_BIN/coveralls" var/coverage.xml'
