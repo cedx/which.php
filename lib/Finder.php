@@ -45,7 +45,7 @@ class Finder {
    * @param bool $all Value indicating whether to return all executables found, or just the first one.
    * @return string[] The paths of the executables found, or an empty array if the command was not found.
    */
-  public function find(string $command, $all = true): array {
+  public function find(string $command, bool $all = true): array {
     $executables = [];
     foreach ($this->getPath()->getArrayCopy() as $path) {
       $executables = array_merge($executables, $this->findExecutables($path, $command, $all));
@@ -190,7 +190,7 @@ class Finder {
    * @param bool $all Value indicating whether to return all executables found, or just the first one.
    * @return string[] The paths of the executables found, or an empty array if the command was not found.
    */
-  private function findExecutables(string $directory, string $command, $all = true): array {
+  private function findExecutables(string $directory, string $command, bool $all = true): array {
     $executables = [];
 
     foreach(array_merge([''], $this->getExtensions()->getArrayCopy()) as $extension) {
