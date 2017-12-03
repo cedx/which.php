@@ -1,6 +1,10 @@
 # Changelog
 This file contains highlights of what changes on each version of the [Which for PHP](https://github.com/cedx/which.php) library.
 
+## Version [5.0.0](https://github.com/cedx/which.php/compare/v4.0.0...v5.0.0)
+- Breaking change: raised the required [PHP](https://secure.php.net) version.
+- Breaking change: using PHP 7.1 features, like void functions.
+
 ## Version [4.0.0](https://github.com/cedx/which.php/compare/v3.0.0...v4.0.0)
 - Breaking change: removed the `Application` class.
 - Added the `onError` option.
