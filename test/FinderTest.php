@@ -13,7 +13,7 @@ class FinderTest extends TestCase {
   /**
    * @test Finder::checkFileExtension
    */
-  public function testCheckFileExtension() {
+  public function testCheckFileExtension(): void {
     $checkFileExtension = function(string $file) {
       return $this->checkFileExtension(new \SplFileInfo($file));
     };
@@ -45,7 +45,7 @@ class FinderTest extends TestCase {
   /**
    * @test Finder::checkFilePermissions
    */
-  public function testCheckFilePermissions() {
+  public function testCheckFilePermissions(): void {
     if (Finder::isWindows()) $this->markTestSkipped('Not supported on Windows.');
 
     $checkFilePermissions = function(string $file) {
@@ -64,7 +64,7 @@ class FinderTest extends TestCase {
   /**
    * @test Finder::find
    */
-  public function testFind() {
+  public function testFind(): void {
     it('should return the path of the `executable.cmd` file on Windows', function() {
       $executables = (new Finder('test/fixtures'))->find('executable');
       expect($executables)->to->have->lengthOf(Finder::isWindows() ? 1 : 0);
@@ -81,7 +81,7 @@ class FinderTest extends TestCase {
   /**
    * @test Finder::isExecutable
    */
-  public function testIsExecutable() {
+  public function testIsExecutable(): void {
     it('should return `false` for a non-executable file', function() {
       expect((new Finder)->isExecutable(__FILE__))->to->be->false;
     });
@@ -98,7 +98,7 @@ class FinderTest extends TestCase {
   /**
    * @test Finder::setExtensions
    */
-  public function testSetExtensions() {
+  public function testSetExtensions(): void {
     it('should be the value of the `PATHEXT` environment variable by default', function() {
       $pathExt = (string) getenv('PATHEXT');
       $extensions = mb_strlen($pathExt) ? explode(PATH_SEPARATOR, $pathExt) : [];
@@ -115,7 +115,7 @@ class FinderTest extends TestCase {
   /**
    * @test Finder::setPath
    */
-  public function testSetPath() {
+  public function testSetPath(): void {
     it('should be the value of the `PATH` environment variable by default', function() {
       $pathEnv = (string) getenv('PATH');
       $paths = mb_strlen($pathEnv) ? explode(PATH_SEPARATOR, $pathEnv) : [];
@@ -132,7 +132,7 @@ class FinderTest extends TestCase {
   /**
    * @test Finder::setPathSeparator
    */
-  public function testSetPathSeparator() {
+  public function testSetPathSeparator(): void {
     it('should be the value of the `PATH_SEPARATOR` constant by default', function() {
       expect((new Finder)->getPathSeparator())->to->equal(PATH_SEPARATOR);
     });

@@ -8,13 +8,12 @@ use function Which\{which};
 /**
  * @var string The version number of this package.
  */
-const VERSION = '4.0.0';
+const VERSION = '5.0.0';
 
 /**
  * Application entry point.
- * @return int The application exit code.
  */
-function main(): int {
+function main() {
   // Initialize the application.
   @cli_set_process_title('Which.php');
 
