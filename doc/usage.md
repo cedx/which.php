@@ -23,7 +23,7 @@ catch (FinderException $e) {
 ```
 
 The function returns a `string` specifying the absolute path of the first instance of the executables found.
-If the command could not be located, a `FinderException` is thrown.
+If the command could not be located, a `Which\FinderException` is thrown.
 
 ## Options
 The behavior of the `Which\which()` function can be customized using the following parameters.
@@ -41,7 +41,7 @@ foreach ($paths as $path) echo $path, PHP_EOL;
 ```
 
 ### callable **$onError** = `null`
-By default, when the specified command cannot be located, a `FinderException` is thrown. You can disable this exception by providing your own error handler:
+By default, when the specified command cannot be located, a `Which\FinderException` is thrown. You can disable this exception by providing your own error handler:
 
 ```php
 <?php
