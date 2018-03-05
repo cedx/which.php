@@ -64,7 +64,7 @@ class Finder {
       if (!$all && $executables) return $executables;
     }
 
-    return $executables;
+    return array_unique($executables);
   }
 
   /**
