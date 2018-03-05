@@ -28,7 +28,7 @@ If the command could not be located, a `Which\FinderException` is thrown.
 ## Options
 The behavior of the `Which\which()` function can be customized using the following parameters.
 
-### bool **$all** = `false`
+### bool **$all**
 A value indicating whether to return all executables found, instead of just the first one.
 
 If you pass `true` as parameter value, the function will return an array of strings providing all paths found, instead of a single string:
@@ -40,7 +40,7 @@ echo 'The command "foobar" was found at these locations:', PHP_EOL;
 foreach ($paths as $path) echo $path, PHP_EOL;
 ```
 
-### callable **$onError** = `null`
+### callable **$onError**
 By default, when the specified command cannot be located, a `Which\FinderException` is thrown. You can disable this exception by providing your own error handler:
 
 ```php
@@ -52,10 +52,10 @@ else echo 'The command "foobar" is located at: ', $path;
 
 When a `$onError` handler is provided, it is called with the command as argument, and its return value is used instead. This is preferable to throwing and then immediately catching the `FinderException`.
 
-### array **$options** = `[]`
+### array **$options**
 The options to be passed to the underlying finder:
 
-#### string | string[] `"extensions"`
+#### "extensions" => string | string[]
 The executable file extensions, provided as a string or a list of file extensions. Defaults to the list of extensions provided by the `PATHEXT` environment variable.
 
 ```php
@@ -67,7 +67,7 @@ which('foobar', false, null, ['extensions' => ['.foo', '.exe', '.cmd']]);
 !!! tip
     The `extensions` option is only meaningful on the Windows platform, where the executability of a file is determined from its extension.
 
-#### string | string[] `"path"`
+#### "path" => string | string[]
 The system path, provided as a string or a list of directories. Defaults to the list of paths provided by the `PATH` environment variable.
 
 ```php
@@ -76,7 +76,7 @@ which('foobar', false, null, ['path' => '/usr/local/bin:/usr/bin']);
 which('foobar', false, null, ['path' => ['/usr/local/bin', '/usr/bin']]);
 ```
 
-#### string `"pathSeparator"`
+#### "pathSeparator" => string
 The character used to separate paths in the system path. Defaults to the platform path separator (e.g. `";"` on Windows, `":"` on other platforms).
 
 ```php
