@@ -3,6 +3,12 @@
 
 Find the instances of an executable in the system path, implemented in [PHP](https://secure.php.net).
 
+## Resources
+- [Documentation](https://cedx.github.io/which.php)
+- [API reference](https://cedx.github.io/which.php/api)
+- [Packagist package](https://packagist.org/packages/cedx/which)
+- [GitHub repository](https://github.com/cedx/which.php)
+
 ## Requirements
 The latest [PHP](https://secure.php.net) and [Composer](https://getcomposer.org) versions.
 If you plan to play with the sources, you will also need the latest [Phing](https://www.phing.info) version.
@@ -11,7 +17,7 @@ If you plan to play with the sources, you will also need the latest [Phing](http
 From a command prompt, run:
 
 ```shell
-$ composer require cedx/which
+$composer require cedx/which
 ```
 
 ## Usage
@@ -96,15 +102,15 @@ which('foobar', false, null, ['pathSeparator' => $pathSeparator]);
 From a command prompt, install the `which` executable:
 
 ```shell
-$ composer global require cedx/which
+$composer global require cedx/which
 ```
 
 > Consider adding the [`composer global`](https://getcomposer.org/doc/03-cli.md#global) executables directory to your system path.
 
-Then use it to find the instances of an executable:
+Then use it to find the instances of an executable command:
 
 ```shell
-$ which --help
+$which --help
 
 Find the instances of an executable in the system path.
 
@@ -127,7 +133,7 @@ command
 For example:
 
 ```shell
-$ which --all php
+$which --all php
 ```
 
 ## See also
@@ -136,4 +142,4 @@ $ which --all php
 - [Continuous integration](https://travis-ci.org/cedx/which.php)
 
 ## License
-[Which for PHP](https://github.com/cedx/which.php) is distributed under the MIT License.
+[Which for PHP](https://cedx.github.io/which.php) is distributed under the MIT License.

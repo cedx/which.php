@@ -9,18 +9,19 @@ namespace Which;
  * @param callable $onError If provided, instead of throwing an exception, this handler is called with the command as argument and its return value is used.
  * @param array $options The options to be passed to the finder.
  * @return string|string[] A string, or an array of strings, specifying the path(s) of the found executable(s).
- * @throws \RuntimeException The specified command was not found.
+ * @throws FinderException The specified command was not found.
  */
 function which(string $command, bool $all = false, callable $onError = null, array $options = []) {
-  $executables = (new Finder(
+  $finder = new Finder(
     $options['path'] ?? '',
     $options['extensions'] ?? '',
     $options['pathSeparator'] ?? ''
-  ))->find($command, $all);
+  );
 
+  $executables = $finder->find($command, $all);
   if (!$executables) {
     if ($onError) return call_user_func($onError, $command);
-    throw new \RuntimeException("Command not found: $command");
+    throw new FinderException($command, $finder, "Command '$command' not found");
   }
 
   return $all ? $executables : $executables[0];

@@ -38,7 +38,7 @@ class FinderTest extends TestCase {
       expect($checkFileExtension->call($finder, 'C:\\Program Files\\FooBar\\FooBar.cmd'))->to->be->true;
 
       $finder->setExtensions('.BAR');
-      expect($checkFileExtension->call($finder, 'foo.bar'))->to->be->true;
+      expect($checkFileExtension->call($finder, 'foo.BAR'))->to->be->true;
     });
   }
 
@@ -108,7 +108,7 @@ class FinderTest extends TestCase {
     it('should split the extension list using the path separator', function() {
       $extensions = ['.EXE', '.CMD', '.BAT'];
       $finder = (new Finder)->setExtensions(implode(PATH_SEPARATOR, $extensions));
-      expect($finder->getExtensions()->getArrayCopy())->to->equal($extensions);
+      expect($finder->getExtensions()->getArrayCopy())->to->equal(['.exe', '.cmd', '.bat']);
     });
   }
 

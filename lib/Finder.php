@@ -40,6 +40,18 @@ class Finder {
   }
 
   /**
+   * Returns a string representation of this object.
+   * @return string The string representation of this object.
+   */
+  public function __toString(): string {
+    $separator = $this->getPathSeparator();
+    $values = [];
+    if (count($path = $this->getPath())) $values[] = sprintf('path: "%s"', implode($separator, $path->getArrayCopy()));
+    if (count($extensions = $this->getExtensions())) $values[] = sprintf('extensions: "%s"', implode($separator, $extensions->getArrayCopy()));
+    return sprintf('%s(%s)', static::class, implode(', ', $values));
+  }
+
+  /**
    * Finds the instances of an executable in the system path.
    * @param string $command The command to be resolved.
    * @param bool $all Value indicating whether to return all executables found, or just the first one.
@@ -47,7 +59,7 @@ class Finder {
    */
   public function find(string $command, bool $all = true): array {
     $executables = [];
-    foreach ($this->getPath()->getArrayCopy() as $path) {
+    foreach ($this->getPath() as $path) {
       $executables = array_merge($executables, $this->findExecutables($path, $command, $all));
       if (!$all && $executables) return $executables;
     }
@@ -97,7 +109,6 @@ class Finder {
    */
   public static function isWindows(): bool {
     if (mb_strtoupper(mb_substr(PHP_OS, 0, 3)) == 'WIN') return true;
-
     $osType = (string) getenv('OSTYPE');
     return $osType == 'cygwin' || $osType == 'msys';
   }
@@ -116,7 +127,7 @@ class Finder {
       $value = mb_strlen($pathExt) ? explode($pathSep, $pathExt) : ['.exe', '.cmd', '.bat', '.com'];
     }
 
-    $this->getExtensions()->exchangeArray(array_map('mb_strtoupper', $value));
+    $this->getExtensions()->exchangeArray(array_map('mb_strtolower', $value));
     return $this;
   }
 
@@ -157,7 +168,7 @@ class Finder {
    * @return bool Value indicating whether the specified file is executable.
    */
   private function checkFileExtension(\SplFileInfo $fileInfo): bool {
-    $extension = mb_strtoupper($fileInfo->getExtension());
+    $extension = mb_strtolower($fileInfo->getExtension());
     return mb_strlen($extension) ? in_array(".$extension", $this->getExtensions()->getArrayCopy()) : false;
   }
 

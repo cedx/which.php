@@ -23,7 +23,7 @@ class WhichTest extends TestCase {
 
       catch (\Throwable $e) {
         if (Finder::isWindows()) fail($e->getMessage());
-        else expect(true)->to->be->true;
+        else expect($e)->to->be->an->instanceOf(FinderException::class);
       }
     });
 
@@ -37,9 +37,9 @@ class WhichTest extends TestCase {
         }
       }
 
-      catch (\RuntimeException $e) {
+      catch (\Throwable $e) {
         if (Finder::isWindows()) fail($e->getMessage());
-        else expect(true)->to->be->true;
+        else expect($e)->to->be->an->instanceOf(FinderException::class);
       }
     });
 
@@ -50,8 +50,8 @@ class WhichTest extends TestCase {
         else expect($executable)->to->be->a('string')->and->endWith('/test/fixtures/executable.sh');
       }
 
-      catch (\RuntimeException $e) {
-        if (Finder::isWindows()) expect(true)->to->be->true;
+      catch (\Throwable $e) {
+        if (Finder::isWindows()) expect($e)->to->be->an->instanceOf(FinderException::class);
         else fail($e->getMessage());
       }
     });
@@ -66,8 +66,8 @@ class WhichTest extends TestCase {
         }
       }
 
-      catch (\RuntimeException $e) {
-        if (Finder::isWindows()) expect(true)->to->be->true;
+      catch (\Throwable $e) {
+        if (Finder::isWindows()) expect($e)->to->be->an->instanceOf(FinderException::class);
         else fail($e->getMessage());
       }
     });

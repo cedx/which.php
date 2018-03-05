@@ -4,6 +4,7 @@
 - Breaking change: raised the required [PHP](https://secure.php.net) version.
 - Breaking change: using PHP 7.1 features, like void functions.
 - Added a user guide based on [MkDocs](http://www.mkdocs.org).
+- Added the `FinderException` class.
 - Updated the package dependencies.
 
 ## Version [4.0.0](https://github.com/cedx/which.php/compare/v3.0.0...v4.0.0)
