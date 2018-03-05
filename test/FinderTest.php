@@ -101,7 +101,7 @@ class FinderTest extends TestCase {
   public function testSetExtensions(): void {
     it('should be the value of the `PATHEXT` environment variable by default', function() {
       $pathExt = (string) getenv('PATHEXT');
-      $extensions = mb_strlen($pathExt) ? explode(PATH_SEPARATOR, $pathExt) : [];
+      $extensions = mb_strlen($pathExt) ? array_map('mb_strtolower', explode(PATH_SEPARATOR, $pathExt)) : [];
       expect((new Finder)->getExtensions()->getArrayCopy())->to->equal($extensions);
     });
 
