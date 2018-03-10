@@ -23,6 +23,7 @@
   </target>
 
   <target name="lint" description="Perform the static analysis">
+    <phplint file="bin/which"/>
     <phplint>
       <fileset dir="lib" includes="**/*.php"/>
       <fileset dir="test" includes="**/*.php"/>
