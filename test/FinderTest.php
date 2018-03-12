@@ -46,7 +46,7 @@ class FinderTest extends TestCase {
    * @test Finder::checkFilePermissions
    */
   public function testCheckFilePermissions(): void {
-    if (Finder::isWindows()) $this->markTestSkipped('Not supported on Windows.');
+    if (Finder::isWindows()) $this->markTestSkipped('Not supported on Windows');
 
     $checkFilePermissions = function(string $file) {
       return $this->checkFilePermissions(new \SplFileInfo($file));

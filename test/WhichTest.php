@@ -18,7 +18,7 @@ class WhichTest extends TestCase {
       try {
         $executable = which('executable', false, null, ['path' => 'test/fixtures']);
         if (Finder::isWindows()) expect($executable)->to->be->a('string')->and->endWith('\\test\\fixtures\\executable.cmd');
-        else fail('Exception not thrown.');
+        else fail('Exception not thrown');
       }
 
       catch (\Throwable $e) {
@@ -30,7 +30,7 @@ class WhichTest extends TestCase {
     it('should return all the paths of the `executable.cmd` file on Windows', function() {
       try {
         $executables = which('executable', true, null, ['path' => 'test/fixtures']);
-        if (!Finder::isWindows()) fail('Exception not thrown.');
+        if (!Finder::isWindows()) fail('Exception not thrown');
         else {
           expect($executables)->to->be->an('array')->and->have->lengthOf(1);
           expect($executables[0])->to->be->a('string')->and->endWith('\\test\\fixtures\\executable.cmd');
@@ -46,7 +46,7 @@ class WhichTest extends TestCase {
     it('should return the path of the `executable.sh` file on POSIX', function() {
       try {
         $executable = which('executable.sh', false, null, ['path' => 'test/fixtures']);
-        if (Finder::isWindows()) fail('Exception not thrown.');
+        if (Finder::isWindows()) fail('Exception not thrown');
         else expect($executable)->to->be->a('string')->and->endWith('/test/fixtures/executable.sh');
       }
 
@@ -59,7 +59,7 @@ class WhichTest extends TestCase {
     it('should return all the paths of the `executable.sh` file on POSIX', function() {
       try {
         $executables = which('executable.sh', true, null, ['path' => 'test/fixtures']);
-        if (Finder::isWindows()) fail('Exception not thrown.');
+        if (Finder::isWindows()) fail('Exception not thrown');
         else {
           expect($executables)->to->be->an('array')->and->have->lengthOf(1);
           expect($executables[0])->to->be->a('string')->and->endWith('/test/fixtures/executable.sh');
