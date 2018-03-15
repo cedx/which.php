@@ -6,7 +6,7 @@
 
 ## Testing
 - [Continuous integration](https://travis-ci.org/cedx/which.php)
-- [Code coverage](https://coveralls.io/github/cedx/which.php)
+- [Code coverage](https://coveralls.io/github/cedx/which.php/)
 
 ## Other implementations
 - Dart: [Where.dart](https://cedx.github.io/where.dart)
