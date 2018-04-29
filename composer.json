@@ -23,7 +23,7 @@
     "which"
   ],
   "require": {
-    "php": ">=7.1.0",
+    "php": ">=7.2.0",
     "ext-mbstring": "*",
     "ext-spl": "*",
     "nategood/commando": "^0.2.9",

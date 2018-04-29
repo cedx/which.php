@@ -122,4 +122,5 @@ For example:
 
 ```shell
 which --all php
+# /usr/bin/php
 ```
