@@ -8,7 +8,7 @@ use function Which\{which};
 /**
  * @var string The version number of this package.
  */
-const VERSION = '5.0.1';
+const VERSION = '6.0.0';
 
 /**
  * Application entry point.
