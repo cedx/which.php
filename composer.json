@@ -1,6 +1,6 @@
 {
   "description": "Find the instances of an executable in the system path.",
-  "homepage": "https://cedx.github.io/which.php",
+  "homepage": "https://dev.belin.io/which.php",
   "license": "MIT",
   "name": "cedx/which",
   "type": "library",
@@ -38,7 +38,7 @@
     "test": "phpunit --colors=auto --verbose"
   },
   "support": {
-    "docs": "https://cedx.github.io/which.php/api",
+    "docs": "https://dev.belin.io/which.php/api",
     "issues": "https://github.com/cedx/which.php/issues"
   }
 }

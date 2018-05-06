@@ -4,10 +4,10 @@
 Find the instances of an executable in the system path, implemented in [PHP](https://secure.php.net).
 
 ## Resources
-- [Documentation](https://cedx.github.io/which.php)
-- [API reference](https://cedx.github.io/which.php/api)
+- [Documentation](https://dev.belin.io/which.php)
+- [API reference](https://dev.belin.io/which.php/api)
 - [Packagist package](https://packagist.org/packages/cedx/which)
 - [GitHub repository](https://github.com/cedx/which.php)
 
 ## License
-[Which for PHP](https://cedx.github.io/which.php) is distributed under the MIT License.
+[Which for PHP](https://dev.belin.io/which.php) is distributed under the MIT License.

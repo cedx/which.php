@@ -1,7 +1,7 @@
 site_name: Which for PHP
 site_description: Find the instances of an executable in the system path, implemented in PHP.
 site_author: Cédric Belin - cedric@belin.io
-site_url: https://cedx.github.io/which.php
+site_url: https://dev.belin.io/which.php
 
 docs_dir: doc
 site_dir: web
