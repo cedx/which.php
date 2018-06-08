@@ -3,6 +3,7 @@
 ## Version [6.0.0](https://github.com/cedx/which.php/compare/v5.0.1...v6.0.0)
 - Breaking change: raised the required [PHP](https://secure.php.net) version.
 - Added support for [phpDocumentor](https://www.phpdoc.org).
+- Updated the package dependencies.
 
 ## Version [5.0.1](https://github.com/cedx/which.php/compare/v5.0.0...v5.0.1)
 - Fixed [issue #2](https://github.com/cedx/which.php/issues/2): the `which()` function can return duplicates.
