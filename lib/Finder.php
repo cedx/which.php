@@ -116,7 +116,7 @@ class Finder {
   /**
    * Sets the list of executable file extensions.
    * @param string|string[] $value The new executable file extensions, or an empty string to use the `PATHEXT` environment variable.
-   * @return Finder This instance.
+   * @return self This instance.
    */
   public function setExtensions($value): self {
     $pathSep = $this->getPathSeparator();
@@ -134,7 +134,7 @@ class Finder {
   /**
    * Sets the list of system paths.
    * @param string|string[] $value The new system path, or an empty string to use the `PATH` environment variable.
-   * @return Finder This instance.
+   * @return self This instance.
    */
   public function setPath($value): self {
     $pathSep = $this->getPathSeparator();
@@ -155,7 +155,7 @@ class Finder {
   /**
    * Sets the character used to separate paths in the system path.
    * @param string $value The new path separator, or an empty string to use the `PATH_SEPARATOR` constant.
-   * @return Finder This instance.
+   * @return self This instance.
    */
   public function setPathSeparator(string $value): self {
     $this->pathSeparator = mb_strlen($value) ? $value : (static::isWindows() ? ';' : PATH_SEPARATOR);
