@@ -25,11 +25,14 @@ extra:
 markdown_extensions:
 - admonition
 - codehilite
+- meta
 
 pages:
 - Overview: index.md
 - Installation: installation.md
-- Usage: usage.md
+- Usage:
+  - Programming interface: usage/api.md
+  - Command line interface: usage/cli.md
 - About:
   - Changelog: about/changelog.md
   - License: about/license.md
