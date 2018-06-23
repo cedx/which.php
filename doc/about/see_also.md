@@ -5,7 +5,7 @@
 - [Packagist package](https://packagist.org/packages/cedx/which)
 
 ## Testing
-- [Continuous integration](https://travis-ci.org/cedx/which.php)
+- [Continuous integration](https://travis-ci.com/cedx/which.php)
 - [Code coverage](https://coveralls.io/github/cedx/which.php/)
 
 ## Other implementations
