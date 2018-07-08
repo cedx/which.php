@@ -27,6 +27,7 @@
   <target name="lint" description="Perform the static analysis">
     <phpLint file="bin/which"/>
     <phpLint>
+      <fileSet dir="example" includes="*.php"/>
       <fileSet dir="lib" includes="**/*.php"/>
       <fileSet dir="test" includes="**/*.php"/>
     </phpLint>
