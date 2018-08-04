@@ -2,7 +2,6 @@
 declare(strict_types=1);
 namespace Which;
 
-use function PHPUnit\Expect\{expect, it};
 use PHPUnit\Framework\{TestCase};
 
 /**
@@ -14,82 +13,71 @@ class FinderTest extends TestCase {
    * @test Finder::find
    */
   public function testFind(): void {
-    it('should return the path of the `executable.cmd` file on Windows', function() {
-      $executables = (new Finder('test/fixtures'))->find('executable');
-      expect($executables)->to->have->lengthOf(Finder::isWindows() ? 1 : 0);
-      if (Finder::isWindows()) expect($executables[0])->to->endWith('\\test\\fixtures\\executable.cmd');
-    });
+    // It should return the path of the `executable.cmd` file on Windows.
+    $executables = (new Finder('test/fixtures'))->find('executable');
+    assertThat($executables, countOf(Finder::isWindows() ? 1 : 0));
+    if (Finder::isWindows()) assertThat($executables[0], stringEndsWith('\\test\\fixtures\\executable.cmd'));
 
-    it('should return the path of the `executable.sh` file on POSIX', function() {
-      $executables = (new Finder('test/fixtures'))->find('executable.sh');
-      expect($executables)->to->have->lengthOf(Finder::isWindows() ? 0 : 1);
-      if (!Finder::isWindows()) expect($executables[0])->to->endWith('/test/fixtures/executable.sh');
-    });
+    // It should return the path of the `executable.sh` file on POSIX.
+    $executables = (new Finder('test/fixtures'))->find('executable.sh');
+    assertThat($executables, countOf(Finder::isWindows() ? 0 : 1));
+    if (!Finder::isWindows()) assertThat($executables[0], stringEndsWith('/test/fixtures/executable.sh'));
   }
 
   /**
    * @test Finder::isExecutable
    */
   public function testIsExecutable(): void {
-    it('should return `false` for a non-executable file', function() {
-      expect((new Finder)->isExecutable(__FILE__))->to->be->false;
-    });
+    // It should return `false` for a non-executable file.
+    assertThat((new Finder)->isExecutable(__FILE__), isFalse());
 
-    it('should return `false` for a POSIX executable, when test is run on Windows', function() {
-      expect((new Finder)->isExecutable('test/fixtures/executable.sh'))->to->not->equal(Finder::isWindows());
-    });
+    // It should return `false` for a POSIX executable, when test is run on Windows.
+    assertThat((new Finder)->isExecutable('test/fixtures/executable.sh'), logicalNot(equalTo(Finder::isWindows())));
 
-    it('should return `false` for a Windows executable, when test is run on POSIX', function() {
-      expect((new Finder)->isExecutable('test/fixtures/executable.cmd'))->to->equal(Finder::isWindows());
-    });
+    // It should return `false` for a Windows executable, when test is run on POSIX.
+    assertThat((new Finder)->isExecutable('test/fixtures/executable.cmd'), equalTo(Finder::isWindows()));
   }
 
   /**
    * @test Finder::setExtensions
    */
   public function testSetExtensions(): void {
-    it('should be the value of the `PATHEXT` environment variable by default', function() {
-      $pathExt = (string) getenv('PATHEXT');
-      $extensions = mb_strlen($pathExt) ? array_map('mb_strtolower', explode(PATH_SEPARATOR, $pathExt)) : [];
-      expect((new Finder)->getExtensions()->getArrayCopy())->to->equal($extensions);
-    });
+    // It should be the value of the `PATHEXT` environment variable by default.
+    $pathExt = (string) getenv('PATHEXT');
+    $extensions = mb_strlen($pathExt) ? array_map('mb_strtolower', explode(PATH_SEPARATOR, $pathExt)) : [];
+    assertThat((new Finder)->getExtensions()->getArrayCopy(), equalTo($extensions));
 
-    it('should split the extension list using the path separator', function() {
-      $extensions = ['.EXE', '.CMD', '.BAT'];
-      $finder = (new Finder)->setExtensions(implode(PATH_SEPARATOR, $extensions));
-      expect($finder->getExtensions()->getArrayCopy())->to->equal(['.exe', '.cmd', '.bat']);
-    });
+    // It should split the extension list using the path separator.
+    $extensions = ['.EXE', '.CMD', '.BAT'];
+    $finder = (new Finder)->setExtensions(implode(PATH_SEPARATOR, $extensions));
+    assertThat($finder->getExtensions()->getArrayCopy(), equalTo(['.exe', '.cmd', '.bat']));
   }
 
   /**
    * @test Finder::setPath
    */
   public function testSetPath(): void {
-    it('should be the value of the `PATH` environment variable by default', function() {
-      $pathEnv = (string) getenv('PATH');
-      $paths = mb_strlen($pathEnv) ? explode(PATH_SEPARATOR, $pathEnv) : [];
-      expect((new Finder)->getPath()->getArrayCopy())->to->equal($paths);
-    });
+    // It should be the value of the `PATH` environment variable by default.
+    $pathEnv = (string) getenv('PATH');
+    $paths = mb_strlen($pathEnv) ? explode(PATH_SEPARATOR, $pathEnv) : [];
+    assertThat((new Finder)->getPath()->getArrayCopy(), equalTo($paths));
 
-    it('should split the input path using the path separator', function() {
-      $paths = ['/usr/local/bin', '/usr/bin'];
-      $finder = (new Finder)->setPath(implode(PATH_SEPARATOR, $paths));
-      expect($finder->getPath()->getArrayCopy())->to->equal($paths);
-    });
+    // It should split the input path using the path separator.
+    $paths = ['/usr/local/bin', '/usr/bin'];
+    $finder = (new Finder)->setPath(implode(PATH_SEPARATOR, $paths));
+    assertThat($finder->getPath()->getArrayCopy(), equalTo($paths));
   }
 
   /**
    * @test Finder::setPathSeparator
    */
   public function testSetPathSeparator(): void {
-    it('should be the value of the `PATH_SEPARATOR` constant by default', function() {
-      expect((new Finder)->getPathSeparator())->to->equal(PATH_SEPARATOR);
-    });
+    // It should be the value of the `PATH_SEPARATOR` constant by default.
+    assertThat((new Finder)->getPathSeparator(), equalTo(PATH_SEPARATOR));
 
-    it('should properly set the path separator', function() {
-      $finder = (new Finder)->setPathSeparator('#');
-      expect($finder->getPathSeparator())->to->equal('#');
-      expect($finder->setPathSeparator('')->getPathSeparator())->to->equal(PATH_SEPARATOR);
-    });
+    // It should properly set the path separator.
+    $finder = (new Finder)->setPathSeparator('#');
+    assertThat($finder->getPathSeparator(), equalTo('#'));
+    assertThat($finder->setPathSeparator('')->getPathSeparator(), equalTo(PATH_SEPARATOR));
   }
 }
