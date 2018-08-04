@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [6.2.0](https://github.com/cedx/which.php/compare/v6.1.0...v6.2.0)
+- Dropped the dependency on [PHPUnit-Expect](https://dev.belin.io/phpunit-expect).
+
 ## Version [6.1.0](https://github.com/cedx/which.php/compare/v6.0.0...v6.1.0)
 - Added an example code.
 - Updated the package dependencies.
