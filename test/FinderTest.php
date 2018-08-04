@@ -11,57 +11,6 @@ use PHPUnit\Framework\{TestCase};
 class FinderTest extends TestCase {
 
   /**
-   * @test Finder::checkFileExtension
-   */
-  public function testCheckFileExtension(): void {
-    $checkFileExtension = function(string $file) {
-      return $this->checkFileExtension(new \SplFileInfo($file));
-    };
-
-    it('should return `false` if the file has not an executable file extension', function() use ($checkFileExtension) {
-      $finder = new Finder('', ['.EXE', '.CMD', '.BAT']);
-      expect($checkFileExtension->call($finder, ''))->to->be->false;
-      expect($checkFileExtension->call($finder, 'exe.'))->to->be->false;
-      expect($checkFileExtension->call($finder, 'foo.bar'))->to->be->false;
-      expect($checkFileExtension->call($finder, '/home/logger.txt'))->to->be->false;
-      expect($checkFileExtension->call($finder, 'C:\\Program Files\\FooBar\\FooBar.dll'))->to->be->false;
-
-      $finder->setExtensions('.BAR');
-      expect($checkFileExtension->call($finder, 'foo.exe'))->to->be->false;
-    });
-
-    it('should return `true` if the file has an executable file extension', function() use ($checkFileExtension) {
-      $finder = new Finder('', ['.EXE', '.CMD', '.BAT']);
-      expect($checkFileExtension->call($finder, '.exe'))->to->be->true;
-      expect($checkFileExtension->call($finder, 'foo.exe'))->to->be->true;
-      expect($checkFileExtension->call($finder, '/home/logger.bat'))->to->be->true;
-      expect($checkFileExtension->call($finder, 'C:\\Program Files\\FooBar\\FooBar.cmd'))->to->be->true;
-
-      $finder->setExtensions('.BAR');
-      expect($checkFileExtension->call($finder, 'foo.BAR'))->to->be->true;
-    });
-  }
-
-  /**
-   * @test Finder::checkFilePermissions
-   */
-  public function testCheckFilePermissions(): void {
-    if (Finder::isWindows()) $this->markTestSkipped('Not supported on Windows');
-
-    $checkFilePermissions = function(string $file) {
-      return $this->checkFilePermissions(new \SplFileInfo($file));
-    };
-
-    it('it should return `false` if the file is not executable at all', function() use ($checkFilePermissions) {
-      expect($checkFilePermissions->call(new Finder, 'test/fixtures/not_executable.sh'))->to->be->false;
-    });
-
-    it('it should return `true` if the file is executable by everyone', function() use ($checkFilePermissions) {
-      expect($checkFilePermissions->call(new Finder, 'test/fixtures/executable.sh'))->to->be->true;
-    });
-  }
-
-  /**
    * @test Finder::find
    */
   public function testFind(): void {

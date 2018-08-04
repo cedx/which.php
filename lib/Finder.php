@@ -25,7 +25,7 @@ class Finder {
   private $pathSeparator;
 
   /**
-   * Initializes a new instance of the class.
+   * Creates a new finder.
    * @param string|string[] $path The system path. Defaults to the `PATH` environment variable.
    * @param string|string[] $extensions The executable file extensions. Defaults to the `PATHEXT` environment variable.
    * @param string $pathSeparator The character used to separate paths in the system path. Defaults to the `PATH_SEPARATOR` constant.
