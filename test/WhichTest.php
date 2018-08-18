@@ -12,7 +12,7 @@ class WhichTest extends TestCase {
   /**
    * @test which
    */
-  public function testWhich(): void {
+  function testWhich(): void {
     // It should return the path of the `executable.cmd` file on Windows.
     try {
       $executable = which('executable', false, null, ['path' => 'test/fixtures']);

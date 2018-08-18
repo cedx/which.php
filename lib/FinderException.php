@@ -24,7 +24,7 @@ class FinderException extends \RuntimeException {
    * @param string $message A message describing the error.
    * @param \Throwable $previous The previous exception used for the exception chaining.
    */
-  public function __construct(string $command, Finder $finder, string $message = '', \Throwable $previous = null) {
+  function __construct(string $command, Finder $finder, string $message = '', \Throwable $previous = null) {
     parent::__construct($message, 0, $previous);
     $this->command = $command;
     $this->finder = $finder;
@@ -34,7 +34,7 @@ class FinderException extends \RuntimeException {
    * Returns a string representation of this object.
    * @return string The string representation of this object.
    */
-  public function __toString(): string {
+  function __toString(): string {
     $finder = $this->getFinder();
     $values = ["\"{$this->getCommand()}\""];
     if (count($path = $finder->getPath())) $values[] = sprintf('finder: "%s"', implode($finder->getPathSeparator(), $path->getArrayCopy()));
@@ -46,7 +46,7 @@ class FinderException extends \RuntimeException {
    * Gets the name of the looked up command.
    * @return string The looked up command.
    */
-  public function getCommand(): string {
+  function getCommand(): string {
     return $this->command;
   }
 
@@ -54,7 +54,7 @@ class FinderException extends \RuntimeException {
    * Gets the instance of the finder used to lookup the command.
    * @return Finder The finder used to lookup the command.
    */
-  public function getFinder(): Finder {
+  function getFinder(): Finder {
     return $this->finder;
   }
 }

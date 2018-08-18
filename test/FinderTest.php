@@ -12,7 +12,7 @@ class FinderTest extends TestCase {
   /**
    * @test Finder::find
    */
-  public function testFind(): void {
+  function testFind(): void {
     // It should return the path of the `executable.cmd` file on Windows.
     $executables = (new Finder('test/fixtures'))->find('executable');
     assertThat($executables, countOf(Finder::isWindows() ? 1 : 0));
@@ -27,7 +27,7 @@ class FinderTest extends TestCase {
   /**
    * @test Finder::isExecutable
    */
-  public function testIsExecutable(): void {
+  function testIsExecutable(): void {
     // It should return `false` for a non-executable file.
     assertThat((new Finder)->isExecutable(__FILE__), isFalse());
 
@@ -41,7 +41,7 @@ class FinderTest extends TestCase {
   /**
    * @test Finder::setExtensions
    */
-  public function testSetExtensions(): void {
+  function testSetExtensions(): void {
     // It should be the value of the `PATHEXT` environment variable by default.
     $pathExt = (string) getenv('PATHEXT');
     $extensions = mb_strlen($pathExt) ? array_map('mb_strtolower', explode(PATH_SEPARATOR, $pathExt)) : [];
@@ -56,7 +56,7 @@ class FinderTest extends TestCase {
   /**
    * @test Finder::setPath
    */
-  public function testSetPath(): void {
+  function testSetPath(): void {
     // It should be the value of the `PATH` environment variable by default.
     $pathEnv = (string) getenv('PATH');
     $paths = mb_strlen($pathEnv) ? explode(PATH_SEPARATOR, $pathEnv) : [];
@@ -71,7 +71,7 @@ class FinderTest extends TestCase {
   /**
    * @test Finder::setPathSeparator
    */
-  public function testSetPathSeparator(): void {
+  function testSetPathSeparator(): void {
     // It should be the value of the `PATH_SEPARATOR` constant by default.
     assertThat((new Finder)->getPathSeparator(), equalTo(PATH_SEPARATOR));
 

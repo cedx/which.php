@@ -30,7 +30,7 @@ class Finder {
    * @param string|string[] $extensions The executable file extensions. Defaults to the `PATHEXT` environment variable.
    * @param string $pathSeparator The character used to separate paths in the system path. Defaults to the `PATH_SEPARATOR` constant.
    */
-  public function __construct($path = '', $extensions = '', string $pathSeparator = '') {
+  function __construct($path = '', $extensions = '', string $pathSeparator = '') {
     $this->extensions = new \ArrayObject;
     $this->path = new \ArrayObject;
     $this->setPathSeparator($pathSeparator);
@@ -43,7 +43,7 @@ class Finder {
    * Returns a string representation of this object.
    * @return string The string representation of this object.
    */
-  public function __toString(): string {
+  function __toString(): string {
     $separator = $this->getPathSeparator();
     $values = [];
     if (count($path = $this->getPath())) $values[] = sprintf('path: "%s"', implode($separator, $path->getArrayCopy()));
@@ -57,7 +57,7 @@ class Finder {
    * @param bool $all Value indicating whether to return all executables found, or just the first one.
    * @return string[] The paths of the executables found, or an empty array if the command was not found.
    */
-  public function find(string $command, bool $all = true): array {
+  function find(string $command, bool $all = true): array {
     $executables = [];
     foreach ($this->getPath() as $path) {
       $executables = array_merge($executables, $this->findExecutables($path, $command, $all));
@@ -71,7 +71,7 @@ class Finder {
    * Gets the list of executable file extensions.
    * @return \ArrayObject The list of executable file extensions.
    */
-  public function getExtensions(): \ArrayObject {
+  function getExtensions(): \ArrayObject {
     return $this->extensions;
   }
 
@@ -79,7 +79,7 @@ class Finder {
    * Gets the list of system paths.
    * @return \ArrayObject The list of system paths.
    */
-  public function getPath(): \ArrayObject {
+  function getPath(): \ArrayObject {
     return $this->path;
   }
 
@@ -87,7 +87,7 @@ class Finder {
    * Gets the character used to separate paths in the system path.
    * @return string The character used to separate paths in the system path.
    */
-  public function getPathSeparator(): string {
+  function getPathSeparator(): string {
     return $this->pathSeparator;
   }
 
@@ -96,7 +96,7 @@ class Finder {
    * @param string $file The path of the file to be checked.
    * @return bool `true` if the specified file is executable, otherwise `false`.
    */
-  public function isExecutable(string $file): bool {
+  function isExecutable(string $file): bool {
     $fileInfo = new \SplFileInfo($file);
     if (!$fileInfo->isFile()) return false;
     if ($fileInfo->isExecutable()) return true;
@@ -107,7 +107,7 @@ class Finder {
    * Gets a value indicating whether the current platform is Windows.
    * @return bool `true` if the current platform is Windows, otherwise `false`.
    */
-  public static function isWindows(): bool {
+  static function isWindows(): bool {
     if (PHP_OS_FAMILY == 'Windows') return true;
     $osType = (string) getenv('OSTYPE');
     return $osType == 'cygwin' || $osType == 'msys';
@@ -118,7 +118,7 @@ class Finder {
    * @param string|string[] $value The new executable file extensions, or an empty string to use the `PATHEXT` environment variable.
    * @return self This instance.
    */
-  public function setExtensions($value): self {
+  function setExtensions($value): self {
     $pathSep = $this->getPathSeparator();
     if (!is_array($value)) $value = mb_strlen($value) ? explode($pathSep, $value) : [];
 
@@ -136,7 +136,7 @@ class Finder {
    * @param string|string[] $value The new system path, or an empty string to use the `PATH` environment variable.
    * @return self This instance.
    */
-  public function setPath($value): self {
+  function setPath($value): self {
     $pathSep = $this->getPathSeparator();
     if (!is_array($value)) $value = mb_strlen($value) ? explode($pathSep, $value) : [];
 
@@ -157,7 +157,7 @@ class Finder {
    * @param string $value The new path separator, or an empty string to use the `PATH_SEPARATOR` constant.
    * @return self This instance.
    */
-  public function setPathSeparator(string $value): self {
+  function setPathSeparator(string $value): self {
     $this->pathSeparator = mb_strlen($value) ? $value : (static::isWindows() ? ';' : PATH_SEPARATOR);
     return $this;
   }
