@@ -34,17 +34,17 @@ class Finder {
     $this->pathSeparator = mb_strlen($pathSeparator) ? $pathSeparator : (static::isWindows() ? ';' : PATH_SEPARATOR);
 
     if (!is_array($path))
-      $path = array_values(array_filter((array) explode($this->pathSeparator, $path), function($item) { return mb_strlen($item) > 0; }));
+      $path = array_values(array_filter(explode($this->pathSeparator, $path) ?: [], function($item) { return mb_strlen($item) > 0; }));
     if (!$path) {
       $pathEnv = (string) getenv('PATH');
-      if (mb_strlen($pathEnv)) $path = (array) explode($this->pathSeparator, $pathEnv);
+      if (mb_strlen($pathEnv)) $path = explode($this->pathSeparator, $pathEnv) ?: [];
     }
 
     if (!is_array($extensions))
-      $extensions = array_values(array_filter((array) explode($this->pathSeparator, $extensions), function($item) { return mb_strlen($item) > 0; }));
+      $extensions = array_values(array_filter(explode($this->pathSeparator, $extensions) ?: [], function($item) { return mb_strlen($item) > 0; }));
     if (!$extensions && static::isWindows()) {
       $pathExt = (string) getenv('PATHEXT');
-      $extensions = mb_strlen($pathExt) ? (array) explode($this->pathSeparator, $pathExt) : ['.exe', '.cmd', '.bat', '.com'];
+      $extensions = mb_strlen($pathExt) ? explode($this->pathSeparator, $pathExt) ?: [] : ['.exe', '.cmd', '.bat', '.com'];
     }
 
     $this->extensions = new \ArrayObject(array_map('mb_strtolower', $extensions));
@@ -168,7 +168,7 @@ class Finder {
     $executables = [];
 
     foreach (array_merge([''], $this->getExtensions()->getArrayCopy()) as $extension) {
-      $resolvedPath = Path::makeAbsolute(Path::join($directory, $command).mb_strtolower($extension), (string) getcwd());
+      $resolvedPath = Path::makeAbsolute(Path::join($directory, $command).mb_strtolower($extension), getcwd() ?: '.');
       if ($this->isExecutable($resolvedPath)) {
         $executables[] = str_replace('/', DIRECTORY_SEPARATOR, $resolvedPath);
         if (!$all) return $executables;
