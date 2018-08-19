@@ -10,6 +10,35 @@ use PHPUnit\Framework\{TestCase};
 class FinderTest extends TestCase {
 
   /**
+   * @test Finder::__construct
+   */
+  function testConstructor(): void {
+    // It should set the `path` property to the value of the `PATH` environment variable by default.
+    $pathEnv = (string) getenv('PATH');
+    $paths = mb_strlen($pathEnv) ? explode(PATH_SEPARATOR, $pathEnv) : [];
+    assertThat((new Finder)->getPath()->getArrayCopy(), equalTo($paths));
+
+    // It should split the input path using the path separator.
+    $paths = ['/usr/local/bin', '/usr/bin'];
+    assertThat((new Finder(implode(PATH_SEPARATOR, $paths)))->getPath()->getArrayCopy(), equalTo($paths));
+
+    // It should set the `extensions` property to the value of the `PATHEXT` environment variable by default.
+    $pathExt = (string) getenv('PATHEXT');
+    $extensions = mb_strlen($pathExt) ? array_map('mb_strtolower', explode(PATH_SEPARATOR, $pathExt)) : [];
+    assertThat((new Finder)->getExtensions()->getArrayCopy(), equalTo($extensions));
+
+    // It should split the extension list using the path separator.
+    $extensions = ['.EXE', '.CMD', '.BAT'];
+    assertThat((new Finder('', implode(PATH_SEPARATOR, $extensions)))->getExtensions()->getArrayCopy(), equalTo(['.exe', '.cmd', '.bat']));
+
+    // It should set the `pathSeparator` property to the value of the `PATH_SEPARATOR` constant by default.
+    assertThat((new Finder)->getPathSeparator(), equalTo(PATH_SEPARATOR));
+
+    // It should properly set the path separator.
+    assertThat((new Finder('', '', '#'))->getPathSeparator(), equalTo('#'));
+  }
+
+  /**
    * @test Finder::find
    */
   function testFind(): void {
@@ -36,48 +65,5 @@ class FinderTest extends TestCase {
 
     // It should return `false` for a Windows executable, when test is run on POSIX.
     assertThat((new Finder)->isExecutable('test/fixtures/executable.cmd'), equalTo(Finder::isWindows()));
-  }
-
-  /**
-   * @test Finder::setExtensions
-   */
-  function testSetExtensions(): void {
-    // It should be the value of the `PATHEXT` environment variable by default.
-    $pathExt = (string) getenv('PATHEXT');
-    $extensions = mb_strlen($pathExt) ? array_map('mb_strtolower', explode(PATH_SEPARATOR, $pathExt)) : [];
-    assertThat((new Finder)->getExtensions()->getArrayCopy(), equalTo($extensions));
-
-    // It should split the extension list using the path separator.
-    $extensions = ['.EXE', '.CMD', '.BAT'];
-    $finder = (new Finder)->setExtensions(implode(PATH_SEPARATOR, $extensions));
-    assertThat($finder->getExtensions()->getArrayCopy(), equalTo(['.exe', '.cmd', '.bat']));
-  }
-
-  /**
-   * @test Finder::setPath
-   */
-  function testSetPath(): void {
-    // It should be the value of the `PATH` environment variable by default.
-    $pathEnv = (string) getenv('PATH');
-    $paths = mb_strlen($pathEnv) ? explode(PATH_SEPARATOR, $pathEnv) : [];
-    assertThat((new Finder)->getPath()->getArrayCopy(), equalTo($paths));
-
-    // It should split the input path using the path separator.
-    $paths = ['/usr/local/bin', '/usr/bin'];
-    $finder = (new Finder)->setPath(implode(PATH_SEPARATOR, $paths));
-    assertThat($finder->getPath()->getArrayCopy(), equalTo($paths));
-  }
-
-  /**
-   * @test Finder::setPathSeparator
-   */
-  function testSetPathSeparator(): void {
-    // It should be the value of the `PATH_SEPARATOR` constant by default.
-    assertThat((new Finder)->getPathSeparator(), equalTo(PATH_SEPARATOR));
-
-    // It should properly set the path separator.
-    $finder = (new Finder)->setPathSeparator('#');
-    assertThat($finder->getPathSeparator(), equalTo('#'));
-    assertThat($finder->setPathSeparator('')->getPathSeparator(), equalTo(PATH_SEPARATOR));
   }
 }

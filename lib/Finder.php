@@ -31,12 +31,24 @@ class Finder {
    * @param string $pathSeparator The character used to separate paths in the system path. Defaults to the `PATH_SEPARATOR` constant.
    */
   function __construct($path = '', $extensions = '', string $pathSeparator = '') {
-    $this->extensions = new \ArrayObject;
-    $this->path = new \ArrayObject;
-    $this->setPathSeparator($pathSeparator);
+    $this->pathSeparator = mb_strlen($pathSeparator) ? $pathSeparator : (static::isWindows() ? ';' : PATH_SEPARATOR);
 
-    $this->setExtensions($extensions);
-    $this->setPath($path);
+    if (!is_array($path))
+      $path = array_values(array_filter((array) explode($this->pathSeparator, $path), function($item) { return mb_strlen($item) > 0; }));
+    if (!$path) {
+      $pathEnv = (string) getenv('PATH');
+      if (mb_strlen($pathEnv)) $path = (array) explode($this->pathSeparator, $pathEnv);
+    }
+
+    if (!is_array($extensions))
+      $extensions = array_values(array_filter((array) explode($this->pathSeparator, $extensions), function($item) { return mb_strlen($item) > 0; }));
+    if (!$extensions && static::isWindows()) {
+      $pathExt = (string) getenv('PATHEXT');
+      $extensions = mb_strlen($pathExt) ? (array) explode($this->pathSeparator, $pathExt) : ['.exe', '.cmd', '.bat', '.com'];
+    }
+
+    $this->extensions = new \ArrayObject(array_map('mb_strtolower', $extensions));
+    $this->path = new \ArrayObject(array_map(function($directory) { return trim($directory, '"'); }, $path));
   }
 
   /**
@@ -114,55 +126,6 @@ class Finder {
   }
 
   /**
-   * Sets the list of executable file extensions.
-   * @param string|string[] $value The new executable file extensions, or an empty string to use the `PATHEXT` environment variable.
-   * @return self This instance.
-   */
-  function setExtensions($value): self {
-    $pathSep = $this->getPathSeparator();
-    if (!is_array($value)) $value = mb_strlen($value) ? explode($pathSep, $value) : [];
-
-    if (!$value && static::isWindows()) {
-      $pathExt = (string) getenv('PATHEXT');
-      $value = mb_strlen($pathExt) ? explode($pathSep, $pathExt) : ['.exe', '.cmd', '.bat', '.com'];
-    }
-
-    $this->getExtensions()->exchangeArray(array_map('mb_strtolower', $value));
-    return $this;
-  }
-
-  /**
-   * Sets the list of system paths.
-   * @param string|string[] $value The new system path, or an empty string to use the `PATH` environment variable.
-   * @return self This instance.
-   */
-  function setPath($value): self {
-    $pathSep = $this->getPathSeparator();
-    if (!is_array($value)) $value = mb_strlen($value) ? explode($pathSep, $value) : [];
-
-    if (!$value) {
-      $pathEnv = (string) getenv('PATH');
-      if (mb_strlen($pathEnv)) $value = explode($pathSep, $pathEnv);
-    }
-
-    $this->getPath()->exchangeArray(array_map(function($path) {
-      return trim($path, '"');
-    }, $value));
-
-    return $this;
-  }
-
-  /**
-   * Sets the character used to separate paths in the system path.
-   * @param string $value The new path separator, or an empty string to use the `PATH_SEPARATOR` constant.
-   * @return self This instance.
-   */
-  function setPathSeparator(string $value): self {
-    $this->pathSeparator = mb_strlen($value) ? $value : (static::isWindows() ? ';' : PATH_SEPARATOR);
-    return $this;
-  }
-
-  /**
    * Checks that the specified file is executable according to the executable file extensions.
    * @param \SplFileInfo $fileInfo The file to be checked.
    * @return bool Value indicating whether the specified file is executable.
@@ -205,7 +168,7 @@ class Finder {
     $executables = [];
 
     foreach (array_merge([''], $this->getExtensions()->getArrayCopy()) as $extension) {
-      $resolvedPath = Path::makeAbsolute(Path::join($directory, $command).mb_strtolower($extension), getcwd());
+      $resolvedPath = Path::makeAbsolute(Path::join($directory, $command).mb_strtolower($extension), (string) getcwd());
       if ($this->isExecutable($resolvedPath)) {
         $executables[] = str_replace('/', DIRECTORY_SEPARATOR, $resolvedPath);
         if (!$all) return $executables;
