@@ -13,7 +13,8 @@
     "psr-4": {"Which\\": "lib/"}
   },
   "autoload-dev": {
-    "files": ["vendor/phpunit/phpunit/src/Framework/Assert/Functions.php"]
+    "files": ["vendor/phpunit/phpunit/src/Framework/Assert/Functions.php"],
+    "psr-4": {"Which\\": "test/"}
   },
   "config": {
     "optimize-autoloader": true
@@ -34,6 +35,7 @@
   },
   "require-dev": {
     "phing/phing": "^2.16.1",
+    "phpstan/phpstan": "^0.10.3",
     "phpunit/phpunit": "^7.3.1"
   },
   "scripts": {
