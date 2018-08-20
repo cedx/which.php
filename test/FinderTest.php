@@ -43,12 +43,12 @@ class FinderTest extends TestCase {
    */
   function testFind(): void {
     // It should return the path of the `executable.cmd` file on Windows.
-    $executables = (new Finder('test/fixtures'))->find('executable');
+    $executables = iterator_to_array((new Finder('test/fixtures'))->find('executable'));
     assertThat($executables, countOf(Finder::isWindows() ? 1 : 0));
     if (Finder::isWindows()) assertThat($executables[0], stringEndsWith('\\test\\fixtures\\executable.cmd'));
 
     // It should return the path of the `executable.sh` file on POSIX.
-    $executables = (new Finder('test/fixtures'))->find('executable.sh');
+    $executables = iterator_to_array((new Finder('test/fixtures'))->find('executable.sh'));
     assertThat($executables, countOf(Finder::isWindows() ? 0 : 1));
     if (!Finder::isWindows()) assertThat($executables[0], stringEndsWith('/test/fixtures/executable.sh'));
   }
