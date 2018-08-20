@@ -1,5 +1,10 @@
 # Changelog
 
+## Version [7.0.0](https://github.com/cedx/which.php/compare/v6.2.0...v7.0.0)
+- Breaking change: implemented the `Finder::find()` method using generators.
+- Breaking change: removed the setters of the `Finder` class.
+- Added support for [PHPStan](https://github.com/phpstan/phpstan) static analyzer.
+
 ## Version [6.2.0](https://github.com/cedx/which.php/compare/v6.1.0...v6.2.0)
 - Dropped the dependency on [PHPUnit-Expect](https://dev.belin.io/phpunit-expect).
 
