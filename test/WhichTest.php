@@ -10,7 +10,7 @@ use PHPUnit\Framework\{TestCase};
 class WhichTest extends TestCase {
 
   /**
-   * @test which
+   * Tests the `which()` function.
    */
   function testWhich(): void {
     // It should return the path of the `executable.cmd` file on Windows.

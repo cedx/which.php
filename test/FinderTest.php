@@ -10,7 +10,7 @@ use PHPUnit\Framework\{TestCase};
 class FinderTest extends TestCase {
 
   /**
-   * @test Finder::__construct
+   * Tests the `Finder` constructor.
    */
   function testConstructor(): void {
     // It should set the `path` property to the value of the `PATH` environment variable by default.
@@ -39,7 +39,7 @@ class FinderTest extends TestCase {
   }
 
   /**
-   * @test Finder::find
+   * Tests the `Finder::find()` method.
    */
   function testFind(): void {
     // It should return the path of the `executable.cmd` file on Windows.
@@ -54,7 +54,7 @@ class FinderTest extends TestCase {
   }
 
   /**
-   * @test Finder::isExecutable
+   * Tests the `Finder::isExecutable()` method.
    */
   function testIsExecutable(): void {
     // It should return `false` for a non-executable file.
