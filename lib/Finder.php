@@ -64,19 +64,22 @@ class Finder {
   }
 
   /**
+   * Gets a value indicating whether the current platform is Windows.
+   * @return bool `true` if the current platform is Windows, otherwise `false`.
+   */
+  static function isWindows(): bool {
+    if (PHP_OS_FAMILY == 'Windows') return true;
+    $osType = (string) getenv('OSTYPE');
+    return $osType == 'cygwin' || $osType == 'msys';
+  }
+
+  /**
    * Finds the instances of an executable in the system path.
    * @param string $command The command to be resolved.
-   * @param bool $all Value indicating whether to return all executables found, or just the first one.
-   * @return string[] The paths of the executables found, or an empty array if the command was not found.
+   * @return \Generator The paths of the executables found.
    */
-  function find(string $command, bool $all = true): array {
-    $executables = [];
-    foreach ($this->getPath() as $path) {
-      $executables = array_merge($executables, $this->findExecutables($path, $command, $all));
-      if (!$all && $executables) return $executables;
-    }
-
-    return array_unique($executables);
+  function find(string $command): \Generator {
+    foreach ($this->getPath() as $directory) yield from $this->findExecutables($directory, $command);
   }
 
   /**
@@ -116,16 +119,6 @@ class Finder {
   }
 
   /**
-   * Gets a value indicating whether the current platform is Windows.
-   * @return bool `true` if the current platform is Windows, otherwise `false`.
-   */
-  static function isWindows(): bool {
-    if (PHP_OS_FAMILY == 'Windows') return true;
-    $osType = (string) getenv('OSTYPE');
-    return $osType == 'cygwin' || $osType == 'msys';
-  }
-
-  /**
    * Checks that the specified file is executable according to the executable file extensions.
    * @param \SplFileInfo $fileInfo The file to be checked.
    * @return bool Value indicating whether the specified file is executable.
@@ -161,20 +154,12 @@ class Finder {
    * Finds the instances of an executable in the specified directory.
    * @param string $directory The directory path.
    * @param string $command The command to be resolved.
-   * @param bool $all Value indicating whether to return all executables found, or just the first one.
-   * @return string[] The paths of the executables found, or an empty array if the command was not found.
+   * @return \Generator The paths of the executables found.
    */
-  private function findExecutables(string $directory, string $command, bool $all = true): array {
-    $executables = [];
-
+  private function findExecutables(string $directory, string $command): \Generator {
     foreach (array_merge([''], $this->getExtensions()->getArrayCopy()) as $extension) {
       $resolvedPath = Path::makeAbsolute(Path::join($directory, $command).mb_strtolower($extension), getcwd() ?: '.');
-      if ($this->isExecutable($resolvedPath)) {
-        $executables[] = str_replace('/', DIRECTORY_SEPARATOR, $resolvedPath);
-        if (!$all) return $executables;
-      }
+      if ($this->isExecutable($resolvedPath)) yield str_replace('/', DIRECTORY_SEPARATOR, $resolvedPath);
     }
-
-    return $executables;
   }
 }
