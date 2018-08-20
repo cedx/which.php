@@ -18,11 +18,16 @@ function which(string $command, bool $all = false, callable $onError = null, arr
     $options['pathSeparator'] ?? ''
   );
 
-  $executables = $finder->find($command, $all);
-  if (!$executables) {
+  $list = [];
+  foreach ($finder->find($command) as $executable) {
+    if (!$all) return $executable;
+    $list[] = $executable;
+  }
+
+  if (!$list) {
     if ($onError) return call_user_func($onError, $command);
     throw new FinderException($command, $finder, "Command '$command' not found");
   }
 
-  return $all ? $executables : $executables[0];
+  return array_unique($list);
 }
