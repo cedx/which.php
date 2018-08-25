@@ -14,9 +14,7 @@
   </target>
 
   <target name="coverage" description="Upload the code coverage">
-    <exec executable="vendor/bin/coveralls" passthru="true">
-      <arg file="var/coverage.xml"/>
-    </exec>
+    <exec command="coveralls var/coverage.xml" passthru="true"/>
   </target>
 
   <target name="doc" description="Build the documentation">

@@ -36,11 +36,11 @@
   "require-dev": {
     "phing/phing": "^2.16.1",
     "phpstan/phpstan": "^0.10.3",
-    "phpunit/phpunit": "^7.3.1"
+    "phpunit/phpunit": "^7.3.2"
   },
   "scripts": {
-    "coverage": "coveralls var/coverage.xml",
-    "test": "phpunit"
+    "coverage": "phing coverage",
+    "test": "phing test"
   },
   "support": {
     "docs": "https://dev.belin.io/which.php/api",

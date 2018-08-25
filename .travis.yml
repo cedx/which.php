@@ -7,6 +7,4 @@ sudo: false
 install: composer install --no-interaction
 before_script: composer global require cedx/coveralls
 script: composer test
-after_success:
-- export COMPOSER_BIN=`composer global config bin-dir --absolute`
-- '"$COMPOSER_BIN/coveralls" var/coverage.xml'
+after_success: coveralls var/coverage.xml
