@@ -1,3 +1,5 @@
 parameters:
+  ignoreErrors: ['/Function posix_[^\\w]+ not found/']
   level: max
   paths: [lib, test]
+  reportUnmatchedIgnoredErrors: false
