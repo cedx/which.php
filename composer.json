@@ -40,8 +40,8 @@
     "phpunit/phpunit": "^7.3.2"
   },
   "scripts": {
-    "coverage": "phing coverage",
-    "test": "phing test"
+    "coverage": "robo coverage",
+    "test": "robo test"
   },
   "support": {
     "docs": "https://dev.belin.io/which.php/api",
