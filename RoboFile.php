@@ -57,11 +57,12 @@ class RoboFile extends Tasks {
    * Upgrades the project to the latest revision.
    */
   function upgrade(): void {
-    $this->_exec('git reset --hard');
-    $this->_exec('git fetch --all --prune');
-    $this->_exec('git pull --rebase');
-
     $composer = PHP_OS_FAMILY == 'Windows' ? 'C:\Program Files\PHP\share\composer.phar' : '/usr/local/bin/composer';
-    $this->_exec("php \"$composer\" update --no-interaction");
+    $this->taskExecStack()->stopOnFail()
+      ->exec('git reset --hard')
+      ->exec('git fetch --all --prune')
+      ->exec('git pull --rebase')
+      ->exec("php '$composer' update --no-interaction")
+      ->run();
   }
 }
