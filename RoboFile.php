@@ -62,7 +62,7 @@ class RoboFile extends Tasks {
       ->exec('git reset --hard')
       ->exec('git fetch --all --prune')
       ->exec('git pull --rebase')
-      ->exec("php '$composer' update --no-interaction")
+      ->exec("php \"$composer\" update --no-interaction")
       ->run();
   }
 }
