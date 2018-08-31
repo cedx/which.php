@@ -2,6 +2,9 @@
 declare(strict_types=1);
 use Robo\Tasks;
 
+// Load the dependencies.
+require_once __DIR__.'/vendor/autoload.php';
+
 /**
  * Provides tasks for the build system.
  */
@@ -43,6 +46,8 @@ class RoboFile extends Tasks {
    * Performs the static analysis of source code.
    */
   function lint(): void {
+    $this->_exec('php -l bin/which');
+    $this->_exec('php -l example/main.php');
     $this->_exec('phpstan analyse');
   }
 
@@ -63,6 +68,15 @@ class RoboFile extends Tasks {
       ->exec('git fetch --all --prune')
       ->exec('git pull --rebase')
       ->exec("php \"$composer\" update --no-interaction")
+      ->run();
+  }
+
+  /**
+   * Watches for file changes.
+   */
+  function watch(): void {
+    $this->taskWatch()
+      ->monitor(['lib', 'test'], function() { $this->test(); })
       ->run();
   }
 }
