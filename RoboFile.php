@@ -60,6 +60,8 @@ class RoboFile extends Tasks {
     $this->_exec('git reset --hard');
     $this->_exec('git fetch --all --prune');
     $this->_exec('git pull --rebase');
-    $this->_exec('composer update --no-interaction');
+
+    $composer = PHP_OS_FAMILY == 'Windows' ? 'C:\Program Files\PHP\share\composer.phar' : '/usr/local/bin/composer';
+    $this->_exec("php \"$composer\" update --no-interaction");
   }
 }
