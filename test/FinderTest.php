@@ -11,6 +11,7 @@ class FinderTest extends TestCase {
 
   /**
    * Tests the `Finder` constructor.
+   * @test
    */
   function testConstructor(): void {
     // It should set the `path` property to the value of the `PATH` environment variable by default.
@@ -40,6 +41,7 @@ class FinderTest extends TestCase {
 
   /**
    * Tests the `Finder::find()` method.
+   * @test
    */
   function testFind(): void {
     // It should return the path of the `executable.cmd` file on Windows.
@@ -55,6 +57,7 @@ class FinderTest extends TestCase {
 
   /**
    * Tests the `Finder::isExecutable()` method.
+   * @test
    */
   function testIsExecutable(): void {
     // It should return `false` for a non-executable file.

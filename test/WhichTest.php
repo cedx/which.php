@@ -11,6 +11,7 @@ class WhichTest extends TestCase {
 
   /**
    * Tests the `which()` function.
+   * @test
    */
   function testWhich(): void {
     // It should return the path of the `executable.cmd` file on Windows.
