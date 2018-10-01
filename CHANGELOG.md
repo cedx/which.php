@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [7.0.1](https://github.com/cedx/which.php/compare/v7.0.0...v7.0.1)
+- Fixed [issue #5](https://github.com/cedx/which.php/issues/5): the CLI executable is not exposed by the `composer.json` file. 
+
 ## Version [7.0.0](https://github.com/cedx/which.php/compare/v6.2.0...v7.0.0)
 - Breaking change: implemented the `Finder::find()` method using generators.
 - Breaking change: removed the setters of the `Finder` class.
