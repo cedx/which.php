@@ -16,9 +16,8 @@
     "files": ["vendor/phpunit/phpunit/src/Framework/Assert/Functions.php"],
     "psr-4": {"Which\\": "test/"}
   },
-  "config": {
-    "optimize-autoloader": true
-  },
+  "bin": ["bin/which"],
+  "config": {"optimize-autoloader": true},
   "keywords": [
     "find",
     "path",
