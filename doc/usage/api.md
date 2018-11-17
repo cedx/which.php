@@ -1,4 +1,4 @@
-path: blob/master
+path: src/branch/master
 source: lib/which.php
 
 # Application programming interface
