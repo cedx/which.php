@@ -3,11 +3,14 @@
 
 Find the instances of an executable in the system path, implemented in [PHP](https://secure.php.net).
 
-## Resources
-- [Documentation](https://dev.belin.io/which.php)
+## Documentation
+- [User guide](https://dev.belin.io/which.php)
 - [API reference](https://dev.belin.io/which.php/api)
+
+## Development
+- [Git repository](https://git.belin.io/cedx/which.php)
 - [Packagist package](https://packagist.org/packages/cedx/which)
-- [GitHub repository](https://github.com/cedx/which.php)
+- [Submit an issue](https://git.belin.io/cedx/which.php/issues)
 
 ## License
 [Which for PHP](https://dev.belin.io/which.php) is distributed under the MIT License.
