@@ -10,7 +10,7 @@ Find the instances of an executable in the system path, implemented in [PHP](htt
 ## Development
 - [Git repository](https://git.belin.io/cedx/which.php)
 - [Packagist package](https://packagist.org/packages/cedx/which)
-- [Submit an issue](https://git.belin.io/cedx/which.php/issues)
+- [Submit an issue](https://github.com/cedx/which.php/issues)
 
 ## License
 [Which for PHP](https://dev.belin.io/which.php) is distributed under the MIT License.
