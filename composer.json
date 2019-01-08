@@ -17,7 +17,10 @@
     "psr-4": {"Which\\": "test/"}
   },
   "bin": ["bin/which"],
-  "config": {"optimize-autoloader": true},
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": {"*": "dist"}
+  },
   "keywords": [
     "find",
     "path",
