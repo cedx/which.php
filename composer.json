@@ -18,8 +18,7 @@
   },
   "bin": ["bin/which"],
   "config": {
-    "optimize-autoloader": true,
-    "preferred-install": {"*": "dist"}
+    "optimize-autoloader": true
   },
   "keywords": [
     "find",
@@ -38,7 +37,7 @@
   "require-dev": {
     "consolidation/robo": "^1.4.3",
     "henrikbjorn/lurker": "^1.2.0",
-    "phpstan/phpstan": "^0.10.7",
+    "phpstan/phpstan": "^0.10.8",
     "phpunit/phpunit": "^7.5.1"
   },
   "scripts": {

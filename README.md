@@ -8,7 +8,7 @@ Find the instances of an executable in the system path, implemented in [PHP](htt
 - [API reference](https://dev.belin.io/which.php/api)
 
 ## Development
-- [Git repository](https://git.belin.io/cedx/which.php)
+- [Git repository](https://github.com/cedx/which.php)
 - [Packagist package](https://packagist.org/packages/cedx/which)
 - [Submit an issue](https://github.com/cedx/which.php/issues)
 
