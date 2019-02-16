@@ -37,10 +37,10 @@
     "webmozart/path-util": "^2.3.0"
   },
   "require-dev": {
-    "consolidation/robo": "^1.4.4",
+    "consolidation/robo": "^1.4.5",
     "henrikbjorn/lurker": "^1.2.0",
     "phpstan/phpstan": "^0.11.2",
-    "phpunit/phpunit": "^7.5.4"
+    "phpunit/phpunit": "^7.5.5"
   },
   "scripts": {
     "coverage": "robo coverage",
