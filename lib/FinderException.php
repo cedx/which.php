@@ -22,7 +22,7 @@ class FinderException extends \RuntimeException {
    * @param string $command The looked up command.
    * @param Finder $finder The finder used to lookup the command.
    * @param string $message A message describing the error.
-   * @param \Throwable $previous The previous exception used for the exception chaining.
+   * @param \Throwable|null $previous The previous exception used for the exception chaining.
    */
   function __construct(string $command, Finder $finder, string $message = '', \Throwable $previous = null) {
     parent::__construct($message, 0, $previous);
