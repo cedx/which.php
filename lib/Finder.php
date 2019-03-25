@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 namespace Which;
 
 use Webmozart\PathUtil\{Path};
