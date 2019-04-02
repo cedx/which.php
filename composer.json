@@ -8,8 +8,8 @@
     {"email": "cedric@belin.io", "name": "Cédric Belin", "homepage": "https://belin.io"}
   ],
   "autoload": {
-    "files": ["lib/which.php"],
-    "psr-4": {"Which\\": "lib/"}
+    "files": ["src/which.php"],
+    "psr-4": {"Which\\": "src/"}
   },
   "autoload-dev": {
     "files": ["vendor/phpunit/phpunit/src/Framework/Assert/Functions.php"],
