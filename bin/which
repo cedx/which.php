@@ -6,7 +6,7 @@ use function Which\{which};
 /**
  * @var string The version number of this package.
  */
-const VERSION = '7.0.1';
+const VERSION = '7.1.0';
 
 /**
  * Application entry point.

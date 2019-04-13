@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [7.1.0](https://github.com/cedx/which.php/compare/v7.0.1...v7.1.0)
+- Updated the package dependencies.
+
 ## Version [7.0.1](https://github.com/cedx/which.php/compare/v7.0.0...v7.0.1)
 - Fixed [issue #5](https://github.com/cedx/which.php/issues/5): the CLI executable is not exposed by the `composer.json` file.
 - Replaced the [Phing](https://www.phing.info) build system by [Robo](https://robo.li).
