@@ -61,7 +61,7 @@ try {
   main();
 }
 
-catch (\Throwable $error) {
+catch (Throwable $error) {
   echo $error, PHP_EOL;
   exit(2);
 }
