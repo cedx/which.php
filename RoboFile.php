@@ -70,6 +70,7 @@ class RoboFile extends Tasks {
    */
   function lint(): Result {
     return $this->taskExecStack()
+      ->exec('php -l bin/which')
       ->exec('php -l example/main.php')
       ->exec('phpstan analyse')
       ->run();
