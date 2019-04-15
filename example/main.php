@@ -3,9 +3,7 @@
 use function Which\{which};
 use Which\{FinderException};
 
-/**
- * Finds the instances of an executable.
- */
+/** Finds the instances of an executable. */
 function main(): void {
   try {
     // `$path` is the absolute path to the executable.

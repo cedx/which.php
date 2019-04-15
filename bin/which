@@ -3,14 +3,10 @@
 use Commando\{Command};
 use function Which\{which};
 
-/**
- * @var string The version number of this package.
- */
+/** @var string The version number of this package. */
 const VERSION = '7.1.0';
 
-/**
- * Application entry point.
- */
+/** Application entry point. */
 function main() {
   // Initialize the application.
   @cli_set_process_title('Which.php');

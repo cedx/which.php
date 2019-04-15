@@ -1,19 +1,13 @@
 <?php declare(strict_types=1);
 namespace Which;
 
-/**
- * An exception caused by a `Finder` in a command lookup.
- */
+/** An exception caused by a `Finder` in a command lookup. */
 class FinderException extends \RuntimeException {
 
-  /**
-   * @var string The looked up command.
-   */
+  /** @var string The looked up command. */
   private $command;
 
-  /**
-   * @var Finder The finder used to lookup the command.
-   */
+  /** @var Finder The finder used to lookup the command. */
   private $finder;
 
   /**

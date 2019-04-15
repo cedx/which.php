@@ -3,15 +3,10 @@ namespace Which;
 
 use PHPUnit\Framework\{TestCase};
 
-/**
- * Tests the features of the `Which\Finder` class.
- */
+/** Tests the features of the `Which\Finder` class. */
 class FinderTest extends TestCase {
 
-  /**
-   * Tests the `Finder` constructor.
-   * @test
-   */
+  /** @test Tests the `Finder` constructor. */
   function testConstructor(): void {
     // It should set the `path` property to the value of the `PATH` environment variable by default.
     $pathEnv = (string) getenv('PATH');
@@ -38,10 +33,7 @@ class FinderTest extends TestCase {
     assertThat((new Finder('', '', '#'))->getPathSeparator(), equalTo('#'));
   }
 
-  /**
-   * Tests the `Finder::find()` method.
-   * @test
-   */
+  /** @test Tests the `Finder::find()` method. */
   function testFind(): void {
     // It should return the path of the `executable.cmd` file on Windows.
     $executables = iterator_to_array((new Finder('test/fixtures'))->find('executable'));
@@ -54,10 +46,7 @@ class FinderTest extends TestCase {
     if (!Finder::isWindows()) assertThat($executables[0], stringEndsWith('/test/fixtures/executable.sh'));
   }
 
-  /**
-   * Tests the `Finder::isExecutable()` method.
-   * @test
-   */
+  /** @test Tests the `Finder::isExecutable()` method. */
   function testIsExecutable(): void {
     // It should return `false` for a non-executable file.
     assertThat((new Finder)->isExecutable(__FILE__), isFalse());

@@ -3,24 +3,16 @@ namespace Which;
 
 use Webmozart\PathUtil\{Path};
 
-/**
- * Finds the instances of an executable in the system path.
- */
+/** Finds the instances of an executable in the system path. */
 class Finder {
 
-  /**
-   * @var \ArrayObject The list of executable file extensions.
-   */
+  /** @var \ArrayObject The list of executable file extensions. */
   private $extensions;
 
-  /**
-   * @var \ArrayObject The list of system paths.
-   */
+  /** @var \ArrayObject The list of system paths. */
   private $path;
 
-  /**
-   * @var string The character used to separate paths in the system path.
-   */
+  /** @var string The character used to separate paths in the system path. */
   private $pathSeparator;
 
   /**

@@ -3,15 +3,11 @@ namespace Which;
 
 use PHPUnit\Framework\{TestCase};
 
-/**
- * Tests the features of the `Which\which()` function.
+/** Tests the features of the `Which\which()` function.
  */
 class WhichTest extends TestCase {
 
-  /**
-   * Tests the `which()` function.
-   * @test
-   */
+  /** @test Tests the `which()` function. */
   function testWhich(): void {
     // It should return the path of the `executable.cmd` file on Windows.
     try {
