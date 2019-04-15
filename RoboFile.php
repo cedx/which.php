@@ -21,7 +21,7 @@ class RoboFile extends Tasks {
    */
   function build(): Result {
     $version = $this->taskSemVer('.semver')->setFormat('%M.%m.%p')->__toString();
-    return $this->taskReplaceInFile('bin/which')->regex("/const VERSION = '\d+(\.\d+){2}'/")->to("const VERSION = '$version'")->run();
+    return $this->taskReplaceInFile('bin/which')->regex("/const packageVersion = '\d+(\.\d+){2}'/")->to("const packageVersion = '$version'")->run();
   }
 
   /**
