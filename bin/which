@@ -1,5 +1,7 @@
 #!/usr/bin/env php
 <?php declare(strict_types=1);
+namespace Which\Cli;
+
 use Commando\{Command};
 use function Which\{which};
 
@@ -52,12 +54,12 @@ function main() {
 
 // Start the application.
 try {
-  $fileInfo = new SplFileInfo(__DIR__.'/../../../autoload.php');
+  $fileInfo = new \SplFileInfo(__DIR__.'/../../../autoload.php');
   require_once $fileInfo->isFile() ? $fileInfo->getPathname() : __DIR__.'/../vendor/autoload.php';
   main();
 }
 
-catch (Throwable $error) {
+catch (\Throwable $error) {
   echo $error, PHP_EOL;
   exit(2);
 }
