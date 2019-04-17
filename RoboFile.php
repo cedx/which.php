@@ -40,6 +40,9 @@ class RoboFile extends Tasks {
    * @return Result The task result.
    */
   function coverage(): Result {
+    $path = (string) getenv('PATH');
+    $vendor = (string) realpath(`composer global config bin-dir --absolute`);
+    if (strpos($path, $vendor) === false) putenv("PATH=$vendor".PATH_SEPARATOR.$path);
     return $this->_exec('coveralls var/coverage.xml');
   }
 
