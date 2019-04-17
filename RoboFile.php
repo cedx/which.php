@@ -7,11 +7,16 @@ require_once __DIR__.'/vendor/autoload.php';
 /** Provides tasks for the build system. */
 class RoboFile extends Tasks {
 
+  /** @var string The path to the Composer archive. */
+  private $composer;
+
   /** Creates a new task runner. */
   function __construct() {
     $path = (string) getenv('PATH');
     $vendor = (string) realpath('vendor/bin');
     if (strpos($path, $vendor) === false) putenv("PATH=$vendor".PATH_SEPARATOR.$path);
+
+    $this->composer = escapeshellarg(PHP_OS_FAMILY == 'Windows' ? 'C:\Program Files\PHP\share\composer.phar' : '/usr/local/bin/composer');
     $this->stopOnFail();
   }
 
@@ -41,7 +46,7 @@ class RoboFile extends Tasks {
    */
   function coverage(): Result {
     $path = (string) getenv('PATH');
-    $vendor = (string) realpath(`composer global config bin-dir --absolute`);
+    $vendor = str_replace('/', DIRECTORY_SEPARATOR, trim(`php {$this->composer} global config bin-dir --absolute`));
     if (strpos($path, $vendor) === false) putenv("PATH=$vendor".PATH_SEPARATOR.$path);
     return $this->_exec('coveralls var/coverage.xml');
   }
@@ -86,12 +91,11 @@ class RoboFile extends Tasks {
    * @return Result The task result.
    */
   function upgrade(): Result {
-    $composer = escapeshellarg(PHP_OS_FAMILY == 'Windows' ? 'C:\Program Files\PHP\share\composer.phar' : '/usr/local/bin/composer');
     return $this->taskExecStack()
       ->exec('git reset --hard')
       ->exec('git fetch --all --prune')
       ->exec('git pull --rebase')
-      ->exec("php $composer update --no-interaction")
+      ->exec("php {$this->composer} update --no-interaction")
       ->run();
   }
 
