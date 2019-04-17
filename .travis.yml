@@ -3,9 +3,11 @@ language: php
 notifications: {email: false}
 php: ['7.2', '7.3']
 
-install: composer install --no-interaction
-before_script: composer global require cedx/coveralls
+install:
+  - composer global require cedx/coveralls
+  - composer install --no-interaction
+
 script: composer test
 after_success:
-- export COMPOSER_BIN=`composer global config bin-dir --absolute`
-- '"$COMPOSER_BIN/coveralls" var/coverage.xml'
+  - export COMPOSER_BIN=`composer global config bin-dir --absolute`
+  - ${COMPOSER_BIN}/coveralls var/coverage.xml
