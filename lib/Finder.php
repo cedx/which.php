@@ -43,18 +43,6 @@ class Finder {
   }
 
   /**
-   * Returns a string representation of this object.
-   * @return string The string representation of this object.
-   */
-  function __toString(): string {
-    $separator = $this->getPathSeparator();
-    $values = [];
-    if (count($path = $this->getPath())) $values[] = sprintf('path: "%s"', implode($separator, $path->getArrayCopy()));
-    if (count($extensions = $this->getExtensions())) $values[] = sprintf('extensions: "%s"', implode($separator, $extensions->getArrayCopy()));
-    return sprintf('%s(%s)', static::class, implode(', ', $values));
-  }
-
-  /**
    * Gets a value indicating whether the current platform is Windows.
    * @return bool `true` if the current platform is Windows, otherwise `false`.
    */

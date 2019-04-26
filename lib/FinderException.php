@@ -24,18 +24,6 @@ class FinderException extends \RuntimeException {
   }
 
   /**
-   * Returns a string representation of this object.
-   * @return string The string representation of this object.
-   */
-  function __toString(): string {
-    $finder = $this->getFinder();
-    $values = ["\"{$this->getCommand()}\""];
-    if (count($path = $finder->getPath())) $values[] = sprintf('finder: "%s"', implode($finder->getPathSeparator(), $path->getArrayCopy()));
-    if (mb_strlen($message = $this->getMessage())) $values[] = "message: \"$message\"";
-    return sprintf('%s(%s)', static::class, implode(', ', $values));
-  }
-
-  /**
    * Gets the name of the looked up command.
    * @return string The looked up command.
    */
