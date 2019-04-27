@@ -12,8 +12,8 @@ namespace Which;
  */
 function which(string $command, bool $all = false, callable $onError = null, array $options = []) {
   $finder = new Finder(
-    $options['path'] ?? '',
-    $options['extensions'] ?? '',
+    $options['extensions'] ?? [],
+    $options['path'] ?? [],
     $options['pathSeparator'] ?? ''
   );
 

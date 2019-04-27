@@ -21,7 +21,7 @@ class Finder {
    * @param string|string[] $extensions The executable file extensions. Defaults to the `PATHEXT` environment variable.
    * @param string $pathSeparator The character used to separate paths in the system path. Defaults to the `PATH_SEPARATOR` constant.
    */
-  function __construct($path = '', $extensions = '', string $pathSeparator = '') {
+  function __construct($path = [], $extensions = [], string $pathSeparator = '') {
     $this->pathSeparator = mb_strlen($pathSeparator) ? $pathSeparator : (static::isWindows() ? ';' : PATH_SEPARATOR);
 
     if (!is_array($path))
