@@ -12,8 +12,8 @@ namespace Which;
  */
 function which(string $command, bool $all = false, callable $onError = null, array $options = []) {
   $finder = new Finder(
-    $options['extensions'] ?? [],
     $options['path'] ?? [],
+    $options['extensions'] ?? [],
     $options['pathSeparator'] ?? ''
   );
 
@@ -23,7 +23,7 @@ function which(string $command, bool $all = false, callable $onError = null, arr
     $list[] = $executable;
   }
 
-  if (!$list) {
+  if (!count($list)) {
     if ($onError) return call_user_func($onError, $command);
     throw new FinderException($command, $finder, "Command '$command' not found");
   }

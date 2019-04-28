@@ -3,8 +3,7 @@ namespace Which;
 
 use PHPUnit\Framework\{TestCase};
 
-/** Tests the features of the `Which\which()` function.
- */
+/** Tests the features of the `Which\which()` function. */
 class WhichTest extends TestCase {
 
   /** @test Tests the `which()` function. */

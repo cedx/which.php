@@ -26,14 +26,14 @@ class Finder {
 
     if (!is_array($path))
       $path = array_values(array_filter(explode($this->pathSeparator, $path) ?: [], function($item) { return mb_strlen($item) > 0; }));
-    if (!$path) {
+    if (!count($path)) {
       $pathEnv = (string) getenv('PATH');
       if (mb_strlen($pathEnv)) $path = explode($this->pathSeparator, $pathEnv) ?: [];
     }
 
     if (!is_array($extensions))
       $extensions = array_values(array_filter(explode($this->pathSeparator, $extensions) ?: [], function($item) { return mb_strlen($item) > 0; }));
-    if (!$extensions && static::isWindows()) {
+    if (!count($extensions) && static::isWindows()) {
       $pathExt = (string) getenv('PATHEXT');
       $extensions = mb_strlen($pathExt) ? explode($this->pathSeparator, $pathExt) ?: [] : ['.exe', '.cmd', '.bat', '.com'];
     }
