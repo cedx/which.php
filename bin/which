@@ -4,9 +4,6 @@
 use Commando\{Command};
 use function Which\{which};
 
-/** @var string The version number of this package. */
-const packageVersion = '7.1.0';
-
 /** Application entry point. */
 function main() {
   // Initialize the application.
@@ -32,7 +29,7 @@ function main() {
     ->description('The program to find.');
 
   if ($program['version']) {
-    echo packageVersion, PHP_EOL;
+    echo require __DIR__.'/../lib/version.g.php', PHP_EOL;
     exit(0);
   }
 
