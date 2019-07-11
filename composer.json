@@ -12,7 +12,6 @@
     "psr-4": {"Which\\": "lib/"}
   },
   "autoload-dev": {
-    "files": ["vendor/phpunit/phpunit/src/Framework/Assert/Functions.php"],
     "psr-4": {"Which\\": "test/"}
   },
   "bin": ["bin/which"],
