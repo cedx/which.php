@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 namespace Which;
 
-use function PHPUnit\Expect\{expect, it};
+use function PHPUnit\Expect\{expect, fail, it};
 use PHPUnit\Framework\{TestCase};
 
 /** Tests the features of the `Which\which()` function. */
@@ -13,11 +13,11 @@ class WhichTest extends TestCase {
       try {
         $executable = which('executable', false, null, ['path' => 'test/fixtures']);
         if (Finder::isWindows()) expect($executable)->to->endWith('\\test\\fixtures\\executable.cmd');
-        else $this->fail('Exception not thrown');
+        else fail('Exception not thrown');
       }
 
       catch (\Throwable $e) {
-        if (Finder::isWindows()) $this->fail($e->getMessage());
+        if (Finder::isWindows()) fail($e->getMessage());
         else expect($e)->to->be->an->instanceOf(FinderException::class);
       }
     });
@@ -25,7 +25,7 @@ class WhichTest extends TestCase {
     it('should return all the paths of the `executable.cmd` file on Windows', function() {
       try {
         $executables = which('executable', true, null, ['path' => 'test/fixtures']);
-        if (!Finder::isWindows()) $this->fail('Exception not thrown');
+        if (!Finder::isWindows()) fail('Exception not thrown');
         else {
           expect($executables)->to->be->an('array')->and->have->lengthOf(1);
           expect($executables[0])->to->endWith('\\test\\fixtures\\executable.cmd');
@@ -33,7 +33,7 @@ class WhichTest extends TestCase {
       }
 
       catch (\Throwable $e) {
-        if (Finder::isWindows()) $this->fail($e->getMessage());
+        if (Finder::isWindows()) fail($e->getMessage());
         else expect($e)->to->be->an->instanceOf(FinderException::class);
       }
     });
@@ -41,20 +41,20 @@ class WhichTest extends TestCase {
     it('should return the path of the `executable.sh` file on POSIX', function() {
       try {
         $executable = which('executable.sh', false, null, ['path' => 'test/fixtures']);
-        if (Finder::isWindows()) $this->fail('Exception not thrown');
+        if (Finder::isWindows()) fail('Exception not thrown');
         else expect($executable)->to->endWith('/test/fixtures/executable.sh');
       }
 
       catch (\Throwable $e) {
         if (Finder::isWindows()) expect($e)->to->be->an->instanceOf(FinderException::class);
-        else $this->fail($e->getMessage());
+        else fail($e->getMessage());
       }
     });
 
     it('should return all the paths of the `executable.sh` file on POSIX', function() {
       try {
         $executables = which('executable.sh', true, null, ['path' => 'test/fixtures']);
-        if (Finder::isWindows()) $this->fail('Exception not thrown');
+        if (Finder::isWindows()) fail('Exception not thrown');
         else {
           expect($executables)->to->be->an('array')->and->have->lengthOf(1);
           expect($executables[0])->to->endWith('/test/fixtures/executable.sh');
@@ -63,7 +63,7 @@ class WhichTest extends TestCase {
 
       catch (\Throwable $e) {
         if (Finder::isWindows()) expect($e)->to->be->an->instanceOf(FinderException::class);
-        else $this->fail($e->getMessage());
+        else fail($e->getMessage());
       }
     });
 
