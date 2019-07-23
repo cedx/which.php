@@ -1,61 +1,75 @@
 #!/usr/bin/env php
 <?php declare(strict_types=1);
 
-use Commando\{Command};
 use function Which\{which};
+use Which\{FinderException};
 
-/** Application entry point. */
-function main() {
+/** @var string The usage information. */
+const usage = <<<'EOT'
+Find the instances of an executable in the system path.
+
+Usage: where [options] <command>
+
+Options:
+-a, --all        List all instances of executables found (instead of just the first one).
+-h, --help       Output usage information.
+-s, --silent     Silence the output, just return the exit code (0 if any executable is found, otherwise 1).
+-v, --version    Output the version number.
+EOT;
+
+/**
+ * Application entry point.
+ * @return int The application exit code.
+ */
+function main(): int {
+  global $argv;
+
   // Initialize the application.
   @cli_set_process_title('Which.php');
 
   // Parse the command line arguments.
-  $program = new Command;
-  $program->setHelp('Find the instances of an executable in the system path.');
+  $options = getopt('ahsv', ['all', 'help', 'silent', 'version']);
+  $rest = array_values(array_filter(array_slice($argv, 1), function($arg) {
+    return mb_substr($arg, 0, 1) != '-';
+  }));
 
-  $program->flag('a')->aka('all')
-    ->description('List all instances of executables found (instead of just the first one).')
-    ->boolean();
-
-  $program->flag('s')->aka('silent')
-    ->description('Silence the output, just return the exit code (0 if any executable is found, otherwise 1).')
-    ->boolean();
-
-  $program->flag('v')->aka('version')
-    ->description('Output the version number.')
-    ->boolean();
-
-  $program->argument()->referToAs('command')
-    ->description('The program to find.');
-
-  if ($program['version']) {
-    echo require __DIR__.'/../lib/version.g.php', PHP_EOL;
-    exit(0);
+  if (isset($options['h']) || isset($options['help'])) {
+    echo usage;
+    return 0;
   }
 
-  if (!is_string($program[0])) {
-    $program->printHelp();
-    exit(64);
+  if (isset($options['v']) || isset($options['version'])) {
+    echo require __DIR__.'/../lib/version.g.php', PHP_EOL;
+    return 0;
+  }
+
+  if (!count($rest)) {
+    echo usage;
+    return 64;
   }
 
   // Run the program.
-  $executables = which($program[0], $program['all'], function() { exit(1); });
-  if (!$program['silent']) {
+  $executables = which($rest[0], isset($options['a']) || isset($options['all']));
+  if (!isset($options['s']) && !isset($options['silent'])) {
     if (!is_array($executables)) $executables = [$executables];
     foreach ($executables as $path) echo $path, PHP_EOL;
   }
 
-  exit(0);
+  return 0;
 }
 
 // Start the application.
 try {
   $fileInfo = new SplFileInfo(__DIR__.'/../../../autoload.php');
   require_once $fileInfo->isFile() ? $fileInfo->getPathname() : __DIR__.'/../vendor/autoload.php';
-  main();
+  exit(main());
 }
 
-catch (Throwable $error) {
-  echo $error, PHP_EOL;
+catch (FinderException $e) {
+  exit(1);
+}
+
+catch (Throwable $e) {
+  echo $e->getMessage(), PHP_EOL;
   exit(2);
 }

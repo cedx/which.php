@@ -29,7 +29,6 @@
     "php": ">=7.2.0",
     "ext-mbstring": "*",
     "ext-spl": "*",
-    "nategood/commando": "^0.3.0",
     "webmozart/path-util": "^2.3.0"
   },
   "require-dev": {
