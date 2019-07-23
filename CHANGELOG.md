@@ -1,5 +1,9 @@
 # Changelog
 
+## Version [7.2.0](https://github.com/cedx/which.php/compare/v7.1.0...v7.2.0)
+- Removed the dependency on [Commando](https://github.com/nategood/commando) library.
+- Updated the package dependencies.
+
 ## Version [7.1.0](https://github.com/cedx/which.php/compare/v7.0.1...v7.1.0)
 - Modified the package layout.
 - Updated the package dependencies.
