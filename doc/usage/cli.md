@@ -18,20 +18,13 @@ $ which --help
 
 Find the instances of an executable in the system path.
 
-command
-     The program to find.
+Usage: where [options] <command>
 
--a/--all
-     List all instances of executables found (instead of just the first one).
-
---help
-     Show the help page for this command.
-
--s/--silent
-     Silence the output, just return the exit code (0 if any executable is found, otherwise 1).
-
--v/--version
-     Output the version number.
+Options:
+-a, --all        List all instances of executables found (instead of just the first one).
+-h, --help       Output usage information.
+-s, --silent     Silence the output, just return the exit code (0 if any executable is found, otherwise 1).
+-v, --version    Output the version number.
 ```
 
 For example:
