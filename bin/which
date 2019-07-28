@@ -21,17 +21,17 @@ function main(): int {
   }));
 
   if (isset($options['h']) || isset($options['help'])) {
-    echo require __DIR__ . '/../lib/cli/usage.php', PHP_EOL;
+    echo require __DIR__ . '/../lib/Cli/usage.php', PHP_EOL;
     return 0;
   }
 
   if (isset($options['v']) || isset($options['version'])) {
-    echo require __DIR__ . '/../lib/cli/version.g.php', PHP_EOL;
+    echo require __DIR__ . '/../lib/Cli/version.g.php', PHP_EOL;
     return 0;
   }
 
   if (!count($rest)) {
-    echo require __DIR__ . '/../lib/cli/usage.php', PHP_EOL;
+    echo require __DIR__ . '/../lib/Cli/usage.php', PHP_EOL;
     return 64;
   }
 
