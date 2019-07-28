@@ -9,7 +9,7 @@
 - Updated the package dependencies.
 
 ## Version [7.0.1](https://github.com/cedx/which.php/compare/v7.0.0...v7.0.1)
-- Fixed [issue #5](https://github.com/cedx/which.php/issues/5): the CLI executable is not exposed by the `composer.json` file.
+- Fixed the [issue #5](https://github.com/cedx/which.php/issues/5): the CLI executable is not exposed by the `composer.json` file.
 - Replaced the [Phing](https://www.phing.info) build system by [Robo](https://robo.li).
 
 ## Version [7.0.0](https://github.com/cedx/which.php/compare/v6.2.0...v7.0.0)
@@ -30,7 +30,7 @@
 - Updated the package dependencies.
 
 ## Version [5.0.1](https://github.com/cedx/which.php/compare/v5.0.0...v5.0.1)
-- Fixed [issue #2](https://github.com/cedx/which.php/issues/2): the `which()` function can return duplicates.
+- Fixed the [issue #2](https://github.com/cedx/which.php/issues/2): the `which()` function can return duplicates.
 
 ## Version [5.0.0](https://github.com/cedx/which.php/compare/v4.0.0...v5.0.0)
 - Breaking change: raised the required [PHP](https://secure.php.net) version.
@@ -51,7 +51,7 @@
 - Breaking change: renamed the `which` namespace to `Which`.
 
 ## Version [1.1.1](https://github.com/cedx/which.php/compare/v1.1.0...v1.1.1)
-- Fixed [issue #1](https://github.com/cedx/which.php/issues/1): the `Finder::isExecutable()` method did not return an `Observable` on Windows.
+- Fixed the [issue #1](https://github.com/cedx/which.php/issues/1): the `Finder::isExecutable()` method did not return an `Observable` on Windows.
 
 ## Version [1.1.0](https://github.com/cedx/which.php/compare/v1.0.0...v1.1.0)
 - Enabled the strict typing.
