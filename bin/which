@@ -4,19 +4,6 @@
 use function Which\{which};
 use Which\{FinderException};
 
-/** @var string The usage information. */
-const usage = <<<'EOT'
-Find the instances of an executable in the system path.
-
-Usage: where [options] <command>
-
-Options:
--a, --all        List all instances of executables found (instead of just the first one).
--h, --help       Output usage information.
--s, --silent     Silence the output, just return the exit code (0 if any executable is found, otherwise 1).
--v, --version    Output the version number.
-EOT;
-
 /**
  * Application entry point.
  * @return int The application exit code.
@@ -34,17 +21,17 @@ function main(): int {
   }));
 
   if (isset($options['h']) || isset($options['help'])) {
-    echo usage;
+    echo require __DIR__ . '/../lib/cli/usage.php', PHP_EOL;
     return 0;
   }
 
   if (isset($options['v']) || isset($options['version'])) {
-    echo require __DIR__.'/../lib/version.g.php', PHP_EOL;
+    echo require __DIR__ . '/../lib/cli/version.g.php', PHP_EOL;
     return 0;
   }
 
   if (!count($rest)) {
-    echo usage;
+    echo require __DIR__ . '/../lib/cli/usage.php', PHP_EOL;
     return 64;
   }
 
