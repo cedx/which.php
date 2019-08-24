@@ -25,7 +25,7 @@
 - Updated the package dependencies.
 
 ## Version [6.0.0](https://github.com/cedx/which.php/compare/v5.0.1...v6.0.0)
-- Breaking change: raised the required [PHP](https://secure.php.net) version.
+- Breaking change: raised the required [PHP](https://www.php.net) version.
 - Added support for [phpDocumentor](https://www.phpdoc.org).
 - Updated the package dependencies.
 
@@ -33,7 +33,7 @@
 - Fixed the [issue #2](https://github.com/cedx/which.php/issues/2): the `which()` function can return duplicates.
 
 ## Version [5.0.0](https://github.com/cedx/which.php/compare/v4.0.0...v5.0.0)
-- Breaking change: raised the required [PHP](https://secure.php.net) version.
+- Breaking change: raised the required [PHP](https://www.php.net) version.
 - Breaking change: using PHP 7.1 features, like void functions.
 - Added a user guide based on [MkDocs](http://www.mkdocs.org).
 - Added the `FinderException` class.
