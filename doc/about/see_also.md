@@ -6,7 +6,7 @@
 - [Submit an issue](https://github.com/cedx/which.php/issues)
 
 ## Testing
-- [Continuous integration](https://travis-ci.com/cedx/which.php)
+- [Continuous integration](https://github.com/cedx/which.php/actions)
 - [Code coverage](https://coveralls.io/github/cedx/which.php/)
 
 ## Other implementations
