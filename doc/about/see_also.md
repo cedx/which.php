@@ -11,4 +11,4 @@
 
 ## Other implementations
 - Dart: [Where.dart](https://dev.belin.io/where.dart)
-- Node.js: [Which for JS](https://dev.belin.io/which.js)
+- JavaScript: [Which for JS](https://dev.belin.io/which.js)
