@@ -1,5 +1,3 @@
 parameters:
-  ignoreErrors: ['/Function posix_\w+ not found/']
   level: max
   paths: [bin, lib, test]
-  reportUnmatchedIgnoredErrors: false
