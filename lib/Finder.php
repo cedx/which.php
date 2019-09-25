@@ -136,8 +136,9 @@ class Finder {
    * @return \Generator The paths of the executables found.
    */
   private function findExecutables(string $directory, string $command): \Generator {
+    $basePath = (string) getcwd();
     foreach (array_merge([''], $this->getExtensions()->getArrayCopy()) as $extension) {
-      $resolvedPath = Path::makeAbsolute(Path::join($directory, $command).mb_strtolower($extension), getcwd() ?: '.');
+      $resolvedPath = Path::makeAbsolute(Path::join($directory, $command).mb_strtolower($extension), $basePath);
       if ($this->isExecutable($resolvedPath)) yield str_replace('/', DIRECTORY_SEPARATOR, $resolvedPath);
     }
   }
