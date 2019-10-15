@@ -4,10 +4,10 @@ namespace Which;
 use function PHPUnit\Expect\{expect, it};
 use PHPUnit\Framework\{TestCase};
 
-/** Tests the features of the `Which\Finder` class. */
+/** @testdox Which\Finder */
 class FinderTest extends TestCase {
 
-  /** @test Finder->__construct() */
+  /** @testdox constructor */
   function testConstructor(): void {
     it('should set the `path` property to the value of the `PATH` environment variable by default', function() {
       $pathEnv = (string) getenv('PATH');
@@ -40,7 +40,7 @@ class FinderTest extends TestCase {
     });
   }
 
-  /** @test Finder->find() */
+  /** @testdox ->find() */
   function testFind(): void {
     it('should return the path of the `executable.cmd` file on Windows', function() {
       $executables = iterator_to_array((new Finder('test/fixtures'))->find('executable'));
@@ -55,7 +55,7 @@ class FinderTest extends TestCase {
     });
   }
 
-  /** @test Finder->isExecutable() */
+  /** @testdox ->isExecutable() */
   function testIsExecutable(): void {
     it('should return `false` for a non-executable file', function() {
       expect((new Finder)->isExecutable(__FILE__))->to->be->false;

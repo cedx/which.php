@@ -4,10 +4,10 @@ namespace Which;
 use function PHPUnit\Expect\{expect, fail, it};
 use PHPUnit\Framework\{TestCase};
 
-/** Tests the features of the `Which\which()` function. */
+/** @testdox Which\which */
 class WhichTest extends TestCase {
 
-  /** @test which() */
+  /** @testdox which() */
   function testWhich(): void {
     it('should return the path of the `executable.cmd` file on Windows', function() {
       try {
