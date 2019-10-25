@@ -15,10 +15,8 @@ function main(): int {
   @cli_set_process_title('Which.php');
 
   // Parse the command line arguments.
-  $options = getopt('ahsv', ['all', 'help', 'silent', 'version']);
-  $rest = array_values(array_filter(array_slice($argv, 1), function($arg) {
-    return mb_substr($arg, 0, 1) != '-';
-  }));
+  $options = getopt('ahsv', ['all', 'help', 'silent', 'version'], $index);
+  $rest = array_slice($argv, $index);
 
   if (isset($options['h']) || isset($options['help'])) {
     echo require __DIR__.'/../lib/Cli/usage.php', PHP_EOL;
