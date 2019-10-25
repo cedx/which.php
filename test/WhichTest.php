@@ -68,10 +68,10 @@ class WhichTest extends TestCase {
     });
 
     it('should return the value of the `onError` handler', function() {
-      $executable = which('executable', false, function() { return 'foo'; }, ['path' => 'test/fixtures']);
+      $executable = which('executable', false, fn() => 'foo', ['path' => 'test/fixtures']);
       if (!Finder::isWindows()) expect($executable)->to->equal('foo');
 
-      $executables = which('executable.sh', true, function() { return ['foo']; }, ['path' => 'test/fixtures']);
+      $executables = which('executable.sh', true, fn() => ['foo'], ['path' => 'test/fixtures']);
       if (Finder::isWindows()) {
         expect($executables)->to->be->an('array')->and->have->lengthOf(1);
         expect($executables[0])->to->equal('foo');
