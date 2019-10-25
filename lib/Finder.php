@@ -7,13 +7,13 @@ use Webmozart\PathUtil\{Path};
 class Finder {
 
   /** @var \ArrayObject The list of executable file extensions. */
-  private $extensions;
+  private \ArrayObject $extensions;
 
   /** @var \ArrayObject The list of system paths. */
-  private $path;
+  private \ArrayObject $path;
 
   /** @var string The character used to separate paths in the system path. */
-  private $pathSeparator;
+  private string $pathSeparator;
 
   /**
    * Creates a new finder.
