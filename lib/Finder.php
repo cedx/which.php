@@ -7,13 +7,13 @@ use Webmozart\PathUtil\{Path};
 class Finder {
 
   /** @var \ArrayObject The list of executable file extensions. */
-  private $extensions;
+  private \ArrayObject $extensions;
 
   /** @var \ArrayObject The list of system paths. */
-  private $path;
+  private \ArrayObject $path;
 
   /** @var string The character used to separate paths in the system path. */
-  private $pathSeparator;
+  private string $pathSeparator;
 
   /**
    * Creates a new finder.
@@ -39,7 +39,7 @@ class Finder {
     }
 
     $this->extensions = new \ArrayObject(array_map('mb_strtolower', $extensions));
-    $this->path = new \ArrayObject(array_map(function($directory) { return trim($directory, '"'); }, $path));
+    $this->path = new \ArrayObject(array_map(fn($directory) => trim($directory, '"'), $path));
   }
 
   /**
@@ -137,7 +137,7 @@ class Finder {
    */
   private function findExecutables(string $directory, string $command): \Generator {
     $basePath = (string) getcwd();
-    foreach (array_merge([''], $this->getExtensions()->getArrayCopy()) as $extension) {
+    foreach (['', ...$this->getExtensions()->getArrayCopy()] as $extension) {
       $resolvedPath = Path::makeAbsolute(Path::join($directory, $command).mb_strtolower($extension), $basePath);
       if ($this->isExecutable($resolvedPath)) yield str_replace('/', DIRECTORY_SEPARATOR, $resolvedPath);
     }

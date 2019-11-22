@@ -43,7 +43,7 @@ By default, when the specified command cannot be located, a `Which\FinderExcepti
 
 ```php
 <?php
-$path = which('foobar', false, function($command) { return ''; });
+$path = which('foobar', false, fn($command) => '');
 if (!mb_strlen($path)) echo 'The command "foobar" was not found.';
 else echo 'The command "foobar" is located at: ', $path;
 ```

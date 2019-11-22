@@ -5,16 +5,16 @@ Before installing **Which for PHP**, you need to make sure you have [PHP](https:
 and [Composer](https://getcomposer.org), the PHP package manager, up and running.
 
 !!! warning
-    Which for PHP requires PHP >= **7.2.0**.
+    Which for PHP requires PHP >= **7.4.0**.
     
 You can verify if you're already good to go with the following commands:
 
 ```shell
 php --version
-# PHP 7.3.8 (cli) (built: Jul 30 2019 12:44:08) ( NTS MSVC15 (Visual C++ 2017) x64 )
+# PHP 7.4.0RC6 (cli) (built: Nov 11 2019 10:43:20) ( NTS Visual C++ 2017 x64 )
 
 composer --version
-# Composer version 1.9.0 2019-08-02 20:55:32
+# Composer version 1.9.1 2019-11-01 17:20:17
 ```
 
 !!! info

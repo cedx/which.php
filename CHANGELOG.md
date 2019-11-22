@@ -1,5 +1,9 @@
 # Changelog
 
+## Version [8.0.0](https://github.com/cedx/which.php/compare/v7.2.0...v8.0.0)
+- Breaking change: raised the required [PHP](https://www.php.net) version.
+- Breaking change: using PHP 7.4 features, like arrow functions and typed properties.
+
 ## Version [7.2.0](https://github.com/cedx/which.php/compare/v7.1.0...v7.2.0)
 - Removed the dependency on [Commando](https://github.com/nategood/commando) library.
 - Updated the package dependencies.

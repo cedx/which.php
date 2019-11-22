@@ -5,10 +5,10 @@ namespace Which;
 class FinderException extends \RuntimeException {
 
   /** @var string The looked up command. */
-  private $command;
+  private string $command;
 
   /** @var Finder The finder used to lookup the command. */
-  private $finder;
+  private Finder $finder;
 
   /**
    * Creates a new finder exception.
@@ -17,7 +17,7 @@ class FinderException extends \RuntimeException {
    * @param string $message A message describing the error.
    * @param \Throwable|null $previous The previous exception used for the exception chaining.
    */
-  function __construct(string $command, Finder $finder, string $message = '', \Throwable $previous = null) {
+  function __construct(string $command, Finder $finder, string $message = '', ?\Throwable $previous = null) {
     parent::__construct($message, 0, $previous);
     $this->command = $command;
     $this->finder = $finder;
