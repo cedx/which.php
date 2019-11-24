@@ -1,60 +1,16 @@
 #!/usr/bin/env php
 <?php declare(strict_types=1);
 
-use function Which\{which};
-use Which\{FinderException};
+use Symfony\Component\Console\{Application};
+use Which\Cli\{Command};
 
-/**
- * Application entry point.
- * @return int The application exit code.
- */
-function main(): int {
-  global $argv;
-
-  // Initialize the application.
-  @cli_set_process_title('Which.php');
-
-  // Parse the command line arguments.
-  $options = getopt('ahsv', ['all', 'help', 'silent', 'version'], $index);
-  $rest = array_slice($argv, $index);
-
-  if (isset($options['h']) || isset($options['help'])) {
-    echo require __DIR__.'/../lib/Cli/usage.php', PHP_EOL;
-    return 0;
-  }
-
-  if (isset($options['v']) || isset($options['version'])) {
-    echo require __DIR__.'/../lib/Cli/version.g.php', PHP_EOL;
-    return 0;
-  }
-
-  if (!count($rest)) {
-    echo require __DIR__.'/../lib/Cli/usage.php', PHP_EOL;
-    return 64;
-  }
-
-  // Run the program.
-  $executables = which($rest[0], isset($options['a']) || isset($options['all']));
-  if (!isset($options['s']) && !isset($options['silent'])) {
-    if (!is_array($executables)) $executables = [$executables];
-    foreach ($executables as $path) echo $path, PHP_EOL;
-  }
-
-  return 0;
-}
+// Load the dependencies.
+$autoload = realpath(__DIR__.'/../../../autoload.php');
+$rootPath = dirname(__DIR__);
+require_once $autoload ? $autoload : "$rootPath/vendor/autoload.php";
 
 // Start the application.
-try {
-  $fileInfo = new SplFileInfo(__DIR__.'/../../../autoload.php');
-  require_once $fileInfo->isFile() ? $fileInfo->getPathname() : __DIR__.'/../vendor/autoload.php';
-  exit(main());
-}
-
-catch (FinderException $e) {
-  exit(1);
-}
-
-catch (Throwable $e) {
-  echo $e->getMessage(), PHP_EOL;
-  exit(2);
-}
+$application = new Application('Which.php', require "$rootPath/lib/Cli/version.g.php");
+$command = (new Command)->setProcessTitle($application->getName());
+$application->add($command);
+return $application->setDefaultCommand($command->getName(), true)->run();
