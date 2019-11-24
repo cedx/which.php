@@ -18,7 +18,7 @@ class Command extends \Symfony\Component\Console\Command\Command
     $this
       ->setDescription('Find the instances of an executable in the system path.')
       ->addArgument('executable', InputArgument::REQUIRED, 'The executable to find')
-      ->addOption('all', 'a', InputOption::VALUE_NONE, 'List all instances of executables found (instead of just the first one)');
+      ->addOption('all', 'a', InputOption::VALUE_NONE, 'List all instances of executables found, instead of just the first one');
   }
 
   /**
