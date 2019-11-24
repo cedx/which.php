@@ -28,8 +28,14 @@ class Command extends \Symfony\Component\Console\Command\Command
    * @return int The exit code.
    */
   protected function execute(InputInterface $input, OutputInterface $output): int {
+    /** @var string $command */
+    $command = $input->getArgument('executable');
+
+    /** @var bool $all */
+    $all = $input->getOption('all');
+
     try {
-      $executables = which($input->getArgument('executable'), $input->getOption('all'));
+      $executables = which($command, $all);
       if (!is_array($executables)) $executables = [$executables];
       $output->writeln($executables);
       return 0;
