@@ -1,3 +1,4 @@
 parameters:
+  ignoreErrors: ['/on a separate line does not do anything/']
   level: max
-  paths: [bin, lib, test]
+  paths: [../lib, ../test]

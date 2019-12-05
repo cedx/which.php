@@ -6,10 +6,10 @@ use Webmozart\PathUtil\{Path};
 /** Finds the instances of an executable in the system path. */
 class Finder {
 
-  /** @var \ArrayObject The list of executable file extensions. */
+  /** @var \ArrayObject<int, string> The list of executable file extensions. */
   private \ArrayObject $extensions;
 
-  /** @var \ArrayObject The list of system paths. */
+  /** @var \ArrayObject<int, string> The list of system paths. */
   private \ArrayObject $path;
 
   /** @var string The character used to separate paths in the system path. */
@@ -55,7 +55,7 @@ class Finder {
   /**
    * Finds the instances of an executable in the system path.
    * @param string $command The command to be resolved.
-   * @return \Generator The paths of the executables found.
+   * @return \Generator<string> The paths of the executables found.
    */
   function find(string $command): \Generator {
     foreach ($this->getPath() as $directory) yield from $this->findExecutables($directory, $command);
@@ -63,7 +63,7 @@ class Finder {
 
   /**
    * Gets the list of executable file extensions.
-   * @return \ArrayObject The list of executable file extensions.
+   * @return \ArrayObject<int, string> The list of executable file extensions.
    */
   function getExtensions(): \ArrayObject {
     return $this->extensions;
@@ -71,7 +71,7 @@ class Finder {
 
   /**
    * Gets the list of system paths.
-   * @return \ArrayObject The list of system paths.
+   * @return \ArrayObject<int, string> The list of system paths.
    */
   function getPath(): \ArrayObject {
     return $this->path;
@@ -133,7 +133,7 @@ class Finder {
    * Finds the instances of an executable in the specified directory.
    * @param string $directory The directory path.
    * @param string $command The command to be resolved.
-   * @return \Generator The paths of the executables found.
+   * @return \Generator<string> The paths of the executables found.
    */
   private function findExecutables(string $directory, string $command): \Generator {
     $basePath = (string) getcwd();
