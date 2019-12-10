@@ -13,4 +13,4 @@ require_once $autoload ? $autoload : "$rootPath/vendor/autoload.php";
 $application = new Application('Which.php', require "$rootPath/lib/Cli/version.g.php");
 $command = (new Command)->setProcessTitle($application->getName());
 $application->add($command);
-return $application->setDefaultCommand($command->getName(), true)->run();
+$application->setDefaultCommand($command->getName(), true)->run();

@@ -8,8 +8,8 @@ use Which\{FinderException};
 use function Which\{which};
 
 /** The console command. */
-class Command extends \Symfony\Component\Console\Command\Command
-{
+class Command extends \Symfony\Component\Console\Command\Command {
+  
   /** @var string The command name. */
   protected static $defaultName = 'which';
 
