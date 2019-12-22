@@ -29,7 +29,7 @@
     "php": ">=7.4.0",
     "ext-mbstring": "*",
     "ext-spl": "*",
-    "symfony/console": "^4.4.1 || ^5.0.1",
+    "symfony/console": "^4.4.2 || ^5.0.2",
     "webmozart/path-util": "^2.3.0"
   },
   "require-dev": {
