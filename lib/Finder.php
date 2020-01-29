@@ -91,9 +91,12 @@ class Finder {
    * @return bool `true` if the specified file is executable, otherwise `false`.
    */
   function isExecutable(string $file): bool {
+    assert(mb_strlen($file) > 0);
+
     $fileInfo = new \SplFileInfo($file);
     if (!$fileInfo->isFile()) return false;
     if ($fileInfo->isExecutable()) return true;
+
     return static::isWindows() ? $this->checkFileExtension($fileInfo) : $this->checkFilePermissions($fileInfo);
   }
 
@@ -136,6 +139,9 @@ class Finder {
    * @return \Generator<string> The paths of the executables found.
    */
   private function findExecutables(string $directory, string $command): \Generator {
+    assert(mb_strlen($directory) > 0);
+    assert(mb_strlen($command) > 0);
+
     $basePath = (string) getcwd();
     foreach (['', ...$this->getExtensions()->getArrayCopy()] as $extension) {
       $resolvedPath = Path::makeAbsolute(Path::join($directory, $command).mb_strtolower($extension), $basePath);
