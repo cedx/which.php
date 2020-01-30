@@ -22,6 +22,8 @@ class Finder {
    * @param string $pathSeparator The character used to separate paths in the system path. Defaults to the `PATH_SEPARATOR` constant.
    */
   function __construct($path = [], $extensions = [], string $pathSeparator = '') {
+    assert(is_string($path) || is_array($path));
+    assert(is_string($extensions) || is_array($extensions));
     $this->pathSeparator = mb_strlen($pathSeparator) ? $pathSeparator : (static::isWindows() ? ';' : PATH_SEPARATOR);
 
     if (!is_array($path))
