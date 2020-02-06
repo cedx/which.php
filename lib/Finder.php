@@ -37,7 +37,7 @@ class Finder {
       $extensions = array_filter(explode($this->pathSeparator, $extensions) ?: [], fn($item) => mb_strlen($item) > 0);
     if (!count($extensions) && static::isWindows()) {
       $pathExt = (string) getenv('PATHEXT');
-      $extensions = mb_strlen($pathExt) ? explode($this->pathSeparator, $pathExt) ?: [] : ['.exe', '.cmd', '.bat', '.com'];
+      $extensions = mb_strlen($pathExt) ? (explode($this->pathSeparator, $pathExt) ?: []) : ['.exe', '.cmd', '.bat', '.com'];
     }
 
     $this->extensions = new \ArrayObject(array_map('mb_strtolower', $extensions));

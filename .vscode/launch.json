@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Executable",
+      "type": "php",
+      "request": "launch",
+      "program": "${workspaceFolder}/bin/which",
+      "args": ["php"]
+    },
+    {
+      "name": "Tests",
+      "type": "php",
+      "request": "launch",
+      "program": "${workspaceFolder}/vendor/phpunit/phpunit/phpunit",
+      "cwd": "${workspaceFolder}",
+      "args": ["--configuration=etc/phpunit.xml"]
+    }
+  ]
+}
