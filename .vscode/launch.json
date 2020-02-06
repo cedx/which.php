@@ -6,7 +6,8 @@
       "type": "php",
       "request": "launch",
       "program": "${workspaceFolder}/bin/which",
-      "args": ["php"]
+      "args": ["php"],
+      "ignore": ["**/vendor/**/*.php"]
     },
     {
       "name": "Tests",
@@ -14,7 +15,8 @@
       "request": "launch",
       "program": "${workspaceFolder}/vendor/phpunit/phpunit/phpunit",
       "cwd": "${workspaceFolder}",
-      "args": ["--configuration=etc/phpunit.xml"]
+      "args": ["--configuration=etc/phpunit.xml"],
+      "ignore": ["**/vendor/**/*.php"]
     }
   ]
 }
