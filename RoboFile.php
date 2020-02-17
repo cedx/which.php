@@ -26,13 +26,11 @@ class RoboFile extends Tasks {
    */
   function build(): ResultData {
     $version = $this->taskSemVer()->setFormat('%M.%m.%p')->__toString();
-    $success = (bool) @file_put_contents('lib/Cli/version.g.php', implode(PHP_EOL, [
-      '<?php declare(strict_types=1);', '',
-      '// The version number of the package.',
-      "return \$packageVersion = '$version';", ''
-    ]));
-
-    return new ResultData($success ? ResultData::EXITCODE_OK : ResultData::EXITCODE_ERROR);
+    return $this->taskWriteToFile('lib/Cli/version.g.php')
+      ->line('<?php declare(strict_types=1);')->line('')
+      ->line('// The version number of the package.')
+      ->line("return \$packageVersion = '$version';")
+      ->run();
   }
 
   /**
