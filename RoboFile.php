@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-use Robo\{Result, ResultData, Tasks};
+use Robo\{Result, Tasks};
 
 // Load the dependencies.
 require_once __DIR__.'/vendor/autoload.php';
