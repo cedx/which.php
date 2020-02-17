@@ -22,9 +22,9 @@ class RoboFile extends Tasks {
 
   /**
    * Builds the project.
-   * @return ResultData The task result.
+   * @return Result The task result.
    */
-  function build(): ResultData {
+  function build(): Result {
     $version = $this->taskSemVer()->setFormat('%M.%m.%p')->__toString();
     return $this->taskWriteToFile('lib/Cli/version.g.php')
       ->line('<?php declare(strict_types=1);')->line('')
