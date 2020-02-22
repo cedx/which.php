@@ -17,7 +17,7 @@
 - Replaced the [Phing](https://www.phing.info) build system by [Robo](https://robo.li).
 
 ## Version [7.0.0](https://github.com/cedx/which.php/compare/v6.2.0...v7.0.0)
-- Breaking change: implemented the `Finder::find()` method using generators.
+- Breaking change: implemented the `Finder->find()` method using generators.
 - Breaking change: removed the setters of the `Finder` class.
 - Added support for [PHPStan](https://github.com/phpstan/phpstan) static analyzer.
 
@@ -55,14 +55,14 @@
 - Breaking change: renamed the `which` namespace to `Which`.
 
 ## Version [1.1.1](https://github.com/cedx/which.php/compare/v1.1.0...v1.1.1)
-- Fixed the [issue #1](https://github.com/cedx/which.php/issues/1): the `Finder::isExecutable()` method did not return an `Observable` on Windows.
+- Fixed the [issue #1](https://github.com/cedx/which.php/issues/1): the `Finder->isExecutable()` method did not return an `Observable` on Windows.
 
 ## Version [1.1.0](https://github.com/cedx/which.php/compare/v1.0.0...v1.1.0)
 - Enabled the strict typing.
 - Updated the package dependencies.
 
 ## Version [1.0.0](https://github.com/cedx/which.php/compare/v0.2.0...v1.0.0)
-- Breaking change: the `Application::run()` method does not `exit()` anymore.
+- Breaking change: the `Application->run()` method does not `exit()` anymore.
 - Added new unit tests.
 
 ## Version [0.2.0](https://github.com/cedx/which.php/compare/v0.1.0...v0.2.0)
