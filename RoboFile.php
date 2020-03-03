@@ -26,12 +26,10 @@ class RoboFile extends Tasks {
    */
   function build(): Result {
     $version = $this->taskSemVer()->setFormat('%M.%m.%p')->__toString();
-    return $this->collectionBuilder()
-      ->addTask($this->taskReplaceInFile('etc/phpdoc.xml')->regex('/version number="\d+(\.\d+){2}"/')->to("version number=\"$version\""))
-      ->addTask($this->taskWriteToFile('lib/Cli/version.g.php')
-        ->line('<?php declare(strict_types=1);')->line('')
-        ->line('// The version number of the package.')
-        ->line("return \$packageVersion = '$version';"))
+    return $this->taskWriteToFile('lib/Cli/version.g.php')
+      ->line('<?php declare(strict_types=1);')->line('')
+      ->line('// The version number of the package.')
+      ->line("return \$packageVersion = '$version';")
       ->run();
   }
 
@@ -113,6 +111,11 @@ class RoboFile extends Tasks {
    * @return Result The task result.
    */
   function version(string $component = 'patch'): Result {
-    return $this->taskSemVer()->increment($component)->run();
+    $semverTask = $this->taskSemVer()->increment($component);
+    $version = $semverTask->setFormat('%M.%m.%p')->__toString();
+    return $this->collectionBuilder()
+      ->addTask($semverTask)
+      ->addTask($this->taskReplaceInFile('etc/phpdoc.xml')->regex('/version number="\d+(\.\d+){2}"/')->to("version number=\"$version\""))
+      ->run();
   }
 }
