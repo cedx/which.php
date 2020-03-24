@@ -36,9 +36,9 @@
     "webmozart/path-util": "^2.3.0"
   },
   "require-dev": {
-    "cedx/phpunit-expect": "^0.10.0",
     "consolidation/robo": "^2.0.3",
-    "phpstan/phpstan": "^0.12.18"
+    "phpstan/phpstan": "^0.12.18",
+    "phpunit/phpunit": "^9.0.1"
   },
   "scripts": {
     "coverage": "robo coverage",

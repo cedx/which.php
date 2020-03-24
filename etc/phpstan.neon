@@ -1,5 +1,4 @@
 parameters:
-  ignoreErrors: ['/on a separate line does not do anything/']
   level: max
   paths: [../lib, ../test]
   treatPhpDocTypesAsCertain: false
