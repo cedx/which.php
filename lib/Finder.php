@@ -57,9 +57,9 @@ class Finder {
   /**
    * Finds the instances of an executable in the system path.
    * @param string $command The command to be resolved.
-   * @return \Generator<string> The paths of the executables found.
+   * @return iterable<string> The paths of the executables found.
    */
-  function find(string $command): \Generator {
+  function find(string $command): iterable {
     foreach ($this->getPath() as $directory) yield from $this->findExecutables($directory, $command);
   }
 
@@ -138,9 +138,9 @@ class Finder {
    * Finds the instances of an executable in the specified directory.
    * @param string $directory The directory path.
    * @param string $command The command to be resolved.
-   * @return \Generator<string> The paths of the executables found.
+   * @return iterable<string> The paths of the executables found.
    */
-  private function findExecutables(string $directory, string $command): \Generator {
+  private function findExecutables(string $directory, string $command): iterable {
     assert(mb_strlen($directory) > 0);
     assert(mb_strlen($command) > 0);
 
