@@ -109,7 +109,7 @@ class Finder {
    */
   private function checkFileExtension(\SplFileInfo $fileInfo): bool {
     $extension = mb_strtolower($fileInfo->getExtension());
-    return mb_strlen($extension) ? in_array(".$extension", $this->getExtensions()->getArrayCopy()) : false;
+    return mb_strlen($extension) ? in_array(".$extension", (array) $this->getExtensions()) : false;
   }
 
   /**
@@ -145,7 +145,7 @@ class Finder {
     assert(mb_strlen($command) > 0);
 
     $basePath = (string) getcwd();
-    foreach (['', ...$this->getExtensions()->getArrayCopy()] as $extension) {
+    foreach (['', ...(array) $this->getExtensions()] as $extension) {
       $resolvedPath = Path::makeAbsolute(Path::join($directory, $command).mb_strtolower($extension), $basePath);
       if ($this->isExecutable($resolvedPath)) yield str_replace('/', DIRECTORY_SEPARATOR, $resolvedPath);
     }
