@@ -32,13 +32,13 @@
     "php": ">=7.4.0",
     "ext-mbstring": "*",
     "ext-spl": "*",
-    "symfony/console": "^4.4.6 || ^5.0.6",
+    "symfony/console": "^4.4.7 || ^5.0.7",
     "webmozart/path-util": "^2.3.0"
   },
   "require-dev": {
     "consolidation/robo": "^2.0.3",
     "phpstan/phpstan": "^0.12.18",
-    "phpunit/phpunit": "^9.0.1"
+    "phpunit/phpunit": "^9.0.2"
   },
   "scripts": {
     "coverage": "robo coverage",
