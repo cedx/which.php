@@ -26,7 +26,7 @@ class RoboFile extends Tasks {
    */
   function build(): Result {
     $version = $this->taskSemVer()->setFormat('%M.%m.%p')->__toString();
-    return $this->taskWriteToFile('lib/Cli/version.g.php')
+    return $this->taskWriteToFile('src/Cli/version.g.php')
       ->line('<?php declare(strict_types=1);')->line('')
       ->line('// The version number of the package.')
       ->line("return \$packageVersion = '$version';")

@@ -10,7 +10,7 @@ $rootPath = dirname(__DIR__);
 require_once $autoload ? $autoload : "$rootPath/vendor/autoload.php";
 
 // Start the application.
-$application = new Application('Which.php', require "$rootPath/lib/Cli/version.g.php");
+$application = new Application('Which.php', require "$rootPath/src/Cli/version.g.php");
 $command = (new Command)->setProcessTitle($application->getName());
 $application->add($command);
 $application->setDefaultCommand($command->getName(), true)->run();

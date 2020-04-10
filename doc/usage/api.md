@@ -1,5 +1,5 @@
 path: blob/master
-source: lib/which.php
+source: src/which.php
 
 # Application programming interface
 This package provides a single function, `Which\which()`, allowing to locate a command in the system path:
