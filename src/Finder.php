@@ -57,7 +57,7 @@ class Finder {
   /**
    * Finds the instances of an executable in the system path.
    * @param string $command The command to be resolved.
-   * @return iterable<string> The paths of the executables found.
+   * @return iterable<\SplFileInfo> The paths of the executables found.
    */
   function find(string $command): iterable {
     foreach ($this->getPath() as $directory) yield from $this->findExecutables($directory, $command);
@@ -138,7 +138,7 @@ class Finder {
    * Finds the instances of an executable in the specified directory.
    * @param string $directory The directory path.
    * @param string $command The command to be resolved.
-   * @return iterable<string> The paths of the executables found.
+   * @return iterable<\SplFileInfo> The paths of the executables found.
    */
   private function findExecutables(string $directory, string $command): iterable {
     assert(mb_strlen($directory) > 0);
@@ -147,7 +147,7 @@ class Finder {
     $basePath = (string) getcwd();
     foreach (['', ...(array) $this->getExtensions()] as $extension) {
       $resolvedPath = Path::makeAbsolute(Path::join($directory, $command).mb_strtolower($extension), $basePath);
-      if ($this->isExecutable($resolvedPath)) yield str_replace('/', DIRECTORY_SEPARATOR, $resolvedPath);
+      if ($this->isExecutable($resolvedPath)) yield new \SplFileInfo(str_replace('/', DIRECTORY_SEPARATOR, $resolvedPath));
     }
   }
 }

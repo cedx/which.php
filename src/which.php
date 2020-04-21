@@ -21,8 +21,8 @@ function which(string $command, bool $all = false, callable $onError = null, arr
 
   $list = [];
   foreach ($finder->find($command) as $executable) {
-    if (!$all) return $executable;
-    $list[] = $executable;
+    if (!$all) return $executable->getPathname();
+    $list[] = $executable->getPathname();
   }
 
   if (!count($list)) {
