@@ -5,9 +5,9 @@ use Symfony\Component\Console\{Application};
 use Which\Cli\{Command};
 
 // Load the dependencies.
-$autoload = realpath(__DIR__.'/../../../autoload.php');
+$autoloader = new SplFileInfo(__DIR__.'/../../../autoload.php');
 $rootPath = dirname(__DIR__);
-require_once $autoload ? $autoload : "$rootPath/vendor/autoload.php";
+require_once $autoloader->isFile() ? $autoloader->getPathname() : "$rootPath/vendor/autoload.php";
 
 // Start the application.
 $application = new Application('Which.php', require "$rootPath/src/Cli/version.g.php");
