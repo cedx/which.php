@@ -1,5 +1,7 @@
-path: blob/master
+---
+path: src/branch/master
 source: bin/which
+---
 
 # Command line interface
 From a command prompt, install the `which` executable:
