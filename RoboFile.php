@@ -40,7 +40,7 @@ class RoboFile extends Tasks {
   function clean(): Result {
     return $this->collectionBuilder()
       ->addTask($this->taskCleanDir('var'))
-      ->addTask($this->taskDeleteDir(['build', 'doc/api', 'web']))
+      ->addTask($this->taskDeleteDir(['build', 'doc/api', 'www']))
       ->run();
   }
 
