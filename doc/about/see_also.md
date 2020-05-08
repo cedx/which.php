@@ -8,7 +8,3 @@
 ## Testing
 - [Continuous integration](https://github.com/cedx/which.php/actions)
 - [Code coverage](https://coveralls.io/github/cedx/which.php/)
-
-## Other implementations
-- Dart: [Where.dart](https://docs.belin.io/where.dart)
-- JavaScript: [Which for JS](https://docs.belin.io/which.js)
