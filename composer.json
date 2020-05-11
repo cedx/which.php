@@ -15,7 +15,9 @@
   "autoload-dev": {
     "psr-4": {"Which\\": "test/"}
   },
-  "bin": ["bin/which"],
+  "bin": [
+    "bin/which"
+  ],
   "config": {
     "optimize-autoloader": true
   },
