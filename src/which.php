@@ -11,24 +11,24 @@ namespace Which;
  * @throws FinderException The specified command was not found.
  */
 function which(string $command, bool $all = false, callable $onError = null, array $options = []) {
-  assert(mb_strlen($command) > 0);
+	assert(mb_strlen($command) > 0);
 
-  $finder = new Finder(
-    $options['path'] ?? [],
-    $options['extensions'] ?? [],
-    $options['pathSeparator'] ?? ''
-  );
+	$finder = new Finder(
+		$options["path"] ?? [],
+		$options["extensions"] ?? [],
+		$options["pathSeparator"] ?? ""
+	);
 
-  $list = [];
-  foreach ($finder->find($command) as $executable) {
-    if (!$all) return $executable->getPathname();
-    $list[] = $executable->getPathname();
-  }
+	$list = [];
+	foreach ($finder->find($command) as $executable) {
+		if (!$all) return $executable->getPathname();
+		$list[] = $executable->getPathname();
+	}
 
-  if (!count($list)) {
-    if ($onError) return call_user_func($onError, $command);
-    throw new FinderException($command, $finder, "Command '$command' not found");
-  }
+	if (!count($list)) {
+		if ($onError) return call_user_func($onError, $command);
+		throw new FinderException($command, $finder, "Command '$command' not found");
+	}
 
-  return array_unique($list);
+	return array_unique($list);
 }
