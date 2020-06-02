@@ -35,7 +35,7 @@
 		"php": ">=7.4.0",
 		"ext-mbstring": "*",
 		"ext-spl": "*",
-		"symfony/console": "^5.0.8",
+		"symfony/console": "^5.1.0",
 		"webmozart/path-util": "^2.3.0"
 	},
 	"require-dev": {
