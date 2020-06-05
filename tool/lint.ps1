@@ -4,4 +4,4 @@ Set-Location (Split-Path $PSScriptRoot)
 
 php -l bin/which
 php -l example/main.php
-vendor/bin/phpstan analyse --configuration=etc/phpstan.neon
+composer run-script lint
