@@ -8,10 +8,10 @@ function main(): void {
 	try {
 		// `$path` is the absolute path to the executable.
 		$path = which("foobar");
-		echo "The command 'foobar' is located at: ", $path;
+		print "The command 'foobar' is located at: $path";
 	}
 
 	catch (FinderException $e) {
-		echo "The command '", $e->getCommand(), "' was not found";
+		print "The command '{$e->getCommand()}' was not found";
 	}
 }
