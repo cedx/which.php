@@ -1,15 +1,15 @@
 <?php declare(strict_types=1);
 namespace Which\Cli;
 
-use Symfony\Component\Console\Exception\{RuntimeException};
+use Symfony\Component\Console\Exception\RuntimeException;
 use Symfony\Component\Console\Input\{InputArgument, InputInterface, InputOption};
-use Symfony\Component\Console\Output\{OutputInterface};
-use Which\{FinderException};
-use function Which\{which};
+use Symfony\Component\Console\Output\OutputInterface;
+use Which\FinderException;
+use function Which\which;
 
 /** The console command. */
 class Command extends \Symfony\Component\Console\Command\Command {
-	
+
 	/** @var string The command name. */
 	protected static $defaultName = "which";
 

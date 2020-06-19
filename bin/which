@@ -1,8 +1,8 @@
 #!/usr/bin/env php
 <?php declare(strict_types=1);
 
-use Symfony\Component\Console\{Application};
-use Which\Cli\{Command};
+use Symfony\Component\Console\Application;
+use Which\Cli\Command;
 
 // Load the dependencies.
 $autoloader = new SplFileInfo(__DIR__."/../../../autoload.php");

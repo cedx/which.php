@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 namespace Which;
 
-use Webmozart\PathUtil\{Path};
+use Webmozart\PathUtil\Path;
 
 /** Finds the instances of an executable in the system path. */
 class Finder {

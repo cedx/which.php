@@ -8,8 +8,8 @@ This package provides a single function, `Which\which()`, allowing to locate a c
 
 ``` php
 <?php
-use function Which\{which};
-use Which\{FinderException};
+use function Which\which;
+use Which\FinderException;
 
 try {
 	// `$path` is the absolute path to the executable.

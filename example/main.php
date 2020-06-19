@@ -1,7 +1,7 @@
 <?php declare(strict_types=1);
 
-use Which\{FinderException};
-use function Which\{which};
+use Which\FinderException;
+use function Which\which;
 
 /** Finds the instances of an executable. */
 function main(): void {
