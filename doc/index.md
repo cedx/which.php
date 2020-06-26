@@ -3,6 +3,10 @@
 
 Find the instances of an executable in the system path, in [PHP](https://www.php.net).
 
+!!! danger
+    This package has been renamed to [`cedx/which.hx`](https://docs.belin.io/which.hx), and its version number resetted.  
+    Please update your `composer.json` file.
+
 ## Quick start
 Install the latest version of **Which for PHP** with [Composer](https://getcomposer.org):
 

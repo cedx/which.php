@@ -1,4 +1,5 @@
 {
+	"abandoned": "cedx/which.hx",
 	"description": "Find the instances of an executable in the system path. Like the `which` Linux command.",
 	"homepage": "https://docs.belin.io/which.php",
 	"license": "MIT",
