@@ -1,5 +1,5 @@
 # Which <small>for PHP</small>
-![Runtime](https://badgen.net/packagist/php/cedx/which) ![Release](https://badgen.net/packagist/v/cedx/which) ![License](https://badgen.net/packagist/license/cedx/which) ![Downloads](https://badgen.net/packagist/dt/cedx/which) ![Coverage](https://badgen.net/coveralls/c/github/cedx/which.php) ![Build](https://badgen.net/github/checks/cedx/which.php)
+![Runtime](https://badgen.net/packagist/php/cedx/which) ![Release](https://badgen.net/packagist/v/cedx/which) ![License](https://badgen.net/packagist/license/cedx/which) ![Downloads](https://badgen.net/packagist/dt/cedx/which) ![Coverage](https://badgen.net/coveralls/c/github/cedx/which.php) ![Build](https://badgen.net/github/checks/cedx/which.php/main)
 
 Find the instances of an executable in the system path, in [PHP](https://www.php.net).
 
