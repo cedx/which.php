@@ -13,12 +13,12 @@ use Which\FinderException;
 
 try {
 	// `$path` is the absolute path to the executable.
-	$path = which('foobar');
-	echo 'The command "foobar" is located at: ', $path;
+	$path = which("foobar");
+	print "The command 'foobar' is located at: $path";
 }
 
 catch (FinderException $e) {
-	echo 'The command "', $e->getCommand(), '" was not found';
+	print "The command '{$e->getCommand()}' was not found.";
 }
 ```
 
@@ -35,9 +35,9 @@ If you pass `true` as parameter value, the function will return an array of stri
 
 ``` php
 <?php
-$paths = which('foobar', true);
-echo 'The command "foobar" was found at these locations:', PHP_EOL;
-foreach ($paths as $path) echo $path, PHP_EOL;
+$paths = which("foobar", true);
+print "The command 'foobar' was found at these locations:" . PHP_EOL;
+foreach ($paths as $path) print $path . PHP_EOL;
 ```
 
 ### callable **$onError**
@@ -45,9 +45,9 @@ By default, when the specified command cannot be located, a `Which\FinderExcepti
 
 ``` php
 <?php
-$path = which('foobar', false, fn($command) => '');
-if (!mb_strlen($path)) echo 'The command "foobar" was not found.';
-else echo 'The command "foobar" is located at: ', $path;
+$path = which("foobar", false, fn($command) => "");
+if (!mb_strlen($path)) print "The command 'foobar' was not found.";
+else print "The command 'foobar' is located at: $path";
 ```
 
 When a `$onError` handler is provided, it is called with the command as argument, and its return value is used instead. This is preferable to throwing and then immediately catching the `FinderException`.
@@ -60,8 +60,8 @@ The executable file extensions, provided as a string or a list of file extension
 
 ``` php
 <?php
-which('foobar', false, null, ['extensions' => '.FOO;.EXE;.CMD']);
-which('foobar', false, null, ['extensions' => ['.foo', '.exe', '.cmd']]);
+which("foobar", false, null, ["extensions" => ".FOO;.EXE;.CMD"]);
+which("foobar", false, null, ["extensions" => [".foo", ".exe", ".cmd"]]);
 ```
 
 !!! tip
@@ -72,8 +72,8 @@ The system path, provided as a string or a list of directories. Defaults to the 
 
 ``` php
 <?php
-which('foobar', false, null, ['path' => '/usr/local/bin:/usr/bin']);
-which('foobar', false, null, ['path' => ['/usr/local/bin', '/usr/bin']]);
+which("foobar", false, null, ["path" => "/usr/local/bin:/usr/bin"]);
+which("foobar", false, null, ["path" => ["/usr/local/bin", "/usr/bin"]]);
 ```
 
 #### "pathSeparator" => string
@@ -81,6 +81,6 @@ The character used to separate paths in the system path. Defaults to the platfor
 
 ``` php
 <?php
-which('foobar', false, null, ['pathSeparator' => '#']);
+which("foobar", false, null, ["pathSeparator" => "#"]);
 // For example: "/usr/local/bin#/usr/bin"
 ```
