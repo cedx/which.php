@@ -1,5 +1,10 @@
 # Changelog
 
+## Version [9.1.0](https://git.belin.io/cedx/which.php/compare/v9.0.0...v9.1.0)
+- Deprecated this package in favor of [`cedx/which.hx`](https://docs.belin.io/which.hx).
+- Replaced the build system based on [Robo](https://robo.li) by [PowerShell](https://docs.microsoft.com/en-us/powershell) scripts.
+- Updated the package dependencies.
+
 ## Version [9.0.0](https://git.belin.io/cedx/which.php/compare/v8.1.0...v9.0.0)
 - Breaking change: the `Finder->find()` method now returns [`SplFileInfo`](https://www.php.net/manual/en/class.splfileinfo.php) instances instead of strings.
 - Updated the documentation.
