@@ -7,13 +7,13 @@ Find the instances of an executable in the system path, in [PHP](https://www.php
 > This package has been renamed to `cedx/which.hx`, and its version number resetted. Please update your `composer.json` file.
 
 ## Documentation
-- [User guide](https://docs.belin.io/which.hx)
-- [API reference](https://api.belin.io/which.hx)
+- [User guide](https://cedx.github.io/which.hx)
+- [API reference](https://cedx.github.io/which.hx/api)
 
 ## Development
-- [Git repository](https://git.belin.io/cedx/which.hx)
+- [Git repository](https://github.com/cedx/which.hx)
 - [Packagist package](https://packagist.org/packages/cedx/which.hx)
-- [Submit an issue](https://git.belin.io/cedx/which.hx/issues)
+- [Submit an issue](https://github.com/cedx/which.hx/issues)
 
 ## License
-[Which for PHP](https://docs.belin.io/which.hx) is distributed under the MIT License.
+[Which for PHP](https://cedx.github.io/which.hx) is distributed under the MIT License.

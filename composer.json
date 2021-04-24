@@ -1,7 +1,7 @@
 {
 	"abandoned": "cedx/which.hx",
 	"description": "Find the instances of an executable in the system path. Like the `which` Linux command.",
-	"homepage": "https://docs.belin.io/which.php",
+	"homepage": "https://cedx.github.io/which.php",
 	"license": "MIT",
 	"name": "cedx/which",
 	"type": "library",
@@ -55,7 +55,7 @@
 		"watch": "pwsh tool/watch.ps1"
 	},
 	"support": {
-		"docs": "https://api.belin.io/which.php",
-		"issues": "https://git.belin.io/cedx/which.php/issues"
+		"docs": "https://cedx.github.io/which.php/api",
+		"issues": "https://github.com/cedx/which.php/issues"
 	}
 }
