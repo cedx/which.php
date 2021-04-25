@@ -5,7 +5,7 @@ From a command prompt, install the `which` executable:
 composer global require cedx/which
 ```
 
-?> Consider adding the [`composer global`](https://getcomposer.org/doc/03-cli.md#global) executables directory to your system path.
+?> Consider adding the [composer global](https://getcomposer.org/doc/03-cli.md#global) executables directory to your system path.
 
 Then use it to find the instances of an executable command:
 
@@ -37,4 +37,5 @@ For example:
 ```shell
 which --all php
 # /usr/bin/php
+# /usr/local/bin/php
 ```

@@ -29,7 +29,6 @@ composer require cedx/which
 Now in your [PHP](https://www.php.net) code, you can use:
 
 ```php
-<?php
 use function Which\which;
 use Which\{Finder, FinderException};
 ```
