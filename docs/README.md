@@ -3,7 +3,7 @@
 
 Find the instances of an executable in the system path, in [PHP](https://www.php.net).
 
-> **WARNING:** this package has been renamed to `cedx/which.hx`, and its version number resetted. Please update your `composer.json` file.
+!> **WARNING:** this package has been renamed to `cedx/which.hx`, and its version number resetted. Please update your `composer.json` file.
 
 ## Documentation
 - [User guide](https://cedx.github.io/which.hx)
