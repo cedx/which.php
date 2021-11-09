@@ -3,16 +3,15 @@
 
 Find the instances of an executable in the system path, in [PHP](https://www.php.net).
 
-> **WARNING:** this package has been renamed to `cedx/which.hx`, and its version number resetted. Please update your `composer.json` file.
+> WARNING: this package is **abandoned** and no longer maintained.
 
 ## Documentation
-- [User guide](https://cedx.github.io/which.hx)
-- [API reference](https://cedx.github.io/which.hx/api)
+- [User guide](https://bitbucket.org/cedx/which.php/wiki)
 
 ## Development
-- [Git repository](https://github.com/cedx/which.hx)
-- [Packagist package](https://packagist.org/packages/cedx/which.hx)
-- [Submit an issue](https://github.com/cedx/which.hx/issues)
+- [Git repository](https://bitbucket.org/cedx/which.php)
+- [Packagist package](https://packagist.org/packages/cedx/which.php)
+- [Submit an issue](https://bitbucket.org/cedx/which.php/issues)
 
 ## License
-[Which for PHP](https://cedx.github.io/which.hx) is distributed under the MIT License.
+[Which for PHP](https://bitbucket.org/cedx/which.php) is distributed under the MIT License.
