@@ -20,7 +20,8 @@
 		"bin/which"
 	],
 	"config": {
-		"optimize-autoloader": true
+		"optimize-autoloader": true,
+		"platform-check": false
 	},
 	"funding": [
 		{"type": "github", "url": "https://github.com/sponsors/cedx"}
@@ -36,19 +37,17 @@
 		"php": ">=7.4.0",
 		"ext-mbstring": "*",
 		"ext-spl": "*",
-		"symfony/console": "^5.1.2",
+		"symfony/console": "^5.3.10",
 		"webmozart/path-util": "^2.3.0"
 	},
 	"require-dev": {
-		"phpstan/phpstan": "^0.12.31",
-		"phpunit/phpunit": "^9.2.5"
+		"phpunit/phpunit": "^9.5.10"
 	},
 	"scripts": {
 		"build": "pwsh tool/build.ps1",
 		"clean": "pwsh tool/clean.ps1",
 		"coverage": "composer global exec coveralls var/coverage.xml",
 		"doc": ["@version", "pwsh tool/doc.ps1"],
-		"lint": "phpstan analyse --configuration=etc/phpstan.neon",
 		"publish": ["@clean", "@version", "@build", "pwsh tool/publish.ps1"],
 		"test": "phpunit --configuration=etc/phpunit.xml",
 		"version": "pwsh tool/version.ps1",
