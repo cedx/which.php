@@ -1,18 +1,17 @@
 <?xml version="1.0"?>
-<phpunit bootstrap="../vendor/autoload.php" cacheResult="false" testdox="true">
-	<filter>
-		<whitelist processUncoveredFilesFromWhitelist="true">
-			<directory suffix=".php">../src</directory>
-		</whitelist>
-	</filter>
-
-	<logging>
-		<log type="coverage-clover" target="../var/coverage.xml"/>
-	</logging>
-
-	<testsuites>
-		<testsuite name="all">
-			<directory suffix="Test.php">../test</directory>
-		</testsuite>
-	</testsuites>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="../vendor/autoload.php" cacheResult="false" testdox="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+  <coverage processUncoveredFiles="true">
+    <include>
+      <directory suffix=".php">../src</directory>
+    </include>
+    <report>
+      <clover outputFile="../var/coverage.xml"/>
+    </report>
+  </coverage>
+  <logging/>
+  <testsuites>
+    <testsuite name="all">
+      <directory suffix="Test.php">../test</directory>
+    </testsuite>
+  </testsuites>
 </phpunit>
