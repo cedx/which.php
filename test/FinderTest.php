@@ -4,7 +4,9 @@ namespace Which;
 use PHPUnit\Framework\TestCase;
 use function PHPUnit\Framework\{assertThat, countOf, equalTo, isFalse, logicalNot, stringEndsWith};
 
-/** @testdox Which\Finder */
+/**
+ * @testdox Which\Finder
+ */
 class FinderTest extends TestCase {
 
 	/** @testdox constructor */
