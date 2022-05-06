@@ -11,8 +11,6 @@ namespace Which;
  * @throws FinderException The specified command was not found.
  */
 function which(string $command, bool $all = false, callable $onError = null, array $options = []) {
-	assert(mb_strlen($command) > 0);
-
 	$finder = new Finder(
 		$options["path"] ?? [],
 		$options["extensions"] ?? [],

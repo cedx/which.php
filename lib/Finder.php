@@ -22,8 +22,6 @@ class Finder {
 	 * @param string $pathSeparator The character used to separate paths in the system path. Defaults to the `PATH_SEPARATOR` constant.
 	 */
 	function __construct($path = [], $extensions = [], string $pathSeparator = "") {
-		assert(is_string($path) || is_array($path));
-		assert(is_string($extensions) || is_array($extensions));
 		$this->pathSeparator = mb_strlen($pathSeparator) ? $pathSeparator : (static::isWindows() ? ";" : PATH_SEPARATOR);
 
 		if (!is_array($path))
@@ -93,8 +91,6 @@ class Finder {
 	 * @return bool `true` if the specified file is executable, otherwise `false`.
 	 */
 	function isExecutable(string $file): bool {
-		assert(mb_strlen($file) > 0);
-
 		$fileInfo = new \SplFileInfo($file);
 		if (!$fileInfo->isFile()) return false;
 		if ($fileInfo->isExecutable()) return true;
@@ -141,9 +137,6 @@ class Finder {
 	 * @return iterable<\SplFileInfo> The paths of the executables found.
 	 */
 	private function findExecutables(string $directory, string $command): iterable {
-		assert(mb_strlen($directory) > 0);
-		assert(mb_strlen($command) > 0);
-
 		$basePath = (string) getcwd();
 		foreach (["", ...(array) $this->getExtensions()] as $extension) {
 			$resolvedPath = Path::makeAbsolute(Path::join($directory, $command).mb_strtolower($extension), $basePath);

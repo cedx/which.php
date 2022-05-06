@@ -18,7 +18,6 @@ class FinderException extends \RuntimeException {
 	 * @param \Throwable|null $previous The previous exception used for the exception chaining.
 	 */
 	function __construct(string $command, Finder $finder, string $message = "", ?\Throwable $previous = null) {
-		assert(mb_strlen($command) > 0);
 		parent::__construct($message, 0, $previous);
 		$this->command = $command;
 		$this->finder = $finder;
