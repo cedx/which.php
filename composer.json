@@ -1,17 +1,16 @@
 {
-	"abandoned": true,
 	"description": "Find the instances of an executable in the system path. Like the `which` Linux command.",
-	"homepage": "https://bitbucket.org/cedx/which.php",
+	"homepage": "https://github.com/cedx/which.php",
 	"license": "MIT",
 	"name": "cedx/which",
 	"type": "library",
-	"version": "9.1.0",
+	"version": "10.0.0",
 	"authors": [
 		{"email": "cedric@belin.io", "homepage": "https://belin.io", "name": "Cédric Belin"}
 	],
 	"autoload": {
-		"files": ["src/which.php"],
-		"psr-4": {"Which\\": "src/"}
+		"files": ["lib/which.php"],
+		"psr-4": {"Which\\": "lib/"}
 	},
 	"autoload-dev": {
 		"psr-4": {"Which\\": "test/"}
@@ -34,27 +33,21 @@
 		"which"
 	],
 	"require": {
-		"php": ">=7.4.0",
+		"php": ">=8.1.0",
 		"ext-mbstring": "*",
 		"ext-spl": "*",
-		"symfony/console": "^5.3.10",
-		"webmozart/path-util": "^2.3.0"
+		"symfony/console": "^6.0.8",
+		"symfony/filesystem": "^6.0.7"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "^9.5.10"
+		"phpstan/phpstan": "^1.6.7",
+		"phpunit/phpunit": "^9.5.20"
 	},
 	"scripts": {
-		"build": "pwsh tool/build.ps1",
-		"clean": "pwsh tool/clean.ps1",
-		"coverage": "composer global exec coveralls var/coverage.xml",
-		"doc": ["@version", "pwsh tool/doc.ps1"],
-		"publish": ["@clean", "@version", "@build", "pwsh tool/publish.ps1"],
-		"test": "phpunit --configuration=etc/phpunit.xml",
-		"version": "pwsh tool/version.ps1",
-		"watch": "pwsh tool/watch.ps1"
+		"test": "phpunit --configuration=etc/phpunit.xml"
 	},
 	"support": {
-		"docs": "https://bitbucket.org/cedx/which.php/wiki",
-		"issues": "https://bitbucket.org/cedx/which.php/issues"
+		"docs": "https://github.com/cedx/which.php/wiki",
+		"issues": "https://github.com/cedx/which.php/issues"
 	}
 }
