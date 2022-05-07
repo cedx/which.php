@@ -1,0 +1,32 @@
+name: main
+on: push
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch sources
+        uses: actions/checkout@v3
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          coverage: xdebug
+          extensions: curl, intl, mbstring, simplexml
+      - name: Get cache directory
+        id: composer-cache
+        run: echo "::set-output name=path::$(composer config cache-files-dir)"
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{steps.composer-cache.outputs.path}}
+          key: php-${{runner.os}}-composer-${{hashFiles('composer.lock')}}
+          restore-keys: php-${{runner.os}}-composer-
+      - name: Install dependencies
+        run: composer install
+      - name: Run tests
+        run: composer run test
+      - name: Collect code coverage
+        if: success()
+        uses: codecov/codecov-action@v2
+        with:
+          files: var/coverage.xml
