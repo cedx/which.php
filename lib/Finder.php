@@ -25,7 +25,7 @@ class Finder {
 	 * @param string[] $paths The system path. Defaults to the `PATH` environment variable.
 	 * @param string[] $extensions The executable file extensions. Defaults to the `PATHEXT` environment variable.
 	 */
-	function __construct($paths = [], $extensions = []) {
+	function __construct(array $paths = [], array $extensions = []) {
 		if (!$extensions) {
 			$pathExt = getenv("PATHEXT") ?: "";
 			$extensions = $pathExt ? explode(";", $pathExt) : [".exe", ".cmd", ".bat", ".com"];

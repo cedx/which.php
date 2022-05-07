@@ -54,7 +54,7 @@ class ResultSet {
 	 */
 	function first(bool $throwIfNotNotFound = false): string {
 		$executable = "";
-		foreach ($this->stream() as $file) { $executable = $file; break; }
+		foreach ($this->stream() as $path) { $executable = $path; break; }
 		if (!$executable && $throwIfNotNotFound) {
 			$paths = implode(Finder::isWindows() ? ";" : PATH_SEPARATOR, $this->finder->paths);
 			throw new \UnderflowException("No '{$this->command}' in ($paths).");

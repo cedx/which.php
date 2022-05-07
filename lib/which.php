@@ -2,31 +2,12 @@
 namespace Which;
 
 /**
- * Finds the first instance of an executable in the system path.
+ * Finds the instances of the specified command in the system path.
  * @param string $command The command to be resolved.
- * @param bool $all Value indicating whether to return all executables found, instead of just the first one.
- * @param callable $onError If provided, instead of throwing an exception, this handler is called with the command as argument and its return value is used.
- * @param array<string, mixed> $options The options to be passed to the finder.
- * @return string|string[] A string, or an array of strings, specifying the path(s) of the found executable(s).
- * @throws FinderException The specified command was not found.
+ * @param string[] $paths The system path. Defaults to the `PATH` environment variable.
+ * @param string[] $extensions The executable file extensions. Defaults to the `PATHEXT` environment variable.
+ * @return ResultSet The search results.
  */
-function which(string $command, bool $all = false, callable $onError = null, array $options = []) {
-	$finder = new Finder(
-		$options["path"] ?? [],
-		$options["extensions"] ?? [],
-		$options["pathSeparator"] ?? ""
-	);
-
-	$list = [];
-	foreach ($finder->find($command) as $executable) {
-		if (!$all) return $executable->getPathname();
-		$list[] = $executable->getPathname();
-	}
-
-	if (!count($list)) {
-		if ($onError) return call_user_func($onError, $command);
-		throw new FinderException($command, $finder, "Command '$command' not found");
-	}
-
-	return array_unique($list);
+function which(string $command, array $paths = [], array $extensions = []) {
+	return new ResultSet($command, new Finder($paths, $extensions));
 }
