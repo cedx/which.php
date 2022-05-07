@@ -116,18 +116,18 @@ class Finder {
 	private function checkFilePermissions(\SplFileInfo $fileInfo): bool {
 		// Others.
 		$perms = $fileInfo->getPerms();
-		if ($perms & 0001) return true;
+		if ($perms & 0o001) return true;
 
 		// Group.
 		$gid = function_exists("posix_getgid") ? posix_getgid() : -1;
-		if ($perms & 0010) return $gid == $fileInfo->getGroup();
+		if ($perms & 0o010) return $gid == $fileInfo->getGroup();
 
 		// Owner.
 		$uid = function_exists("posix_getuid") ? posix_getuid() : -1;
-		if ($perms & 0100) return $uid == $fileInfo->getOwner();
+		if ($perms & 0o100) return $uid == $fileInfo->getOwner();
 
 		// Root.
-		return $perms & (0100 | 0010) ? $uid == 0 : false;
+		return $perms & (0o100 | 0o010) ? $uid == 0 : false;
 	}
 
 	/**
