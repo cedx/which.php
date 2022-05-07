@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Which for PHP</title>
+            <title>Which for PHP</title>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <base href="../">
     <link rel="icon" href="images/favicon.ico"/>
@@ -54,10 +55,12 @@
 <aside class="phpdocumentor-column -four phpdocumentor-sidebar">
                     <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
-                                    <h4 class="phpdocumentor-sidebar__root-namespace"><a href="namespaces/which.html">Which</a></h4>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/which.html" class="">Which</a>
+</h4>
     <ul class="phpdocumentor-list">
                     <li>
-                <a href="namespaces/which-cli.html">Cli</a>
+                <a href="namespaces/which-cli.html" class="">Cli</a>
                 
             </li>
             </ul>
@@ -65,7 +68,9 @@
                         </section>
                 <section class="phpdocumentor-sidebar__category">
             <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
-                                    <h4 class="phpdocumentor-sidebar__root-namespace"><a href="packages/Application.html">Application</a></h4>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Application.html" class="">Application</a>
+</h4>
 
                         </section>
             
@@ -89,11 +94,8 @@
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    FinderException
+    ResultSet
 
-        <span class="phpdocumentor-element__extends">
-        extends <abbr title="\RuntimeException">RuntimeException</abbr>
-    </span>
     
             <div class="phpdocumentor-element__package">
             in package
@@ -106,13 +108,13 @@
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/FinderException.php"><a href="files/src-finderexception.html"><abbr title="src/FinderException.php">FinderException.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="lib/ResultSet.php"><a href="files/lib-resultset.html"><abbr title="lib/ResultSet.php">ResultSet.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">5</span>
+    <span class="phpdocumentor-element-found-in__line">7</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">An exception caused by a `Finder` in a command lookup.</p>
+            <p class="phpdocumentor-summary">Provides convenient access to the stream of search results.</p>
 
 
 
@@ -128,26 +130,33 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Which-FinderException.html#method___construct">__construct()</a>
+                        <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Which-ResultSet.html#method___construct">__construct()</a>
     <span>
-                        &nbsp;: mixed    </span>
+                                &nbsp;: mixed    </span>
 </dt>
-<dd>Creates a new finder exception.</dd>
+<dd>Creates a new result set.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Which-FinderException.html#method_getCommand">getCommand()</a>
+    <a href="classes/Which-ResultSet.html#method_all">all()</a>
     <span>
-                        &nbsp;: string    </span>
+                                &nbsp;: array&lt;string|int, string&gt;    </span>
 </dt>
-<dd>Gets the name of the looked up command.</dd>
+<dd>Returns all instances of the searched command.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -public">
-    <a href="classes/Which-FinderException.html#method_getFinder">getFinder()</a>
+    <a href="classes/Which-ResultSet.html#method_first">first()</a>
     <span>
-                        &nbsp;: <a href="classes/Which-Finder.html"><abbr title="\Which\Finder">Finder</abbr></a>    </span>
+                                &nbsp;: string    </span>
 </dt>
-<dd>Gets the instance of the finder used to lookup the command.</dd>
+<dd>Returns the first instance of the searched command.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a href="classes/Which-ResultSet.html#method_stream">stream()</a>
+    <span>
+                                &nbsp;: iteratable&lt;string|int, <abbr title="\SplFileInfo">SplFileInfo</abbr>&gt;    </span>
+</dt>
+<dd>Returns a stream of instances of the searched command.</dd>
 
         </dl>
 
@@ -160,7 +169,7 @@
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Which-FinderException.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Which-ResultSet.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -170,20 +179,20 @@
 >
     <h4 class="phpdocumentor-element__name" id="method___construct">
         __construct()
-        <a href="classes/Which-FinderException.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Which-ResultSet.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/FinderException.php"><a href="files/src-finderexception.html"><abbr title="src/FinderException.php">FinderException.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="lib/ResultSet.php"><a href="files/lib-resultset.html"><abbr title="lib/ResultSet.php">ResultSet.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">20</span>
+    <span class="phpdocumentor-element-found-in__line">26</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Creates a new finder exception.</p>
+        <p class="phpdocumentor-summary">Creates a new result set.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$command</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Which-Finder.html"><abbr title="\Which\Finder">Finder</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$finder</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$message</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Throwable">Throwable</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$previous</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$command</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/Which-Finder.html"><abbr title="\Which\Finder">Finder</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$finder</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
 
     
         <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
@@ -193,7 +202,7 @@
                 : <span class="phpdocumentor-signature__argument__return-type">string</span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The looked up command.</p>
+                    <section class="phpdocumentor-description"><p>The searched command.</p>
 </section>
 
             </dd>
@@ -202,25 +211,7 @@
                 : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/Which-Finder.html"><abbr title="\Which\Finder">Finder</abbr></a></span>
                             </dt>
             <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The finder used to lookup the command.</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$message</span>
-                : <span class="phpdocumentor-signature__argument__return-type">string</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">&quot;&quot;</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>A message describing the error.</p>
-</section>
-
-            </dd>
-                    <dt class="phpdocumentor-argument-list__entry">
-                <span class="phpdocumentor-signature__argument__name">$previous</span>
-                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Throwable">Throwable</abbr>|null</span>
-                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
-            <dd class="phpdocumentor-argument-list__definition">
-                    <section class="phpdocumentor-description"><p>The previous exception used for the exception chaining.</p>
+                    <section class="phpdocumentor-description"><p>The finder used to perform the search.</p>
 </section>
 
             </dd>
@@ -240,31 +231,59 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getCommand">
-        getCommand()
-        <a href="classes/Which-FinderException.html#method_getCommand" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_all">
+        all()
+        <a href="classes/Which-ResultSet.html#method_all" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/FinderException.php"><a href="files/src-finderexception.html"><abbr title="src/FinderException.php">FinderException.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="lib/ResultSet.php"><a href="files/lib-resultset.html"><abbr title="lib/ResultSet.php">ResultSet.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">31</span>
+    <span class="phpdocumentor-element-found-in__line">37</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Gets the name of the looked up command.</p>
+        <p class="phpdocumentor-summary">Returns all instances of the searched command.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getCommand</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+                    <span class="phpdocumentor-signature__name">all</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$throwIfNotFound</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span></code>
 
     
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$throwIfNotFound</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">false</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Value indicating whether to throw an exception if the command is not found.</p>
+</section>
+
+            </dd>
+            </dl>
+
     
-    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\UnderflowException">UnderflowException</abbr></span>
+                                                            
+                                                 <section class="phpdocumentor-description"><p>The command has not been found.</p>
+</section>
+
+                                    </dd>
+                        </dl>
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type">string</span>
+    <span class="phpdocumentor-signature__response_type">array&lt;string|int, string&gt;</span>
             &mdash;
-            <section class="phpdocumentor-description"><p>The looked up command.</p>
+            <section class="phpdocumentor-description"><p>All search results.</p>
 </section>
 
     
@@ -275,31 +294,94 @@
             -public
                                                         "
 >
-    <h4 class="phpdocumentor-element__name" id="method_getFinder">
-        getFinder()
-        <a href="classes/Which-FinderException.html#method_getFinder" class="headerlink"><i class="fas fa-link"></i></a>
+    <h4 class="phpdocumentor-element__name" id="method_first">
+        first()
+        <a href="classes/Which-ResultSet.html#method_first" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="src/FinderException.php"><a href="files/src-finderexception.html"><abbr title="src/FinderException.php">FinderException.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="lib/ResultSet.php"><a href="files/lib-resultset.html"><abbr title="lib/ResultSet.php">ResultSet.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">39</span>
+    <span class="phpdocumentor-element-found-in__line">53</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Gets the instance of the finder used to lookup the command.</p>
+        <p class="phpdocumentor-summary">Returns the first instance of the searched command.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">public</span>
-                <span class="phpdocumentor-signature__name">getFinder</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/Which-Finder.html"><abbr title="\Which\Finder">Finder</abbr></a></span></code>
+                    <span class="phpdocumentor-signature__name">first</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$throwIfNotFound</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">false</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string</span></code>
+
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$throwIfNotFound</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">false</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Value indicating whether to throw an exception if the command is not found.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="#tags" class="headerlink"><i class="fas fa-link"></i></a>
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">throws</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                <span class="phpdocumentor-tag-link"><abbr title="\UnderflowException">UnderflowException</abbr></span>
+                                                            
+                                                 <section class="phpdocumentor-description"><p>The command has not been found.</p>
+</section>
+
+                                    </dd>
+                        </dl>
+
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+    <span class="phpdocumentor-signature__response_type">string</span>
+            &mdash;
+            <section class="phpdocumentor-description"><p>The first search result.</p>
+</section>
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_stream">
+        stream()
+        <a href="classes/Which-ResultSet.html#method_stream" class="headerlink"><i class="fas fa-link"></i></a>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="lib/ResultSet.php"><a href="files/lib-resultset.html"><abbr title="lib/ResultSet.php">ResultSet.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">68</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns a stream of instances of the searched command.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">stream</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">iteratable&lt;string|int, <abbr title="\SplFileInfo">SplFileInfo</abbr>&gt;</span></code>
 
     
     
     
 
         <h5 class="phpdocumentor-return-value__heading">Return values</h5>
-    <span class="phpdocumentor-signature__response_type"><a href="classes/Which-Finder.html"><abbr title="\Which\Finder">Finder</abbr></a></span>
+    <span class="phpdocumentor-signature__response_type">iteratable&lt;string|int, <abbr title="\SplFileInfo">SplFileInfo</abbr>&gt;</span>
             &mdash;
-            <section class="phpdocumentor-description"><p>The finder used to lookup the command.</p>
+            <section class="phpdocumentor-description"><p>A stream of the search results.</p>
 </section>
 
     
@@ -382,7 +464,7 @@
 </section>
             </div>
         </div>
-        <a href="classes/Which-FinderException.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Which-ResultSet.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

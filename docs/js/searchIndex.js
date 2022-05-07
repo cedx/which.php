@@ -41,49 +41,49 @@ Search.appendIndex(
             "summary": "Finds\u0020the\u0020instances\u0020of\u0020an\u0020executable\u0020in\u0020the\u0020system\u0020path.",
             "url": "classes/Which-Finder.html#method_find"
         },                {
-            "fqsen": "\\Which\\Finder\u003A\u003AgetExtensions\u0028\u0029",
-            "name": "getExtensions",
-            "summary": "Gets\u0020the\u0020list\u0020of\u0020executable\u0020file\u0020extensions.",
-            "url": "classes/Which-Finder.html#method_getExtensions"
-        },                {
-            "fqsen": "\\Which\\Finder\u003A\u003AgetPath\u0028\u0029",
-            "name": "getPath",
-            "summary": "Gets\u0020the\u0020list\u0020of\u0020system\u0020paths.",
-            "url": "classes/Which-Finder.html#method_getPath"
-        },                {
-            "fqsen": "\\Which\\Finder\u003A\u003AgetPathSeparator\u0028\u0029",
-            "name": "getPathSeparator",
-            "summary": "Gets\u0020the\u0020character\u0020used\u0020to\u0020separate\u0020paths\u0020in\u0020the\u0020system\u0020path.",
-            "url": "classes/Which-Finder.html#method_getPathSeparator"
-        },                {
             "fqsen": "\\Which\\Finder\u003A\u003AisExecutable\u0028\u0029",
             "name": "isExecutable",
             "summary": "Gets\u0020a\u0020value\u0020indicating\u0020whether\u0020the\u0020specified\u0020file\u0020is\u0020executable.",
             "url": "classes/Which-Finder.html#method_isExecutable"
         },                {
-            "fqsen": "\\Which\\FinderException",
-            "name": "FinderException",
-            "summary": "An\u0020exception\u0020caused\u0020by\u0020a\u0020\u0060Finder\u0060\u0020in\u0020a\u0020command\u0020lookup.",
-            "url": "classes/Which-FinderException.html"
+            "fqsen": "\\Which\\Finder\u003A\u003A\u0024extensions",
+            "name": "extensions",
+            "summary": "The\u0020list\u0020of\u0020executable\u0020file\u0020extensions.",
+            "url": "classes/Which-Finder.html#property_extensions"
         },                {
-            "fqsen": "\\Which\\FinderException\u003A\u003A__construct\u0028\u0029",
+            "fqsen": "\\Which\\Finder\u003A\u003A\u0024paths",
+            "name": "paths",
+            "summary": "The\u0020list\u0020of\u0020system\u0020paths.",
+            "url": "classes/Which-Finder.html#property_paths"
+        },                {
+            "fqsen": "\\Which\\ResultSet",
+            "name": "ResultSet",
+            "summary": "Provides\u0020convenient\u0020access\u0020to\u0020the\u0020stream\u0020of\u0020search\u0020results.",
+            "url": "classes/Which-ResultSet.html"
+        },                {
+            "fqsen": "\\Which\\ResultSet\u003A\u003A__construct\u0028\u0029",
             "name": "__construct",
-            "summary": "Creates\u0020a\u0020new\u0020finder\u0020exception.",
-            "url": "classes/Which-FinderException.html#method___construct"
+            "summary": "Creates\u0020a\u0020new\u0020result\u0020set.",
+            "url": "classes/Which-ResultSet.html#method___construct"
         },                {
-            "fqsen": "\\Which\\FinderException\u003A\u003AgetCommand\u0028\u0029",
-            "name": "getCommand",
-            "summary": "Gets\u0020the\u0020name\u0020of\u0020the\u0020looked\u0020up\u0020command.",
-            "url": "classes/Which-FinderException.html#method_getCommand"
+            "fqsen": "\\Which\\ResultSet\u003A\u003Aall\u0028\u0029",
+            "name": "all",
+            "summary": "Returns\u0020all\u0020instances\u0020of\u0020the\u0020searched\u0020command.",
+            "url": "classes/Which-ResultSet.html#method_all"
         },                {
-            "fqsen": "\\Which\\FinderException\u003A\u003AgetFinder\u0028\u0029",
-            "name": "getFinder",
-            "summary": "Gets\u0020the\u0020instance\u0020of\u0020the\u0020finder\u0020used\u0020to\u0020lookup\u0020the\u0020command.",
-            "url": "classes/Which-FinderException.html#method_getFinder"
+            "fqsen": "\\Which\\ResultSet\u003A\u003Afirst\u0028\u0029",
+            "name": "first",
+            "summary": "Returns\u0020the\u0020first\u0020instance\u0020of\u0020the\u0020searched\u0020command.",
+            "url": "classes/Which-ResultSet.html#method_first"
+        },                {
+            "fqsen": "\\Which\\ResultSet\u003A\u003Astream\u0028\u0029",
+            "name": "stream",
+            "summary": "Returns\u0020a\u0020stream\u0020of\u0020instances\u0020of\u0020the\u0020searched\u0020command.",
+            "url": "classes/Which-ResultSet.html#method_stream"
         },                {
             "fqsen": "\\Which\\which\u0028\u0029",
             "name": "which",
-            "summary": "Finds\u0020the\u0020first\u0020instance\u0020of\u0020an\u0020executable\u0020in\u0020the\u0020system\u0020path.",
+            "summary": "Finds\u0020the\u0020instances\u0020of\u0020the\u0020specified\u0020command\u0020in\u0020the\u0020system\u0020path.",
             "url": "namespaces/which.html#function_which"
         },                {
             "fqsen": "\\",
