@@ -2,56 +2,66 @@
 namespace Which;
 
 use PHPUnit\Framework\TestCase;
-use function PHPUnit\Framework\{assertThat, countOf, equalTo, isFalse, logicalNot, stringEndsWith};
+use function PHPUnit\Framework\{assertThat, countOf, equalTo, isEmpty, isFalse, logicalNot, stringEndsWith};
 
 /**
  * @testdox Which\Finder
  */
 class FinderTest extends TestCase {
 
-	/** @testdox constructor */
+	/**
+	 * @testdox constructor
+	 */
 	function testConstructor(): void {
-		// It should set the `path` property to the value of the `PATH` environment variable by default.
+		// It should set the `paths` property to the value of the `PATH` environment variable by default.
 		$pathEnv = getenv("PATH");
-		$path = mb_strlen($pathEnv) ? explode(PATH_SEPARATOR, $pathEnv) : [];
-		assertThat((new Finder)->paths, equalTo($path));
-
-		// It should split the input path using the path separator.
-		$path = ["/usr/local/bin", "/usr/bin"];
-		assertThat((new Finder(implode(PATH_SEPARATOR, $path)))->paths, equalTo($path));
+		$paths = $pathEnv ? explode(PATH_SEPARATOR, $pathEnv) : [];
+		assertThat((new Finder)->paths, equalTo($paths));
 
 		// It should set the `extensions` property to the value of the `PATHEXT` environment variable by default.
 		$pathExt = getenv("PATHEXT");
-		$extensions = mb_strlen($pathExt) ? array_map(mb_strtolower(...), explode(PATH_SEPARATOR, $pathExt)) : [];
+		$extensions = $pathExt ? array_map(mb_strtolower(...), explode(";", $pathExt)) : [".exe", ".cmd", ".bat", ".com"];
 		assertThat((new Finder)->extensions, equalTo($extensions));
 
-		// It should split the extension list using the path separator.
-		$extensions = [".EXE", ".CMD", ".BAT"];
-		assertThat((new Finder("", implode(PATH_SEPARATOR, $extensions)))->extensions, equalTo([".exe", ".cmd", ".bat"]));
+		// It should put in lower case the list of file extensions.
+		assertThat((new Finder(extensions: [".EXE", ".JS", ".PS1"]))->extensions, equalTo([".exe", ".js", ".ps1"]));
 	}
 
-	/** @testdox ->find() */
+	/**
+	 * @testdox ->find()
+	 */
 	function testFind(): void {
+		$finder = new Finder(["test/fixture"]);
+
 		// It should return the path of the `executable.cmd` file on Windows.
-		$executables = [...(new Finder("test/fixtures"))->find("executable")];
+		$executables = [...$finder->find("executable")];
 		assertThat($executables, countOf(Finder::isWindows() ? 1 : 0));
-		if (Finder::isWindows()) assertThat($executables[0]->getPathname(), stringEndsWith("\\test\\fixtures\\executable.cmd"));
+		if (Finder::isWindows()) assertThat($executables[0]->getPathname(), stringEndsWith("\\test\\fixture\\executable.cmd"));
 
 		// It should return the path of the `executable.sh` file on POSIX.
-		$executables = [...(new Finder("test/fixtures"))->find("executable.sh")];
+		$executables = [...$finder->find("executable.sh")];
 		assertThat($executables, countOf(Finder::isWindows() ? 0 : 1));
-		if (!Finder::isWindows()) assertThat($executables[0]->getPathname(), stringEndsWith("/test/fixtures/executable.sh"));
+		if (!Finder::isWindows()) assertThat($executables[0]->getPathname(), stringEndsWith("/test/fixture/executable.sh"));
+
+		// It should return an empty array if the searched command is not executable or not found.
+		assertThat([...$finder->find("not_executable.sh")], isEmpty());
+		assertThat([...$finder->find("foo")], isEmpty());
 	}
 
-	/** @testdox ->isExecutable() */
+	/**
+	 * @testdox ->isExecutable()
+	 */
 	function testIsExecutable(): void {
-		// It should return `false` for a non-executable file.
-		assertThat((new Finder)->isExecutable(__FILE__), isFalse());
+		$finder = new Finder;
+
+		// It should return `false` if the searched command is not executable or not found.
+		assertThat($finder->isExecutable("test/fixture/not_executable.sh"), isFalse());
+		assertThat($finder->isExecutable("foo/bar/baz.qux"), isFalse());
 
 		// It should return `false` for a POSIX executable, when test is run on Windows.
-		assertThat((new Finder)->isExecutable("test/fixtures/executable.sh"), logicalNot(equalTo(Finder::isWindows())));
+		assertThat($finder->isExecutable("test/fixture/executable.sh"), logicalNot(equalTo(Finder::isWindows())));
 
 		// It should return `false` for a Windows executable, when test is run on POSIX.
-		assertThat((new Finder)->isExecutable("test/fixtures/executable.cmd"), equalTo(Finder::isWindows()));
+		assertThat($finder->isExecutable("test/fixture/executable.cmd"), equalTo(Finder::isWindows()));
 	}
 }

@@ -33,11 +33,11 @@ class Finder {
 
 		if (!$paths) {
 			$pathEnv = getenv("PATH") ?: "";
-			if ($pathEnv) $paths = explode(static::isWindows() ? ";" : PATH_SEPARATOR, $pathEnv) ?: [];
+			if ($pathEnv) $paths = explode(static::isWindows() ? ";" : PATH_SEPARATOR, $pathEnv);
 		}
 
 		$this->extensions = array_map(mb_strtolower(...), $extensions);
-		$this->path = array_map(fn($directory) => trim($directory, '"'), $paths);
+		$this->paths = array_map(fn($directory) => trim($directory, '"'), $paths);
 	}
 
 	/**
@@ -53,7 +53,7 @@ class Finder {
 	/**
 	 * Finds the instances of an executable in the system path.
 	 * @param string $command The command to be resolved.
-	 * @return iterable The paths of the executables found.
+	 * @return iterable<\SplFileInfo> The paths of the executables found.
 	 */
 	function find(string $command): iterable {
 		foreach ($this->paths as $directory) yield from $this->findExecutables($directory, $command);
@@ -106,10 +106,10 @@ class Finder {
 	 * Finds the instances of an executable in the specified directory.
 	 * @param string $directory The directory path.
 	 * @param string $command The command to be resolved.
-	 * @return iterable The paths of the executables found.
+	 * @return iterable<\SplFileInfo> The paths of the executables found.
 	 */
 	private function findExecutables(string $directory, string $command): iterable {
-		$basePath = getcwd();
+		$basePath = (string) getcwd();
 		$isWindows = static::isWindows();
 		foreach (["", ...$isWindows ? $this->extensions : []] as $extension) {
 			$resolvedPath = Path::makeAbsolute(Path::join($directory, "$command$extension"), $basePath);
