@@ -35,7 +35,7 @@ class ResultSet {
 	 * @throws \UnderflowException The command has not been found.
 	 */
 	function all(bool $throwIfNotFound = false): array {
-		$executables = array_values(array_unique(array_map(fn($file) => $file->getPathname(), [...$this->stream()])));
+		$executables = array_values(array_unique(array_map(fn(\SplFileInfo $file) => $file->getPathname(), [...$this->stream()])));
 		if (!$executables && $throwIfNotFound) {
 			$paths = implode(Finder::isWindows() ? ";" : PATH_SEPARATOR, $this->finder->paths);
 			throw new \UnderflowException("No '{$this->command}' in ($paths).");

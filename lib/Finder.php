@@ -37,7 +37,7 @@ class Finder {
 		}
 
 		$this->extensions = array_map(mb_strtolower(...), $extensions);
-		$this->paths = array_map(fn($directory) => trim($directory, '"'), $paths);
+		$this->paths = array_map(fn(string $directory) => trim($directory, '"'), $paths);
 	}
 
 	/**
