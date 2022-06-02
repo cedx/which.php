@@ -58,12 +58,6 @@
                                     <h4 class="phpdocumentor-sidebar__root-namespace">
     <a href="namespaces/which.html" class="">Which</a>
 </h4>
-    <ul class="phpdocumentor-list">
-                    <li>
-                <a href="namespaces/which-cli.html" class="">Cli</a>
-                
-            </li>
-            </ul>
 
                         </section>
                 <section class="phpdocumentor-sidebar__category">
@@ -90,12 +84,11 @@
             <div class="phpdocumentor-column -eight phpdocumentor-content">
                     <ul class="phpdocumentor-breadcrumbs">
             <li class="phpdocumentor-breadcrumb"><a href="namespaces/which.html">Which</a></li>
-            <li class="phpdocumentor-breadcrumb"><a href="namespaces/which-cli.html">Cli</a></li>
     </ul>
 
     <article class="phpdocumentor-element -class">
         <h2 class="phpdocumentor-content__title">
-    Command
+    WhichCommand
 
         <span class="phpdocumentor-element__extends">
         extends <abbr title="\Symfony\Component\Console\Command\Command">Command</abbr>
@@ -112,13 +105,13 @@
     </h2>
 
         <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="lib/Cli/Command.php"><a href="files/lib-cli-command.html"><abbr title="lib/Cli/Command.php">Command.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="lib/WhichCommand.php"><a href="files/lib-whichcommand.html"><abbr title="lib/WhichCommand.php">WhichCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">11</span>
+    <span class="phpdocumentor-element-found-in__line">13</span>
 
     </aside>
 
-            <p class="phpdocumentor-summary">The console command.</p>
+            <p class="phpdocumentor-summary">The `which` command.</p>
 
 
 
@@ -134,26 +127,19 @@
 </h3>
 
 <dl class="phpdocumentor-table-of-contents">
-                    <dt class="phpdocumentor-table-of-contents__entry -property -protected">
-    <a href="classes/Which-Cli-Command.html#property_defaultName">$defaultName</a>
-    <span>
-                        &nbsp;: string            </span>
-</dt>
-<dd></dd>
-
-                <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a href="classes/Which-Cli-Command.html#method_configure">configure()</a>
+                        <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a href="classes/Which-WhichCommand.html#method_configure">configure()</a>
     <span>
                                 &nbsp;: void    </span>
 </dt>
-<dd>Configures the current command.</dd>
+<dd>Configures this command.</dd>
 
             <dt class="phpdocumentor-table-of-contents__entry -method -protected">
-    <a href="classes/Which-Cli-Command.html#method_execute">execute()</a>
+    <a href="classes/Which-WhichCommand.html#method_execute">execute()</a>
     <span>
                                 &nbsp;: int    </span>
 </dt>
-<dd>Executes the current command.</dd>
+<dd>Executes this command.</dd>
 
         </dl>
 
@@ -162,51 +148,11 @@
         
 
         
-    <section class="phpdocumentor-properties">
-        <h3 class="phpdocumentor-elements__header" id="properties">
-            Properties
-            <a href="classes/Which-Cli-Command.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
-        </h3>
-                    <article
-        class="
-            phpdocumentor-element
-            -property
-            -protected
-            -static                                            "
->
-    <h4 class="phpdocumentor-element__name" id="property_defaultName">
-        $defaultName
-        <a href="classes/Which-Cli-Command.html#property_defaultName" class="headerlink"><i class="fas fa-link"></i></a>
-        <span class="phpdocumentor-element__modifiers">
-                                </span>
-    </h4>
-    <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="lib/Cli/Command.php"><a href="files/lib-cli-command.html"><abbr title="lib/Cli/Command.php">Command.php</abbr></a></abbr>
-    :
-    <span class="phpdocumentor-element-found-in__line">14</span>
-
-    </aside>
-
-    
-    <code class="phpdocumentor-code phpdocumentor-signature ">
-    <span class="phpdocumentor-signature__visibility">protected</span>
-    <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type">string</span>
-    <span class="phpdocumentor-signature__name">$defaultName</span>
-     = <span class="phpdocumentor-signature__default-value">&quot;which&quot;</span></code>
-
-    
-        <section class="phpdocumentor-description"><p>The command name.</p>
-</section>
-
-    
-
-</article>
-            </section>
 
             <section class="phpdocumentor-methods">
         <h3 class="phpdocumentor-elements__header" id="methods">
             Methods
-            <a href="classes/Which-Cli-Command.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+            <a href="classes/Which-WhichCommand.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
         </h3>
                     <article
         class="phpdocumentor-element
@@ -216,16 +162,16 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_configure">
         configure()
-        <a href="classes/Which-Cli-Command.html#method_configure" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Which-WhichCommand.html#method_configure" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="lib/Cli/Command.php"><a href="files/lib-cli-command.html"><abbr title="lib/Cli/Command.php">Command.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="lib/WhichCommand.php"><a href="files/lib-whichcommand.html"><abbr title="lib/WhichCommand.php">WhichCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">17</span>
+    <span class="phpdocumentor-element-found-in__line">19</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Configures the current command.</p>
+        <p class="phpdocumentor-summary">Configures this command.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
@@ -249,16 +195,16 @@
 >
     <h4 class="phpdocumentor-element__name" id="method_execute">
         execute()
-        <a href="classes/Which-Cli-Command.html#method_execute" class="headerlink"><i class="fas fa-link"></i></a>
+        <a href="classes/Which-WhichCommand.html#method_execute" class="headerlink"><i class="fas fa-link"></i></a>
     </h4>
     <aside class="phpdocumentor-element-found-in">
-    <abbr class="phpdocumentor-element-found-in__file" title="lib/Cli/Command.php"><a href="files/lib-cli-command.html"><abbr title="lib/Cli/Command.php">Command.php</abbr></a></abbr>
+    <abbr class="phpdocumentor-element-found-in__file" title="lib/WhichCommand.php"><a href="files/lib-whichcommand.html"><abbr title="lib/WhichCommand.php">WhichCommand.php</abbr></a></abbr>
     :
-    <span class="phpdocumentor-element-found-in__line">30</span>
+    <span class="phpdocumentor-element-found-in__line">32</span>
 
     </aside>
 
-        <p class="phpdocumentor-summary">Executes the current command.</p>
+        <p class="phpdocumentor-summary">Executes this command.</p>
 
     <code class="phpdocumentor-code phpdocumentor-signature ">
     <span class="phpdocumentor-signature__visibility">protected</span>
@@ -375,7 +321,7 @@
 </section>
             </div>
         </div>
-        <a href="classes/Which-Cli-Command.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+        <a href="classes/Which-WhichCommand.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
 
     </main>
 

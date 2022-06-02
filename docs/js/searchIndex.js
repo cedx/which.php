@@ -1,26 +1,6 @@
 Search.appendIndex(
     [
                 {
-            "fqsen": "\\Which\\Cli\\Command",
-            "name": "Command",
-            "summary": "The\u0020console\u0020command.",
-            "url": "classes/Which-Cli-Command.html"
-        },                {
-            "fqsen": "\\Which\\Cli\\Command\u003A\u003Aconfigure\u0028\u0029",
-            "name": "configure",
-            "summary": "Configures\u0020the\u0020current\u0020command.",
-            "url": "classes/Which-Cli-Command.html#method_configure"
-        },                {
-            "fqsen": "\\Which\\Cli\\Command\u003A\u003Aexecute\u0028\u0029",
-            "name": "execute",
-            "summary": "Executes\u0020the\u0020current\u0020command.",
-            "url": "classes/Which-Cli-Command.html#method_execute"
-        },                {
-            "fqsen": "\\Which\\Cli\\Command\u003A\u003A\u0024defaultName",
-            "name": "defaultName",
-            "summary": "",
-            "url": "classes/Which-Cli-Command.html#property_defaultName"
-        },                {
             "fqsen": "\\Which\\Finder",
             "name": "Finder",
             "summary": "Finds\u0020the\u0020instances\u0020of\u0020an\u0020executable\u0020in\u0020the\u0020system\u0020path.",
@@ -86,15 +66,25 @@ Search.appendIndex(
             "summary": "Finds\u0020the\u0020instances\u0020of\u0020the\u0020specified\u0020command\u0020in\u0020the\u0020system\u0020path.",
             "url": "namespaces/which.html#function_which"
         },                {
+            "fqsen": "\\Which\\WhichCommand",
+            "name": "WhichCommand",
+            "summary": "The\u0020\u0060which\u0060\u0020command.",
+            "url": "classes/Which-WhichCommand.html"
+        },                {
+            "fqsen": "\\Which\\WhichCommand\u003A\u003Aconfigure\u0028\u0029",
+            "name": "configure",
+            "summary": "Configures\u0020this\u0020command.",
+            "url": "classes/Which-WhichCommand.html#method_configure"
+        },                {
+            "fqsen": "\\Which\\WhichCommand\u003A\u003Aexecute\u0028\u0029",
+            "name": "execute",
+            "summary": "Executes\u0020this\u0020command.",
+            "url": "classes/Which-WhichCommand.html#method_execute"
+        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",
             "url": "namespaces/default.html"
-        },                {
-            "fqsen": "\\Which\\Cli",
-            "name": "Cli",
-            "summary": "",
-            "url": "namespaces/which-cli.html"
         },                {
             "fqsen": "\\Which",
             "name": "Which",
