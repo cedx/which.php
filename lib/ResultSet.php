@@ -31,7 +31,7 @@ class ResultSet {
 	/**
 	 * Returns all instances of the searched command.
 	 * @param bool $throwIfNotFound Value indicating whether to throw an exception if the command is not found.
-	 * @return string[] All search results.
+	 * @return string[] All search results, or an empty array if the command is not found.
 	 * @throws \UnderflowException The command has not been found.
 	 */
 	function all(bool $throwIfNotFound = false): array {
@@ -47,7 +47,7 @@ class ResultSet {
 	/**
 	 * Returns the first instance of the searched command.
 	 * @param bool $throwIfNotFound Value indicating whether to throw an exception if the command is not found.
-	 * @return string The first search result.
+	 * @return string The first search result, or an empty string if the command is not found.
 	 * @throws \UnderflowException The command has not been found.
 	 */
 	function first(bool $throwIfNotFound = false): string {
