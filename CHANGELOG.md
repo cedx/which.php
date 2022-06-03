@@ -1,7 +1,13 @@
 # Changelog
 
+## Version [10.0.0](https://github.com/cedx/which.php/compare/v9.1.0...v10.0.0)
+- Breaking change: using PHP 8 features, like attributes and readonly properties.
+- Breaking change: removed the `FinderException` class.
+- Breaking change: removed the `Finder->pathSeparator` property.
+- Breaking change: renamed the `Finder->path` property to `paths`.
+- Added the `ResultSet` class.
+
 ## Version [9.1.0](https://github.com/cedx/which.php/branches/compare/v9.1.0..v9.0.0)
-- Deprecated this package in favor of [`cedx/which.hx`](https://github.com/cedx/which.hx).
 - Replaced the build system based on [Robo](https://robo.li) by [PowerShell](https://docs.microsoft.com/en-us/powershell) scripts.
 - Updated the package dependencies.
 
