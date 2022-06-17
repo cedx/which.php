@@ -8,6 +8,6 @@ namespace Which;
  * @param string[] $extensions The executable file extensions. Defaults to the `PATHEXT` environment variable.
  * @return ResultSet The search results.
  */
-function which(string $command, array $paths = [], array $extensions = []) {
+function which(string $command, array $paths = [], array $extensions = []): ResultSet {
 	return new ResultSet($command, new Finder($paths, $extensions));
 }
