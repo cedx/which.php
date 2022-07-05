@@ -1,5 +1,4 @@
-<?php declare(strict_types=1);
-namespace Which;
+<?php namespace Which;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;

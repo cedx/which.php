@@ -1,5 +1,4 @@
-<?php declare(strict_types=1);
-namespace Which;
+<?php namespace Which;
 
 /**
  * Provides convenient access to the stream of search results.

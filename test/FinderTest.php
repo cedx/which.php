@@ -1,5 +1,4 @@
-<?php declare(strict_types=1);
-namespace Which;
+<?php namespace Which;
 
 use PHPUnit\Framework\TestCase;
 use function PHPUnit\Framework\{assertThat, countOf, equalTo, isEmpty, isFalse, logicalNot, stringEndsWith};
