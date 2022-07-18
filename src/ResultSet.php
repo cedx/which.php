@@ -37,7 +37,7 @@ class ResultSet {
 		$executables = array_values(array_unique(array_map(fn(\SplFileInfo $file) => $file->getPathname(), [...$this->stream()])));
 		if (!$executables && $throwIfNotFound) { // @phpstan-ignore-line
 			$paths = implode(Finder::isWindows() ? ";" : PATH_SEPARATOR, $this->finder->paths);
-			throw new \UnderflowException("No '{$this->command}' in ($paths).");
+			throw new \UnderflowException("No '$this->command' in ($paths).");
 		}
 
 		return $executables;
@@ -54,7 +54,7 @@ class ResultSet {
 		foreach ($this->stream() as $file) { $executable = $file->getPathname(); break; }
 		if (!$executable && $throwIfNotFound) {
 			$paths = implode(Finder::isWindows() ? ";" : PATH_SEPARATOR, $this->finder->paths);
-			throw new \UnderflowException("No '{$this->command}' in ($paths).");
+			throw new \UnderflowException("No '$this->command' in ($paths).");
 		}
 
 		return $executable;
