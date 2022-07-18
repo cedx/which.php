@@ -35,7 +35,7 @@ class ResultSetTest extends TestCase {
 		assertThat(which("foo", paths: $paths)->all(), isEmpty());
 
 		// It should eventually throw an exception if the searched command is not executable or not found.
-		$this->expectException(\UnderflowException::class);
+		$this->expectException(\RuntimeException::class);
 		which("not_executable.sh", paths: $paths)->all(throwIfNotFound: true);
 	}
 
@@ -58,7 +58,7 @@ class ResultSetTest extends TestCase {
 		assertThat(which("foo", paths: $paths)->first(), isEmpty());
 
 		// It should eventually thrown an exception if the searched command is not executable or not found.
-		$this->expectException(\UnderflowException::class);
+		$this->expectException(\RuntimeException::class);
 		which("not_executable.sh", paths: $paths)->first(throwIfNotFound: true);
 	}
 }

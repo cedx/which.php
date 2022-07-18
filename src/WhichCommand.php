@@ -45,7 +45,7 @@ class WhichCommand extends Command {
 			return Command::SUCCESS;
 		}
 
-		catch (\UnderflowException $e) {
+		catch (\RuntimeException $e) {
 			if (!$silent) $output->writeln($e->getMessage());
 			return Command::FAILURE;
 		}

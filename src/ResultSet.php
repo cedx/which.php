@@ -31,13 +31,13 @@ class ResultSet {
 	 * Returns all instances of the searched command.
 	 * @param bool $throwIfNotFound Value indicating whether to throw an exception if the command is not found.
 	 * @return string[] All search results, or an empty array if the command is not found.
-	 * @throws \UnderflowException The command has not been found.
+	 * @throws \RuntimeException The command has not been found.
 	 */
 	function all(bool $throwIfNotFound = false): array {
 		$executables = array_values(array_unique(array_map(fn(\SplFileInfo $file) => $file->getPathname(), [...$this->stream()])));
 		if (!$executables && $throwIfNotFound) { // @phpstan-ignore-line
 			$paths = implode(Finder::isWindows() ? ";" : PATH_SEPARATOR, $this->finder->paths);
-			throw new \UnderflowException("No '$this->command' in ($paths).");
+			throw new \RuntimeException("No '$this->command' in ($paths).");
 		}
 
 		return $executables;
@@ -47,14 +47,14 @@ class ResultSet {
 	 * Returns the first instance of the searched command.
 	 * @param bool $throwIfNotFound Value indicating whether to throw an exception if the command is not found.
 	 * @return string The first search result, or an empty string if the command is not found.
-	 * @throws \UnderflowException The command has not been found.
+	 * @throws \RuntimeException The command has not been found.
 	 */
 	function first(bool $throwIfNotFound = false): string {
 		$executable = "";
 		foreach ($this->stream() as $file) { $executable = $file->getPathname(); break; }
 		if (!$executable && $throwIfNotFound) {
 			$paths = implode(Finder::isWindows() ? ";" : PATH_SEPARATOR, $this->finder->paths);
-			throw new \UnderflowException("No '$this->command' in ($paths).");
+			throw new \RuntimeException("No '$this->command' in ($paths).");
 		}
 
 		return $executable;
