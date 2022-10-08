@@ -109,11 +109,10 @@ class Finder {
 	 */
 	private function findExecutables(string $directory, string $command): iterable {
 		$basePath = (string) getcwd();
-		$isWindows = static::isWindows();
-		foreach (["", ...$isWindows ? $this->extensions : []] as $extension) {
+		foreach (["", ...static::isWindows() ? $this->extensions : []] as $extension) {
 			$resolvedPath = Path::makeAbsolute(Path::join($directory, "$command$extension"), $basePath);
 			if ($this->isExecutable($resolvedPath))
-				yield new \SplFileInfo(str_replace("/", $isWindows ? "\\" : DIRECTORY_SEPARATOR, $resolvedPath));
+				yield new \SplFileInfo(str_replace("/", DIRECTORY_SEPARATOR, $resolvedPath));
 		}
 	}
 }
