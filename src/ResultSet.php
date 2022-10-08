@@ -3,7 +3,7 @@
 /**
  * Provides convenient access to the stream of search results.
  */
-class ResultSet {
+final class ResultSet {
 
 	/**
 	 * The searched command.

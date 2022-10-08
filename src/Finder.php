@@ -5,7 +5,7 @@ use Symfony\Component\Filesystem\Path;
 /**
  * Finds the instances of an executable in the system path.
  */
-class Finder {
+final class Finder {
 
 	/**
 	 * The list of executable file extensions.
@@ -32,7 +32,7 @@ class Finder {
 
 		if (!$paths) {
 			$pathEnv = getenv("PATH") ?: "";
-			if ($pathEnv) $paths = explode(static::isWindows() ? ";" : PATH_SEPARATOR, $pathEnv);
+			if ($pathEnv) $paths = explode(self::isWindows() ? ";" : PATH_SEPARATOR, $pathEnv);
 		}
 
 		$this->extensions = array_map(mb_strtolower(...), $extensions);
@@ -67,7 +67,7 @@ class Finder {
 		$fileInfo = new \SplFileInfo($file);
 		if (!$fileInfo->isFile()) return false;
 		if ($fileInfo->isExecutable()) return true;
-		return static::isWindows() ? $this->checkFileExtension($fileInfo) : $this->checkFilePermissions($fileInfo);
+		return self::isWindows() ? $this->checkFileExtension($fileInfo) : $this->checkFilePermissions($fileInfo);
 	}
 
 	/**
@@ -109,7 +109,7 @@ class Finder {
 	 */
 	private function findExecutables(string $directory, string $command): iterable {
 		$basePath = (string) getcwd();
-		foreach (["", ...static::isWindows() ? $this->extensions : []] as $extension) {
+		foreach (["", ...self::isWindows() ? $this->extensions : []] as $extension) {
 			$resolvedPath = Path::makeAbsolute(Path::join($directory, "$command$extension"), $basePath);
 			if ($this->isExecutable($resolvedPath))
 				yield new \SplFileInfo(str_replace("/", DIRECTORY_SEPARATOR, $resolvedPath));
