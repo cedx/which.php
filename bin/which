@@ -1,14 +1,60 @@
 #!/usr/bin/env php
 <?php
-use Symfony\Component\Console\Application;
-use Which\WhichCommand;
+use function Which\which;
 
 // Load the dependencies.
 $rootPath = dirname(__DIR__);
 require is_file($autoload = __DIR__."/../../../autoload.php") ? $autoload : "$rootPath/vendor/autoload.php";
 
+// The usage information.
+const usage = "
+Find the instances of an executable in the system path.
+
+Usage:
+  which [options] <command>
+
+Arguments:
+  command        The name of the executable to find.
+
+Options:
+  -a, --all      List all executable instances found (instead of just the first one).
+  -s, --silent   Silence the output, just return the exit code (0 if any executable is found, otherwise 1).
+  -h, --help     Display this help.
+  -v, --version  Output the version number.
+";
+
+// Parse the command line arguments.
+$options = ["a" => "all", "h" => "help", "s" => "silent", "v" => "version"];
+$values = getopt(implode("", array_keys($options)), $options, $index);
+$positionals = array_slice($argv, $index);
+
+// Print the usage.
+$help = isset($values["h"]) || isset($values["help"]);
+$version = isset($values["v"]) || isset($values["version"]);
+if ($help || $version) {
+	print $help ? trim(usage) : json_decode(file_get_contents(__DIR__."/../composer.json"))->version;
+	exit();
+}
+
+// Check the requirements.
+if (!$positionals) {
+	print "Required argument 'command' is missing.";
+	exit(1);
+}
+
 // Start the application.
-$application = new Application("Which.php", json_decode(file_get_contents(__DIR__."/../composer.json"))->version);
-$command = new WhichCommand;
-$application->add($command);
-$application->setDefaultCommand($command->getName(), true)->run();
+$all = isset($values["a"]) || isset($values["all"]);
+$silent = isset($values["s"]) || isset($values["silent"]);
+
+try {
+	$finder = which($positionals[0]);
+	$paths = $all ? $finder->all(throwIfNotFound: true) : $finder->first(throwIfNotFound: true);
+	if (!$silent) {
+		if (!is_array($paths)) $paths = [$paths];
+		foreach ($paths as $path) print $path . PHP_EOL;
+	}
+}
+catch (RuntimeException $e) {
+	if (!$silent) fwrite(STDERR, $e->getMessage() . PHP_EOL);
+	exit(1);
+}

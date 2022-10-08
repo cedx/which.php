@@ -14,7 +14,7 @@ class FinderTest extends TestCase {
 	function testConstructor(): void {
 		// It should set the `paths` property to the value of the `PATH` environment variable by default.
 		$pathEnv = getenv("PATH");
-		$paths = $pathEnv ? explode(PATH_SEPARATOR, $pathEnv) : [];
+		$paths = $pathEnv ? array_filter(explode(PATH_SEPARATOR, $pathEnv)) : [];
 		assertThat((new Finder)->paths, equalTo($paths));
 
 		// It should set the `extensions` property to the value of the `PATHEXT` environment variable by default.

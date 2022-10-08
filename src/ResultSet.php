@@ -35,7 +35,7 @@ final class ResultSet {
 	 */
 	function all(bool $throwIfNotFound = false): array {
 		$executables = array_values(array_unique(array_map(fn(\SplFileInfo $file) => $file->getPathname(), [...$this->stream()])));
-		if (!$executables && $throwIfNotFound) { // @phpstan-ignore-line
+		if (!$executables && $throwIfNotFound) {
 			$paths = implode(Finder::isWindows() ? ";" : PATH_SEPARATOR, $this->finder->paths);
 			throw new \RuntimeException("No '$this->command' in ($paths).");
 		}
