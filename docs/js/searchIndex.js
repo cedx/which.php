@@ -66,21 +66,6 @@ Search.appendIndex(
             "summary": "Finds\u0020the\u0020instances\u0020of\u0020the\u0020specified\u0020command\u0020in\u0020the\u0020system\u0020path.",
             "url": "namespaces/which.html#function_which"
         },                {
-            "fqsen": "\\Which\\WhichCommand",
-            "name": "WhichCommand",
-            "summary": "The\u0020\u0060which\u0060\u0020command.",
-            "url": "classes/Which-WhichCommand.html"
-        },                {
-            "fqsen": "\\Which\\WhichCommand\u003A\u003Aconfigure\u0028\u0029",
-            "name": "configure",
-            "summary": "Configures\u0020this\u0020command.",
-            "url": "classes/Which-WhichCommand.html#method_configure"
-        },                {
-            "fqsen": "\\Which\\WhichCommand\u003A\u003Aexecute\u0028\u0029",
-            "name": "execute",
-            "summary": "Executes\u0020this\u0020command.",
-            "url": "classes/Which-WhichCommand.html#method_execute"
-        },                {
             "fqsen": "\\",
             "name": "\\",
             "summary": "",

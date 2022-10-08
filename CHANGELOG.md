@@ -2,6 +2,7 @@
 
 ## Version [10.1.0](https://github.com/cedx/which.php/compare/v10.0.0...v10.1.0)
 - Dropped the dependency on [Symfony Console](https://symfony.com/doc/current/components/console.html) component.
+- Replaced the use of `UnderflowException` with `RuntimeException`.
 
 ## Version [10.0.0](https://github.com/cedx/which.php/compare/v9.1.0...v10.0.0)
 - Breaking change: using PHP 8 features, like attributes and readonly properties.
