@@ -51,10 +51,11 @@ try {
 	$paths = $all ? $finder->all(throwIfNotFound: true) : $finder->first(throwIfNotFound: true);
 	if (!$silent) {
 		if (!is_array($paths)) $paths = [$paths];
-		foreach ($paths as $path) print $path . PHP_EOL;
+		$length = count($paths);
+		foreach ($paths as $index => $path) print $path . ($index < $length - 1 ? PHP_EOL : "");
 	}
 }
 catch (RuntimeException $e) {
-	if (!$silent) fwrite(STDERR, $e->getMessage() . PHP_EOL);
+	if (!$silent) fwrite(STDERR, $e->getMessage());
 	exit(1);
 }
