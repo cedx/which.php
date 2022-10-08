@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [10.1.0](https://github.com/cedx/which.php/compare/v10.0.0...v10.1.0)
+- Dropped the dependency on [Symfony Console](https://symfony.com/doc/current/components/console.html) component.
+
 ## Version [10.0.0](https://github.com/cedx/which.php/compare/v9.1.0...v10.0.0)
 - Breaking change: using PHP 8 features, like attributes and readonly properties.
 - Breaking change: removed the `FinderException` class.
@@ -8,7 +11,7 @@
 - Added the `ResultSet` class.
 
 ## Version [9.1.0](https://github.com/cedx/which.php/compare/v9.0.0...v9.1.0)
-- Replaced the build system based on [Robo](https://robo.li) by [PowerShell](https://docs.microsoft.com/en-us/powershell) scripts.
+- Replaced the build system based on [Robo](https://robo.li) by [PowerShell](https://learn.microsoft.com/powershell) scripts.
 - Updated the package dependencies.
 
 ## Version [9.0.0](https://github.com/cedx/which.php/compare/v8.1.0...v9.0.0)
