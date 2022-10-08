@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: composer install
       - name: Run tests
-        run: composer run test
+        run: composer test
       - name: Collect code coverage
         if: success()
         uses: codecov/codecov-action@v3
