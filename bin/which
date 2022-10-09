@@ -51,8 +51,7 @@ try {
 	$paths = $all ? $finder->all(throwIfNotFound: true) : $finder->first(throwIfNotFound: true);
 	if (!$silent) {
 		if (!is_array($paths)) $paths = [$paths];
-		$length = count($paths);
-		foreach ($paths as $index => $path) print $path . ($index < $length - 1 ? PHP_EOL : "");
+		print implode(PHP_EOL, $paths);
 	}
 }
 catch (RuntimeException $e) {
