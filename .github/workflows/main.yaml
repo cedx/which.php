@@ -1,5 +1,8 @@
 name: main
 on: push
+defaults:
+  run:
+    shell: bash
 jobs:
   main:
     runs-on: ${{matrix.os}}
@@ -17,12 +20,7 @@ jobs:
           extensions: curl, intl, mbstring, simplexml
       - name: Get cache directory
         id: composer-cache
-        if: matrix.os != 'windows-latest'
         run: echo "path=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
-      - name: Get cache directory
-        id: composer-cache
-        if: matrix.os == 'windows-latest'
-        run: Add-Content -Path $env:GITHUB_OUTPUT -Value "path=$(composer config cache-files-dir)"
       - name: Cache dependencies
         uses: actions/cache@v3
         with:
