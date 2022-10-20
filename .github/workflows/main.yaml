@@ -17,7 +17,7 @@ jobs:
           extensions: curl, intl, mbstring, simplexml
       - name: Get cache directory
         id: composer-cache
-        run: echo "::set-output name=path::$(composer config cache-files-dir)"
+        run: echo "path=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
       - name: Cache dependencies
         uses: actions/cache@v3
         with:

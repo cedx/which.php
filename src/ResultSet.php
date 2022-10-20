@@ -6,26 +6,11 @@
 final class ResultSet {
 
 	/**
-	 * The searched command.
-	 * @var string
-	 */
-	private readonly string $command;
-
-	/**
-	 * The finder used to perform the search.
-	 * @var Finder
-	 */
-	private readonly Finder $finder;
-
-	/**
 	 * Creates a new result set.
 	 * @param string $command The searched command.
 	 * @param Finder $finder The finder used to perform the search.
 	 */
-	function __construct(string $command, Finder $finder) {
-		$this->command = $command;
-		$this->finder = $finder;
-	}
+	function __construct(private string $command, private Finder $finder) {}
 
 	/**
 	 * Returns all instances of the searched command.

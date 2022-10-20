@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e8d5b3000a6ca26c984f86a46912c40",
+    "content-hash": "34c01d307208a17e5246c4577238697a",
     "packages": [
         {
             "name": "symfony/filesystem",
@@ -236,6 +236,67 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "cedx/phpunit-expect",
+            "version": "0.13.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/cedx/phpunit-expect.git",
+                "reference": "3bc9ee64ef840b2394eb26710fb88fbd688cb9c4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/cedx/phpunit-expect/zipball/3bc9ee64ef840b2394eb26710fb88fbd688cb9c4",
+                "reference": "3bc9ee64ef840b2394eb26710fb88fbd688cb9c4",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "ext-reflection": "*",
+                "ext-spl": "*",
+                "php": ">=8.1.0",
+                "phpunit/phpunit": "^9.5.25"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^1.8.10"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "PHPUnit\\Expect\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Cédric Belin",
+                    "email": "cedric@belin.io",
+                    "homepage": "https://belin.io"
+                }
+            ],
+            "description": "BDD assertion library based on PHPUnit, inspired by Chai.",
+            "homepage": "https://github.com/cedx/phpunit-expect",
+            "keywords": [
+                "BDD",
+                "assert",
+                "expect",
+                "phpunit",
+                "test",
+                "unit"
+            ],
+            "support": {
+                "docs": "https://github.com/cedx/phpunit-expect/wiki",
+                "issues": "https://github.com/cedx/phpunit-expect/issues",
+                "source": "https://github.com/cedx/phpunit-expect/tree/v0.13.1"
+            },
+            "time": "2022-10-20T07:34:21+00:00"
+        },
         {
             "name": "doctrine/instantiator",
             "version": "1.4.1",

@@ -36,8 +36,8 @@
 		"symfony/filesystem": "^6.1.5"
 	},
 	"require-dev": {
-		"phpstan/phpstan": "^1.8.10",
-		"phpunit/phpunit": "^9.5.25"
+		"cedx/phpunit-expect": "^0.13.1",
+		"phpstan/phpstan": "^1.8.10"
 	},
 	"scripts": {
 		"test": ["@putenv XDEBUG_MODE=coverage", "phpunit --configuration=etc/phpunit.xml"]
