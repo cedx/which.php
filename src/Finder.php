@@ -11,13 +11,13 @@ final class Finder {
 	 * The list of executable file extensions.
 	 * @var string[]
 	 */
-	public readonly array $extensions;
+	readonly array $extensions;
 
 	/**
 	 * The list of system paths.
 	 * @var string[]
 	 */
-	public readonly array $paths;
+	readonly array $paths;
 
 	/**
 	 * Creates a new finder.
