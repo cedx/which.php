@@ -32,7 +32,7 @@ $positionals = array_slice($argv, $index);
 $help = isset($values["h"]) || isset($values["help"]);
 $version = isset($values["v"]) || isset($values["version"]);
 if ($help || $version) {
-	print $help ? trim(usage) : json_decode(file_get_contents(__DIR__."/../composer.json") ?: "{}")->version;
+	print $version ? json_decode(file_get_contents(__DIR__."/../composer.json") ?: "{}")->version : trim(usage);
 	exit();
 }
 

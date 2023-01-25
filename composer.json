@@ -33,7 +33,7 @@
 		"php": ">=8.1.0",
 		"ext-mbstring": "*",
 		"ext-spl": "*",
-		"symfony/filesystem": "^6.2.0"
+		"symfony/filesystem": "^6.2.5"
 	},
 	"require-dev": {
 		"cedx/phpunit-expect": "^0.13.1",
