@@ -25,7 +25,7 @@ Options:
 
 // Parse the command line arguments.
 $options = ["a" => "all", "h" => "help", "s" => "silent", "v" => "version"];
-$values = getopt(implode("", array_keys($options)), $options, $index);
+$values = getopt(implode(array_keys($options)), $options, $index);
 $positionals = array_slice($argv, $index);
 
 // Print the usage.
