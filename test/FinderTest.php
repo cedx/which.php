@@ -1,7 +1,7 @@
 <?php namespace which;
 
 use PHPUnit\Framework\TestCase;
-use function PHPUnit\Expect\{expect, it};
+use function phpunit\expect\{expect, it};
 
 /**
  * @testdox which\Finder
