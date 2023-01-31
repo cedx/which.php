@@ -1,5 +1,9 @@
 # Changelog
 
+## Version [11.0.0](https://github.com/cedx/which.php/compare/v10.1.0...v11.0.0)
+- Breaking change: lowercased the `Which` namespace.
+- Updated the package dependencies.
+
 ## Version [10.1.0](https://github.com/cedx/which.php/compare/v10.0.0...v10.1.0)
 - Dropped the dependency on [Symfony Console](https://symfony.com/doc/current/components/console.html) component.
 - Replaced the use of `UnderflowException` with `RuntimeException`.
