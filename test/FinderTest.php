@@ -1,10 +1,10 @@
-<?php namespace Which;
+<?php namespace which;
 
 use PHPUnit\Framework\TestCase;
 use function PHPUnit\Expect\{expect, it};
 
 /**
- * @testdox Which\Finder
+ * @testdox which\Finder
  */
 class FinderTest extends TestCase {
 

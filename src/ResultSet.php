@@ -1,4 +1,4 @@
-<?php namespace Which;
+<?php namespace which;
 
 /**
  * Provides convenient access to the stream of search results.

@@ -1,6 +1,6 @@
 #!/usr/bin/env php
 <?php
-use function Which\which;
+use function which\which;
 
 // Load the dependencies.
 $rootPath = dirname(__DIR__);

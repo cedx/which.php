@@ -1,4 +1,4 @@
-<?php namespace Which;
+<?php namespace which;
 
 use Symfony\Component\Filesystem\Path;
 

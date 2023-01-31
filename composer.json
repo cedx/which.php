@@ -10,10 +10,10 @@
 	],
 	"autoload": {
 		"files": ["src/which.php"],
-		"psr-4": {"Which\\": "src/"}
+		"psr-4": {"which\\": "src/"}
 	},
 	"autoload-dev": {
-		"psr-4": {"Which\\": "test/"}
+		"psr-4": {"which\\": "test/"}
 	},
 	"bin": [
 		"bin/which"
