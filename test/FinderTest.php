@@ -8,7 +8,7 @@ use function phpunit\expect\{expect, it};
  * Tests the features of the {@see Finder} class.
  */
 #[TestDox('which\Finder')]
-class FinderTest extends TestCase {
+final class FinderTest extends TestCase {
 
 	#[TestDox("constructor")]
 	function testConstructor(): void {

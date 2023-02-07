@@ -8,7 +8,7 @@ use function phpunit\expect\{expect, it};
  * Tests the features of the {@see ResultSet} class.
  */
 #[TestDox('which\ResultSet')]
-class ResultSetTest extends TestCase {
+final class ResultSetTest extends TestCase {
 
 	#[TestDox("->all()")]
 	function testAll(): void {
