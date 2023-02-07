@@ -1,16 +1,16 @@
 <?php namespace which;
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 use function phpunit\expect\{expect, it};
 
 /**
- * @testdox which\Finder
+ * Tests the features of the {@see Finder} class.
  */
+#[TestDox('which\Finder')]
 class FinderTest extends TestCase {
 
-	/**
-	 * @testdox constructor
-	 */
+	#[TestDox("constructor")]
 	function testConstructor(): void {
 		it("should set the `paths` property to the value of the `PATH` environment variable by default", function() {
 			$pathEnv = getenv("PATH");
@@ -29,9 +29,7 @@ class FinderTest extends TestCase {
 		});
 	}
 
-	/**
-	 * @testdox ->find()
-	 */
+	#[TestDox("->find()")]
 	function testFind(): void {
 		$finder = new Finder(["test/fixture"]);
 
@@ -53,9 +51,7 @@ class FinderTest extends TestCase {
 		});
 	}
 
-	/**
-	 * @testdox ->isExecutable()
-	 */
+	#[TestDox("->isExecutable()")]
 	function testIsExecutable(): void {
 		$finder = new Finder;
 

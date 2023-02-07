@@ -1,16 +1,16 @@
 <?php namespace which;
 
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\TestDox;
 use function phpunit\expect\{expect, it};
 
 /**
- * @testdox which\ResultSet
+ * Tests the features of the {@see ResultSet} class.
  */
+#[TestDox('which\ResultSet')]
 class ResultSetTest extends TestCase {
 
-	/**
-	 * @testdox ->all()
-	 */
+	#[TestDox("->all()")]
 	function testAll(): void {
 		$paths = ["test/fixture"];
 
@@ -42,9 +42,7 @@ class ResultSetTest extends TestCase {
 		});
 	}
 
-	/**
-	 * @testdox ->first()
-	 */
+	#[TestDox("->first()")]
 	function testFirst(): void {
 		$paths = ["test/fixture"];
 
