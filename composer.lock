@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "296c6341c410d10cb72204d76d3d5aa5",
+    "content-hash": "29d4b6c906fa67349cd209e6eb26404b",
     "packages": [
         {
             "name": "symfony/filesystem",
-            "version": "v6.2.5",
+            "version": "v6.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/filesystem.git",
-                "reference": "e59e8a4006afd7f5654786a83b4fcb8da98f4593"
+                "reference": "82b6c62b959f642d000456f08c6d219d749215b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/filesystem/zipball/e59e8a4006afd7f5654786a83b4fcb8da98f4593",
-                "reference": "e59e8a4006afd7f5654786a83b4fcb8da98f4593",
+                "url": "https://api.github.com/repos/symfony/filesystem/zipball/82b6c62b959f642d000456f08c6d219d749215b3",
+                "reference": "82b6c62b959f642d000456f08c6d219d749215b3",
                 "shasum": ""
             },
             "require": {
@@ -51,7 +51,7 @@
             "description": "Provides basic utilities for the filesystem",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/filesystem/tree/v6.2.5"
+                "source": "https://github.com/symfony/filesystem/tree/v6.2.7"
             },
             "funding": [
                 {
@@ -67,7 +67,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-20T17:45:48+00:00"
+            "time": "2023-02-14T08:44:56+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -902,16 +902,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "10.0.13",
+            "version": "10.0.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c37a88d7a905266eab6498817a1bf1170043313f"
+                "reference": "7065dbebcb0f66cf16a45fc9cfc28c2351e06169"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c37a88d7a905266eab6498817a1bf1170043313f",
-                "reference": "c37a88d7a905266eab6498817a1bf1170043313f",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/7065dbebcb0f66cf16a45fc9cfc28c2351e06169",
+                "reference": "7065dbebcb0f66cf16a45fc9cfc28c2351e06169",
                 "shasum": ""
             },
             "require": {
@@ -982,7 +982,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.0.13"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.0.14"
             },
             "funding": [
                 {
@@ -998,7 +998,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-27T13:07:57+00:00"
+            "time": "2023-03-01T05:37:49+00:00"
         },
         {
             "name": "sebastian/cli-parser",
