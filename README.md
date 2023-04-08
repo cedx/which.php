@@ -5,7 +5,7 @@ Find the instances of an executable in the system path, in [PHP](https://www.php
 
 ## Documentation
 - [User guide](https://github.com/cedx/which.php/wiki)
-- [API reference](https://cedx.github.io/which.php)
+- [API reference](https://docs.belin.io/which.php)
 
 ## Development
 - [Git repository](https://github.com/cedx/which.php)
