@@ -47,7 +47,7 @@ $all = isset($values["a"]) || isset($values["all"]);
 $silent = isset($values["s"]) || isset($values["silent"]);
 
 try {
-	$finder = which($positionals[0]);
+	$finder = which(array_shift($positionals));
 	$paths = $all ? $finder->all(throwIfNotFound: true) : $finder->first(throwIfNotFound: true);
 	if (!$silent) {
 		if (!is_array($paths)) $paths = [$paths];
