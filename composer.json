@@ -1,6 +1,6 @@
 {
 	"description": "Find the instances of an executable in the system path. Like the `which` Linux command.",
-	"homepage": "https://github.com/cedx/which.php",
+	"homepage": "https://docs.belin.io/which.php",
 	"license": "MIT",
 	"name": "cedx/which",
 	"type": "library",
