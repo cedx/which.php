@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "525e6bd6aafc0fa52183cff87998eb49",
+    "content-hash": "72a21af29e5e6c743f095d7134bb8ff1",
     "packages": [
         {
             "name": "symfony/filesystem",
@@ -525,16 +525,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.10.16",
+            "version": "1.10.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "352bdbb960bb523e3d71b834862589f910921c23"
+                "reference": "8aca56455b40846865e4fac9d24b010a574dc362"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/352bdbb960bb523e3d71b834862589f910921c23",
-                "reference": "352bdbb960bb523e3d71b834862589f910921c23",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/8aca56455b40846865e4fac9d24b010a574dc362",
+                "reference": "8aca56455b40846865e4fac9d24b010a574dc362",
                 "shasum": ""
             },
             "require": {
@@ -583,7 +583,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-06-05T08:21:46+00:00"
+            "time": "2023-06-07T15:55:47+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
