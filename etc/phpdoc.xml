@@ -8,7 +8,7 @@
 	<title>Which for PHP</title>
 	<paths>
 		<cache>../var/phpdoc</cache>
-		<output>../docs</output>
+		<output>../docs/api</output>
 	</paths>
 	<version number="11.0.0">
 		<api>
