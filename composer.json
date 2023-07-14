@@ -43,7 +43,7 @@
 		"test": ["@putenv XDEBUG_MODE=coverage", "phpunit --configuration=etc/phpunit.xml"]
 	},
 	"support": {
-		"docs": "https://github.com/cedx/which.php/wiki",
+		"docs": "https://docs.belin.io/which.php",
 		"issues": "https://github.com/cedx/which.php/issues"
 	}
 }

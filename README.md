@@ -4,8 +4,8 @@
 Find the instances of an executable in the system path, in [PHP](https://www.php.net).
 
 ## Documentation
-- [User guide](https://github.com/cedx/which.php/wiki)
-- [API reference](https://docs.belin.io/which.php)
+- [User guide](https://docs.belin.io/which.php)
+- [API reference](https://docs.belin.io/which.php/api)
 
 ## Development
 - [Git repository](https://github.com/cedx/which.php)
@@ -13,4 +13,4 @@ Find the instances of an executable in the system path, in [PHP](https://www.php
 - [Submit an issue](https://github.com/cedx/which.php/issues)
 
 ## License
-[Which for PHP](https://github.com/cedx/which.php) is distributed under the MIT License.
+[Which for PHP](https://docs.belin.io/which.php) is distributed under the MIT License.
