@@ -28,17 +28,17 @@ final class FinderTest extends TestCase {
 
 	#[TestDox("->find()")]
 	function testFind(): void {
-		$finder = new Finder(["test/fixture"]);
+		$finder = new Finder(["share"]);
 
 		// It should return the path of the `executable.cmd` file on Windows.
 		$executables = [...$finder->find("executable")];
 		assertThat($executables, countOf(Finder::isWindows() ? 1 : 0));
-		if (Finder::isWindows()) assertThat($executables[0]->getPathname(), stringEndsWith("\\test\\fixture\\executable.cmd"));
+		if (Finder::isWindows()) assertThat($executables[0]->getPathname(), stringEndsWith("\\share\\executable.cmd"));
 
 		// It should return the path of the `executable.sh` file on POSIX.
 		$executables = [...$finder->find("executable.sh")];
 		assertThat($executables, countOf(Finder::isWindows() ? 0 : 1));
-		if (!Finder::isWindows()) assertThat($executables[0]->getPathname(), stringEndsWith("/test/fixture/executable.sh"));
+		if (!Finder::isWindows()) assertThat($executables[0]->getPathname(), stringEndsWith("/share/executable.sh"));
 
 		// It should return an empty array if the searched command is not executable or not found.
 		assertThat([...$finder->find("not_executable.sh")], isEmpty());
@@ -50,13 +50,13 @@ final class FinderTest extends TestCase {
 		$finder = new Finder;
 
 		// It should return `false` if the searched command is not executable or not found.
-		assertThat($finder->isExecutable("test/fixture/not_executable.sh"), isFalse());
+		assertThat($finder->isExecutable("share/not_executable.sh"), isFalse());
 		assertThat($finder->isExecutable("foo/bar/baz.qux"), isFalse());
 
 		// It should return `false` for a POSIX executable, when test is run on Windows.
-		assertThat($finder->isExecutable("test/fixture/executable.sh"), logicalNot(equalTo(Finder::isWindows())));
+		assertThat($finder->isExecutable("share/executable.sh"), logicalNot(equalTo(Finder::isWindows())));
 
 		// It should return `false` for a Windows executable, when test is run on POSIX.
-		assertThat($finder->isExecutable("test/fixture/executable.cmd"), equalTo(Finder::isWindows()));
+		assertThat($finder->isExecutable("share/executable.cmd"), equalTo(Finder::isWindows()));
 	}
 }
