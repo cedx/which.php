@@ -7,7 +7,7 @@ use function PHPUnit\Framework\{assertThat, countOf, equalTo, isEmpty, isFalse, 
 /**
  * Tests the features of the {@see Finder} class.
  */
-#[TestDox('which\Finder')]
+#[TestDox("Finder")]
 final class FinderTest extends TestCase {
 
 	#[TestDox("constructor")]
@@ -26,7 +26,7 @@ final class FinderTest extends TestCase {
 		assertThat((new Finder(extensions: [".EXE", ".JS", ".PS1"]))->extensions, equalTo([".exe", ".js", ".ps1"]));
 	}
 
-	#[TestDox("->find()")]
+	#[TestDox("find()")]
 	function testFind(): void {
 		$finder = new Finder(["share"]);
 
@@ -45,7 +45,7 @@ final class FinderTest extends TestCase {
 		assertThat([...$finder->find("foo")], isEmpty());
 	}
 
-	#[TestDox("->isExecutable()")]
+	#[TestDox("isExecutable()")]
 	function testIsExecutable(): void {
 		$finder = new Finder;
 
