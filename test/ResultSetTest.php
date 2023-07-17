@@ -1,7 +1,7 @@
 <?php namespace which;
 
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\Attributes\{Test, TestDox};
 use function PHPUnit\Framework\{assertThat, countOf, isEmpty, stringEndsWith};
 
 /**
@@ -10,8 +10,9 @@ use function PHPUnit\Framework\{assertThat, countOf, isEmpty, stringEndsWith};
 #[TestDox("ResultSet")]
 final class ResultSetTest extends TestCase {
 
+	#[Test]
 	#[TestDox("all()")]
-	function testAll(): void {
+	function all(): void {
 		$paths = ["share"];
 
 		// It should return the path of the `executable.cmd` file on Windows.
@@ -39,8 +40,9 @@ final class ResultSetTest extends TestCase {
 		which("not_executable.sh", paths: $paths)->all(throwIfNotFound: true);
 	}
 
+	#[Test]
 	#[TestDox("first()")]
-	function testFirst(): void {
+	function first(): void {
 		$paths = ["share"];
 
 		// It should return the path of the `executable.cmd` file on Windows.

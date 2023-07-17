@@ -1,7 +1,7 @@
 <?php namespace which;
 
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\Attributes\TestDox;
+use PHPUnit\Framework\Attributes\{Test, TestDox};
 use function PHPUnit\Framework\{assertThat, countOf, equalTo, isEmpty, isFalse, logicalNot, stringEndsWith};
 
 /**
@@ -10,8 +10,9 @@ use function PHPUnit\Framework\{assertThat, countOf, equalTo, isEmpty, isFalse, 
 #[TestDox("Finder")]
 final class FinderTest extends TestCase {
 
+	#[Test]
 	#[TestDox("constructor")]
-	function testConstructor(): void {
+	function constructor(): void {
 		// It should set the `paths` property to the value of the `PATH` environment variable by default.
 		$pathEnv = getenv("PATH");
 		$paths = $pathEnv ? array_filter(explode(PATH_SEPARATOR, $pathEnv)) : [];
@@ -26,8 +27,9 @@ final class FinderTest extends TestCase {
 		assertThat((new Finder(extensions: [".EXE", ".JS", ".PS1"]))->extensions, equalTo([".exe", ".js", ".ps1"]));
 	}
 
+	#[Test]
 	#[TestDox("find()")]
-	function testFind(): void {
+	function find(): void {
 		$finder = new Finder(["share"]);
 
 		// It should return the path of the `executable.cmd` file on Windows.
@@ -45,8 +47,9 @@ final class FinderTest extends TestCase {
 		assertThat([...$finder->find("foo")], isEmpty());
 	}
 
+	#[Test]
 	#[TestDox("isExecutable()")]
-	function testIsExecutable(): void {
+	function isExecutable(): void {
 		$finder = new Finder;
 
 		// It should return `false` if the searched command is not executable or not found.
