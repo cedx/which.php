@@ -32,7 +32,7 @@ final class Finder {
 
 		if (!$paths) {
 			$pathEnv = getenv("PATH") ?: "";
-			if ($pathEnv) $paths = explode(self::isWindows() ? ";" : PATH_SEPARATOR, $pathEnv);
+			if ($pathEnv) $paths = $pathEnv ? explode(self::isWindows() ? ";" : PATH_SEPARATOR, $pathEnv) : [];
 		}
 
 		$this->extensions = array_map(mb_strtolower(...), $extensions);
