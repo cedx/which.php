@@ -25,14 +25,14 @@ final class Finder {
 	 * @param string[] $extensions The executable file extensions. Defaults to the `PATHEXT` environment variable.
 	 */
 	function __construct(array $paths = [], array $extensions = []) {
-		if (!$extensions) {
-			$pathExt = getenv("PATHEXT") ?: "";
-			$extensions = $pathExt ? explode(";", $pathExt) : [".exe", ".cmd", ".bat", ".com"];
-		}
-
 		if (!$paths) {
 			$pathEnv = getenv("PATH") ?: "";
 			$paths = $pathEnv ? explode(self::isWindows() ? ";" : PATH_SEPARATOR, $pathEnv) : [];
+		}
+
+		if (!$extensions) {
+			$pathExt = getenv("PATHEXT") ?: "";
+			$extensions = $pathExt ? explode(";", $pathExt) : [".exe", ".cmd", ".bat", ".com"];
 		}
 
 		$this->extensions = array_map(mb_strtolower(...), $extensions);
