@@ -11,7 +11,7 @@ use function PHPUnit\Framework\{assertThat, countOf, equalTo, isEmpty, isFalse, 
 final class FinderTest extends TestCase {
 
 	#[Test]
-	#[TestDox("constructor")]
+	#[TestDox("__construct()")]
 	function constructor(): void {
 		// It should set the `paths` property to the value of the `PATH` environment variable by default.
 		$pathEnv = getenv("PATH");
