@@ -64,7 +64,6 @@ final class Finder {
 	function isExecutable(string $file): bool {
 		$fileInfo = new \SplFileInfo($file);
 		if (!$fileInfo->isFile()) return false;
-		if ($fileInfo->isExecutable()) return true;
 		return self::isWindows() ? $this->checkFileExtension($fileInfo) : $this->checkFilePermissions($fileInfo);
 	}
 
