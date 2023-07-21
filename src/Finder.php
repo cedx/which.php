@@ -44,9 +44,7 @@ final class Finder {
 	 * @return bool `true` if the current platform is Windows, otherwise `false`.
 	 */
 	static function isWindows(): bool {
-		if (PHP_OS_FAMILY == "Windows") return true;
-		$osType = getenv("OSTYPE");
-		return $osType == "cygwin" || $osType == "msys";
+		return PHP_OS_FAMILY == "Windows" || in_array(getenv("OSTYPE"), ["cygwin", "msys"]);
 	}
 
 	/**
