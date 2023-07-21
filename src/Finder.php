@@ -36,7 +36,7 @@ final class Finder {
 		}
 
 		$this->extensions = array_map(mb_strtolower(...), $extensions);
-		$this->paths = array_filter(array_map(fn($item) => preg_replace('/^"|"$/', "", $item), $paths));
+		$this->paths = array_values(array_filter(array_map(fn($item) => preg_replace('/^"|"$/', "", $item), $paths)));
 	}
 
 	/**
