@@ -44,6 +44,7 @@
 		"doc": "@php scripts/doc.php",
 		"lint": "phpstan analyse --configuration=etc/phpstan.neon --memory-limit=256M",
 		"publish": "@php scripts/publish.php",
+		"start": "@php bin/which --help",
 		"test": ["@putenv XDEBUG_MODE=coverage", "phpunit --configuration=etc/phpunit.xml"]
 	},
 	"support": {
