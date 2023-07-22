@@ -1,6 +1,9 @@
 <?php
 use function which\which;
 
+/**
+ * Finds all instances of an executable.
+ */
 try {
 	$paths = which("foobar")->all(throwIfNotFound: true);
 	print 'The "foobar" command is available at these locations:' . PHP_EOL;

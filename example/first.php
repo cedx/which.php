@@ -1,6 +1,9 @@
 <?php
 use function which\which;
 
+/**
+ * Finds the first instance of an executable.
+ */
 try {
 	$path = which("foobar")->first(throwIfNotFound: true);
 	print "The 'foobar' command is located at: $path";
