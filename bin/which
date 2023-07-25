@@ -38,7 +38,7 @@ if ($help || $version) {
 
 // Check the requirements.
 if (!$positionals) {
-	print "Required argument 'command' is missing.";
+	fwrite(STDERR, "You must provide the name of a command to find.");
 	exit(1);
 }
 
