@@ -1,10 +1,7 @@
 name: main
 on: push
-defaults:
-  run:
-    shell: bash
 jobs:
-  main:
+  test:
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
