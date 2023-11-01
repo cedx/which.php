@@ -18,6 +18,9 @@
 	"bin": [
 		"bin/which"
 	],
+	"config": {
+		"platform-check": false
+	},
 	"keywords": [
 		"find",
 		"path",
