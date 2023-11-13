@@ -49,7 +49,7 @@
 - Added support for [PHPStan](https://phpstan.org) static analyzer.
 
 ## Version [6.2.0](https://github.com/cedx/which.php/compare/v6.1.0...v6.2.0)
-- Dropped the dependency on [PHPUnit-Expect](https://docs.belin.io/phpunit-expect).
+- Dropped the dependency on [PHPUnit-Expect](https://cedx.github.io/phpunit-expect).
 
 ## Version [6.1.0](https://github.com/cedx/which.php/compare/v6.0.0...v6.1.0)
 - Added an example code.
