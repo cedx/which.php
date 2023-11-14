@@ -13,4 +13,4 @@ Find the instances of an executable in the system path, in [PHP](https://www.php
 - [Submit an issue](https://github.com/cedx/which.php/issues)
 
 ## License
-[Which for PHP](https://cedx.github.io/which.php) is distributed under the MIT License.
+[Which for PHP](https://github.com/cedx/which.php) is distributed under the MIT License.
