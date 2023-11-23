@@ -1,5 +1,8 @@
 # Changelog
 
+## Version [11.1.0](https://github.com/cedx/which.php/compare/v11.0.0...v11.1.0)
+- Updated the package dependencies.
+
 ## Version [11.0.0](https://github.com/cedx/which.php/compare/v10.1.0...v11.0.0)
 - Breaking change: lowercased the `Which` namespace.
 - Updated the package dependencies.
