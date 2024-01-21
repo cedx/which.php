@@ -95,7 +95,7 @@ final class Finder {
 		if ($perms & 0o100) return $uid == $fileInfo->getOwner();
 
 		// Root.
-		return $perms & (0o100 | 0o010) ? $uid == 0 : false;
+		return ($perms & (0o100 | 0o010)) && $uid == 0;
 	}
 
 	/**
