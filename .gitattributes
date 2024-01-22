@@ -8,7 +8,6 @@
 *.md text diff=markdown
 *.neon text
 *.php text diff=php
-*.ps1 text
 *.svg text
 *.txt text
 *.xml text

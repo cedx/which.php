@@ -13,14 +13,14 @@ final class ResultSetTest extends TestCase {
 	#[Test]
 	#[TestDox("all()")]
 	function all(): void {
-		$paths = ["share"];
+		$paths = ["res"];
 
 		// It should return the path of the `executable.cmd` file on Windows.
 		$executables = which("executable", paths: $paths)->all();
 		if (!Finder::isWindows()) assertThat($executables, isEmpty());
 		else {
 			assertThat($executables, countOf(1));
-			assertThat($executables[0], stringEndsWith("\\share\\executable.cmd"));
+			assertThat($executables[0], stringEndsWith("\\res\\executable.cmd"));
 		}
 
 		// It should return the path of the `executable.sh` file on POSIX.
@@ -28,7 +28,7 @@ final class ResultSetTest extends TestCase {
 		if (Finder::isWindows()) assertThat($executables, isEmpty());
 		else {
 			assertThat($executables, countOf(1));
-			assertThat($executables[0], stringEndsWith("/share/executable.sh"));
+			assertThat($executables[0], stringEndsWith("/res/executable.sh"));
 		}
 
 		// It should return an empty array if the searched command is not executable or not found.
@@ -43,17 +43,17 @@ final class ResultSetTest extends TestCase {
 	#[Test]
 	#[TestDox("first()")]
 	function first(): void {
-		$paths = ["share"];
+		$paths = ["res"];
 
 		// It should return the path of the `executable.cmd` file on Windows.
 		$executable = which("executable", paths: $paths)->first();
-		if (Finder::isWindows()) assertThat($executable, stringEndsWith("\\share\\executable.cmd"));
+		if (Finder::isWindows()) assertThat($executable, stringEndsWith("\\res\\executable.cmd"));
 		else assertThat($executable, isEmpty());
 
 		// It should return the path of the `executable.sh` file on POSIX.
 		$executable = which("executable.sh", paths: $paths)->first();
 		if (Finder::isWindows()) assertThat($executable, isEmpty());
-		else assertThat($executable, stringEndsWith("/share/executable.sh"));
+		else assertThat($executable, stringEndsWith("/res/executable.sh"));
 
 		// It should return an empty string if the searched command is not executable or not found.
 		assertThat(which("not_executable.sh", paths: $paths)->first(), isEmpty());
