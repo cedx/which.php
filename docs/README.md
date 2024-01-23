@@ -17,4 +17,3 @@ For detailed instructions, see the [installation guide](installation.md).
 ## See also
 - [API reference](api/)
 - [Packagist package](https://packagist.org/packages/cedx/which)
-- [Code coverage](https://app.codecov.io/gh/cedx/which.php)

@@ -44,7 +44,7 @@
 		"lint": "phpstan analyse --configuration=etc/phpstan.neon --memory-limit=256M",
 		"publish": "@php tool/publish.php",
 		"start": "@php bin/which --help",
-		"test": ["@putenv XDEBUG_MODE=coverage", "phpunit --configuration=etc/phpunit.xml"]
+		"test": "phpunit --configuration=etc/phpunit.xml"
 	},
 	"support": {
 		"docs": "https://cedx.github.io/which.php",
