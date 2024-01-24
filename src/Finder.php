@@ -50,9 +50,9 @@ final class Finder {
 	/**
 	 * Finds the instances of an executable in the system path.
 	 * @param string $command The command to be resolved.
-	 * @return iterable<\SplFileInfo> The paths of the executables found.
+	 * @return \Generator<int, \SplFileInfo> The paths of the executables found.
 	 */
-	function find(string $command): iterable {
+	function find(string $command): \Generator {
 		foreach ($this->paths as $directory) yield from $this->findExecutables($directory, $command);
 	}
 
@@ -102,9 +102,9 @@ final class Finder {
 	 * Finds the instances of an executable in the specified directory.
 	 * @param string $directory The directory path.
 	 * @param string $command The command to be resolved.
-	 * @return iterable<\SplFileInfo> The paths of the executables found.
+	 * @return \Generator<int, \SplFileInfo> The paths of the executables found.
 	 */
-	private function findExecutables(string $directory, string $command): iterable {
+	private function findExecutables(string $directory, string $command): \Generator {
 		$basePath = (string) getcwd();
 		foreach (["", ...self::isWindows() ? $this->extensions : []] as $extension) {
 			$resolvedPath = Path::makeAbsolute(Path::join($directory, "$command$extension"), $basePath);

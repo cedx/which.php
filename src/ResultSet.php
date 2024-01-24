@@ -19,13 +19,13 @@ final class ResultSet {
 	 * @throws \RuntimeException The command has not been found.
 	 */
 	function all(bool $throwIfNotFound = false): array {
-		$executables = array_values(array_unique(array_map(fn(\SplFileInfo $file) => $file->getPathname(), [...$this->stream()])));
+		$executables = array_unique(array_map(fn(\SplFileInfo $file) => $file->getPathname(), [...$this->stream()]));
 		if (!$executables && $throwIfNotFound) {
 			$paths = implode(Finder::isWindows() ? ";" : PATH_SEPARATOR, $this->finder->paths);
 			throw new \RuntimeException("No '$this->command' in ($paths).");
 		}
 
-		return $executables;
+		return array_values($executables);
 	}
 
 	/**
@@ -35,8 +35,7 @@ final class ResultSet {
 	 * @throws \RuntimeException The command has not been found.
 	 */
 	function first(bool $throwIfNotFound = false): string {
-		$executable = "";
-		foreach ($this->stream() as $file) { $executable = $file->getPathname(); break; }
+		$executable = $this->stream()->current()?->getPathname() ?? ""; // @phpstan-ignore-line
 		if (!$executable && $throwIfNotFound) {
 			$paths = implode(Finder::isWindows() ? ";" : PATH_SEPARATOR, $this->finder->paths);
 			throw new \RuntimeException("No '$this->command' in ($paths).");
@@ -47,9 +46,9 @@ final class ResultSet {
 
 	/**
 	 * Returns a stream of instances of the searched command.
-	 * @return iterable<\SplFileInfo> A stream of the search results.
+	 * @return \Generator<int, \SplFileInfo> A stream of the search results.
 	 */
-	function stream(): iterable {
+	function stream(): \Generator {
 		return $this->finder->find($this->command);
 	}
 }
