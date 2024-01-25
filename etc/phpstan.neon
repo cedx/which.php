@@ -1,3 +1,0 @@
-parameters:
-	level: 8
-	paths: [../bin, ../example, ../src, ../test, ../tool]

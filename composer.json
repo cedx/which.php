@@ -41,7 +41,7 @@
 	"scripts": {
 		"clean": "@php tool/clean.php",
 		"doc": "@php tool/doc.php",
-		"lint": "phpstan analyse --configuration=etc/phpstan.neon --memory-limit=256M",
+		"lint": "phpstan analyse --configuration=etc/phpstan.php --memory-limit=256M",
 		"publish": "@php tool/publish.php",
 		"start": "@php bin/which --help",
 		"test": "phpunit --configuration=etc/phpunit.xml"
