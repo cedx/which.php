@@ -1,59 +1,12 @@
 #!/usr/bin/env php
 <?php
-use function which\which;
-
 // Load the dependencies.
-$rootPath = dirname(__DIR__);
-require is_file($autoload = __DIR__."/../../../autoload.php") ? $autoload : "$rootPath/vendor/autoload.php";
-
-// The usage information.
-const usage = "
-Find the instances of an executable in the system path.
-
-Usage:
-  which [options] <command>
-
-Arguments:
-  command        The name of the executable to find.
-
-Options:
-  -a, --all      List all executable instances found (instead of just the first one).
-  -s, --silent   Silence the output, just return the exit code (0 if any executable is found, otherwise 1).
-  -h, --help     Display this help.
-  -v, --version  Output the version number.
-";
-
-// Parse the command line arguments.
-$options = ["a" => "all", "h" => "help", "s" => "silent", "v" => "version"];
-$values = getopt(implode(array_keys($options)), $options, $index);
-$positionals = array_slice($argv, $index);
-
-// Print the usage.
-$help = isset($values["h"]) || isset($values["help"]);
-$version = isset($values["v"]) || isset($values["version"]);
-if ($help || $version) {
-	print $version ? json_decode(file_get_contents(__DIR__."/../composer.json") ?: "{}")->version : trim(usage);
-	exit();
-}
-
-// Check the requirements.
-if (!$positionals) {
-	fwrite(STDERR, "You must provide the name of a command to find.");
-	exit(1);
-}
+require is_file($autoload = __DIR__."/../../../autoload.php") ? $autoload : dirname(__DIR__)."/vendor/autoload.php";
+require __DIR__."/../src/cli/main.php";
 
 // Start the application.
-$all = isset($values["a"]) || isset($values["all"]);
-$silent = isset($values["s"]) || isset($values["silent"]);
-
-try {
-	$finder = which(array_shift($positionals));
-	$paths = $all ? $finder->all(throwIfNotFound: true) : $finder->first(throwIfNotFound: true);
-	if (!$silent) {
-		if (!is_array($paths)) $paths = [$paths];
-		print implode(PHP_EOL, $paths);
-	}
-}
+$silent = false;
+try { exit(main($argv)); }
 catch (RuntimeException $e) {
 	if (!$silent) fwrite(STDERR, $e->getMessage());
 	exit(1);

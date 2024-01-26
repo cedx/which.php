@@ -10,8 +10,11 @@
 		<cache>../var/phpdoc</cache>
 		<output>../docs/api</output>
 	</paths>
-	<version number="11.1.0">
+	<version number="11.2.0">
 		<api>
+			<ignore>
+				<path>src/cli</path>
+			</ignore>
 			<source dsn="..">
 				<path>src</path>
 			</source>
