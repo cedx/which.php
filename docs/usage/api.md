@@ -40,7 +40,7 @@ catch (RuntimeException $e) {
 }
 ```
 
-### **stream()**: \Generator&lt;\SplFileInfo&gt;
+### **stream()**: \Generator&lt;int, \SplFileInfo&gt;
 The `ResultSet->stream()` method returns a generator that yields an [`SplFileInfo`](https://www.php.net/manual/en/class.splfileinfo.php) instance for each executable found in the system path.
 
 ```php
