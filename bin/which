@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
 // Load the dependencies.
-require is_file($autoload = __DIR__."/../../../autoload.php") ? $autoload : dirname(__DIR__)."/vendor/autoload.php";
+require is_file($autoload = __DIR__."/../../../autoload.php") ? $autoload : __DIR__."/../vendor/autoload.php";
 require __DIR__."/../src/cli/main.php";
 
 // Start the application.
