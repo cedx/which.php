@@ -5,19 +5,19 @@ use Symfony\Component\Filesystem\Path;
 /**
  * Finds the instances of an executable in the system path.
  */
-final class Finder {
+final readonly class Finder {
 
 	/**
 	 * The list of executable file extensions.
 	 * @var string[]
 	 */
-	readonly array $extensions;
+	public array $extensions;
 
 	/**
 	 * The list of system paths.
 	 * @var string[]
 	 */
-	readonly array $paths;
+	public array $paths;
 
 	/**
 	 * Creates a new finder.

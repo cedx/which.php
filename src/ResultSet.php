@@ -3,14 +3,14 @@
 /**
  * Provides convenient access to the stream of search results.
  */
-final class ResultSet {
+final readonly class ResultSet {
 
 	/**
 	 * Creates a new result set.
 	 * @param string $command The searched command.
 	 * @param Finder $finder The finder used to perform the search.
 	 */
-	function __construct(private readonly string $command, private readonly Finder $finder) {}
+	function __construct(private string $command, private Finder $finder) {}
 
 	/**
 	 * Returns all instances of the searched command.
