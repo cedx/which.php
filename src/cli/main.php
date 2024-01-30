@@ -23,11 +23,10 @@ function main(array $args): void {
 
 	// Check the requirements.
 	if (!$positionals) throw new LogicException("You must provide the name of a command to find.");
-	$all = isset($values["a"]) || isset($values["all"]);
-	$silent = isset($values["s"]) || isset($values["silent"]);
 
 	// Find the instances of the provided executable.
+	$silent = isset($values["s"]) || isset($values["silent"]);
 	$finder = which($positionals[0]);
-	$paths = $all ? $finder->all(throwIfNotFound: true) : [$finder->first(throwIfNotFound: true)];
+	$paths = isset($values["a"]) || isset($values["all"]) ? $finder->all(throwIfNotFound: true) : [$finder->first(throwIfNotFound: true)];
 	if (!$silent) print implode(PHP_EOL, $paths);
 }
