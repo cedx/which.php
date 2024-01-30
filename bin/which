@@ -6,7 +6,7 @@ require __DIR__."/../src/cli/main.php";
 
 // Start the application.
 $silent = false;
-try { exit(main($argv)); }
+try { main($argv); }
 catch (Throwable $e) {
 	if (!$silent) fwrite(STDERR, $e->getMessage());
 	exit(1);

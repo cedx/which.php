@@ -3,9 +3,9 @@
 /**
  * Application entry point.
  * @param string[] $args The command line arguments.
- * @return int The application exit code.
+ * @throws LogicException No executable was provided.
  */
-function main(array $args): int {
+function main(array $args): void {
 	global $silent;
 
 	// Parse the command line arguments.
@@ -18,21 +18,16 @@ function main(array $args): int {
 	$version = isset($values["v"]) || isset($values["version"]);
 	if ($help || $version) {
 		print $help ? trim(require __DIR__."/usage.php") : json_decode(file_get_contents(__DIR__."/../../composer.json") ?: "{}")->version;
-		return 0;
+		return;
 	}
 
 	// Check the requirements.
-	if (!$positionals) {
-		fwrite(STDERR, "You must provide the name of a command to find.");
-		return 1;
-	}
-
-	// Find the instances of the provided executable.
+	if (!$positionals) throw new LogicException("You must provide the name of a command to find.");
 	$all = isset($values["a"]) || isset($values["all"]);
 	$silent = isset($values["s"]) || isset($values["silent"]);
 
+	// Find the instances of the provided executable.
 	$finder = which($positionals[0]);
 	$paths = $all ? $finder->all(throwIfNotFound: true) : [$finder->first(throwIfNotFound: true)];
 	if (!$silent) print implode(PHP_EOL, $paths);
-	return 0;
 }
