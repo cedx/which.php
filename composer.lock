@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "307ae4ba07d2f2f1bedbd5877db7b513",
+    "content-hash": "2b561c08cbc44f4a861adfff264b3d20",
     "packages": [
         {
             "name": "symfony/filesystem",
@@ -1920,7 +1920,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.1.0",
+        "php": ">=8.3.0",
         "ext-mbstring": "*",
         "ext-spl": "*"
     },
