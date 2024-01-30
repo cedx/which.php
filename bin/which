@@ -2,7 +2,7 @@
 <?php
 // Load the dependencies.
 require is_file($autoload = __DIR__."/../../../autoload.php") ? $autoload : __DIR__."/../vendor/autoload.php";
-require __DIR__."/../src/cli/main.php";
+require __DIR__."/../src/cli.php";
 
 // Start the application.
 $silent = false;
