@@ -47,7 +47,7 @@
 		"test": "phpunit --configuration=etc/phpunit.xml"
 	},
 	"support": {
-		"docs": "https://cedx.github.io/which.php",
+		"docs": "https://docs.belin.io/which.php",
 		"issues": "https://github.com/cedx/which.php/issues"
 	}
 }
