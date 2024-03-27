@@ -16,9 +16,12 @@ function clean(): void {
 #[AsTask(description: "Builds the documentation")]
 function doc(): void {
 	$pkg = variable("package");
-	foreach (["CHANGELOG.md", "LICENSE.md"] as $file) fs()->copy($file, "docs/".mb_strtolower($file));
-	replaceInFile("etc/phpdoc.xml", '/version number="\d+(\.\d+){2}"/', "version number=\"$pkg->version\"");
+	file_put_contents(
+		$file = "etc/phpdoc.xml",
+		preg_replace('/version number="\d+(\.\d+){2}"/', "version number=\"$pkg->version\"", file_get_contents($file))
+	);
 
+	foreach (["CHANGELOG.md", "LICENSE.md"] as $file) fs()->copy($file, "docs/".mb_strtolower($file));
 	fs()->remove("docs/api");
 	run("phpdoc --config=etc/phpdoc.xml");
 	fs()->copy("docs/favicon.ico", "docs/api/images/favicon.ico");
@@ -38,14 +41,4 @@ function publish(): void {
 #[AsTask(description: "Runs the test suite")]
 function test(): int {
 	return exit_code("php vendor/bin/phpunit --configuration=etc/phpunit.xml");
-}
-
-/**
- * Replaces in the specified file the substring which the pattern matches with the given replacement.
- * @param string $file The path of the file to process.
- * @param string $pattern The pattern to search for.
- * @param string $replacement The string to replace.
- */
-function replaceInFile(string $file, string $pattern, string $replacement): void {
-	file_put_contents($file, preg_replace($pattern, $replacement, file_get_contents($file)));
 }
