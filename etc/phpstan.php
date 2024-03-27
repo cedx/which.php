@@ -1,4 +1,4 @@
 <?php return ["parameters" => [
 	"level" => 8,
-	"paths" => ["bin", "example", "src", "test", "tool"]
+	"paths" => ["bin", "example", "src", "test"]
 ]];
