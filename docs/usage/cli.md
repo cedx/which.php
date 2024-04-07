@@ -1,7 +1,7 @@
 # Command line interface
 From a command prompt, install the `which` executable:
 
-```shell
+``` shell
 composer global require cedx/which
 ```
 
@@ -9,7 +9,7 @@ composer global require cedx/which
 
 Then use it to find the instances of an executable command:
 
-```shell
+``` shell
 $ which --help
 
 Find the instances of an executable in the system path.
@@ -29,7 +29,7 @@ Options:
 
 For example:
 
-```shell
+``` shell
 which --all php
 # /usr/bin/php
 # /usr/local/bin/php

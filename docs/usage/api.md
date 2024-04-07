@@ -11,7 +11,7 @@ This function takes the name of the command to locate, and returns a `ResultSet`
 The `ResultSet->all()` method returns the absolute paths of all instances of an executable found in the system path.
 If the executable could not be located, it returns an empty array, or throws an `RuntimeException` if the `$throwIfNotFound` parameter is set to `true`.
 
-```php
+``` php
 use function which\which;
 
 try {
@@ -28,7 +28,7 @@ catch (RuntimeException $e) {
 The `ResultSet->first()` method returns the absolute path of the first instance of an executable found in the system path.
 If the executable could not be located, it returns an empty string, or throws an `RuntimeException` if the `$throwIfNotFound` parameter is set to `true`.
 
-```php
+``` php
 use function which\which;
 
 try {
@@ -43,7 +43,7 @@ catch (RuntimeException $e) {
 ### **stream()**: \Generator&lt;int, \SplFileInfo&gt;
 The `ResultSet->stream()` method returns a generator that yields an [`SplFileInfo`](https://www.php.net/manual/en/class.splfileinfo.php) instance for each executable found in the system path.
 
-```php
+``` php
 use function which\which;
 
 try {
@@ -62,7 +62,7 @@ The behavior of the `which(string $command, array $paths = [], array $extensions
 An array of strings specifying the list of executable file extensions.
 On Windows, defaults to the list of extensions provided by the `PATHEXT` environment variable.
 
-```php
+``` php
 which("foobar", extensions: [".foo", ".exe", ".cmd"]);
 ```
 
@@ -72,6 +72,6 @@ which("foobar", extensions: [".foo", ".exe", ".cmd"]);
 An array of strings specifying the system paths from which the given command will be searched.
 Defaults to the list of directories provided by the `PATH` environment variable.
 
-```php
+``` php
 which("foobar", paths: ["/usr/local/bin", "/usr/bin"]);
 ```

@@ -4,7 +4,7 @@ Find the instances of an executable in the system path, in [PHP](https://www.php
 ## Quick start
 Install the latest version of **Which for PHP** with [Composer](https://getcomposer.org) package manager:
 
-```shell
+``` shell
 composer require cedx/which
 ```
 

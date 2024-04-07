@@ -11,6 +11,7 @@ function context(): Context {
 #[AsTask(description: "Deletes all generated files")]
 function clean(): void {
 	fs()->remove(finder()->in("var"));
+	fs()->remove("www");
 }
 
 #[AsTask(description: "Builds the documentation")]
