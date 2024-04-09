@@ -6,7 +6,7 @@ jobs:
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
-        os: [windows-latest]
+        os: [macos-latest, ubuntu-latest, windows-latest]
     steps:
       - name: Fetch sources
         uses: actions/checkout@v4
@@ -16,10 +16,10 @@ jobs:
           coverage: none
           extensions: curl, intl, mbstring, simplexml
           php-version: 8.3
-      - run: echo $(composer config cache-files-dir)
       - name: Get cache directory
         id: cache
         run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+        shell: bash
       - name: Cache dependencies
         uses: actions/cache@v4
         with:
