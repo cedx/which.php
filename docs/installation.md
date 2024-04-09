@@ -27,5 +27,5 @@ composer require cedx/which
 Now in your [PHP](https://www.php.net) code, you can use:
 
 ```php
-use function which\which;
+<?php use function which\which;
 ```

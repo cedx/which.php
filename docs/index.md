@@ -13,7 +13,3 @@ For detailed instructions, see the [installation guide](installation.md).
 ## Usage
 - [Application programming interface](usage/api.md)
 - [Command line interface](usage/cli.md)
-
-## See also
-- [API reference](api/)
-- [Packagist package](https://packagist.org/packages/cedx/which)

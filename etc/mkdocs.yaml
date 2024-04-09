@@ -1,0 +1,60 @@
+site_name: Which for PHP
+site_url: https://docs.belin.io/which.php
+site_author: Cédric Belin - cedric@belin.io
+site_description: Find the instances of an executable in the system path. Like the `which` Linux command.
+
+docs_dir: ../docs
+site_dir: ../www
+use_directory_urls: false
+
+edit_uri: edit/main/docs/
+repo_name: cedx/which.php
+repo_url: https://github.com/cedx/which.php
+
+copyright: Copyright &copy; Cédric Belin
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/cedx
+      name: GitHub
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/cedxbelin
+      name: LinkedIn
+    - icon: fontawesome/brands/mastodon
+      link: https://mastodon.social/@cedx
+      name: Mastodon
+
+extra_css:
+  - styles.css
+
+markdown_extensions:
+  - admonition
+  - pymdownx.superfences
+
+nav:
+  - Home: index.md
+  - Installation: installation.md
+  - Usage:
+      - Programming interface: usage/api.md
+      - Command line: usage/cli.md
+  - See also:
+      - API reference: api/
+      - Changelog: changelog.md
+      - License: license.md
+
+theme:
+  favicon: favicon.svg
+  features:
+    - content.code.copy
+    - content.tooltips
+    - navigation.footer
+    - navigation.instant
+    - navigation.instant.progress
+    - navigation.sections
+    - search.suggest
+  font: false
+  logo: favicon.svg
+  name: material
+  palette:
+    accent: indigo
+    primary: indigo
