@@ -10,8 +10,7 @@ use function PHPUnit\Framework\{assertThat, countOf, equalTo, isEmpty, isFalse, 
 #[TestDox("Finder")]
 final class FinderTest extends TestCase {
 
-	#[Test]
-	#[TestDox("__construct()")]
+	#[Test, TestDox("__construct()")]
 	function constructor(): void {
 		// It should set the `paths` property to the value of the `PATH` environment variable by default.
 		$pathEnv = getenv("PATH");
@@ -27,8 +26,7 @@ final class FinderTest extends TestCase {
 		assertThat((new Finder(extensions: [".EXE", ".JS", ".PS1"]))->extensions, equalTo([".exe", ".js", ".ps1"]));
 	}
 
-	#[Test]
-	#[TestDox("find()")]
+	#[Test, TestDox("find()")]
 	function find(): void {
 		$finder = new Finder(["res"]);
 
@@ -47,8 +45,7 @@ final class FinderTest extends TestCase {
 		assertThat([...$finder->find("foo")], isEmpty());
 	}
 
-	#[Test]
-	#[TestDox("isExecutable()")]
+	#[Test, TestDox("isExecutable()")]
 	function isExecutable(): void {
 		$finder = new Finder;
 

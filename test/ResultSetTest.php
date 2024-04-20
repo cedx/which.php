@@ -10,8 +10,7 @@ use function PHPUnit\Framework\{assertThat, countOf, isEmpty, stringEndsWith};
 #[TestDox("ResultSet")]
 final class ResultSetTest extends TestCase {
 
-	#[Test]
-	#[TestDox("all()")]
+	#[Test, TestDox("all()")]
 	function all(): void {
 		$paths = ["res"];
 
@@ -40,8 +39,7 @@ final class ResultSetTest extends TestCase {
 		which("not_executable.sh", paths: $paths)->all(throwIfNotFound: true);
 	}
 
-	#[Test]
-	#[TestDox("first()")]
+	#[Test, TestDox("first()")]
 	function first(): void {
 		$paths = ["res"];
 
