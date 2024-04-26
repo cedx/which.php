@@ -1,12 +1,55 @@
 #!/usr/bin/env php
 <?php
-// Load the dependencies.
-require is_file($autoload = __DIR__."/../../../autoload.php") ? $autoload : __DIR__."/../vendor/autoload.php";
-require __DIR__."/../src/cli.php";
+use function which\which;
 
-// Start the application.
-$silent = false;
-try { main($argv); }
+// The usage information.
+const usage = "
+Find the instances of an executable in the system path.
+
+Usage:
+  which [options] <command>
+
+Arguments:
+  command        The name of the executable to find.
+
+Options:
+  -a, --all      List all executable instances found (instead of just the first one).
+  -s, --silent   Silence the output, just return the exit code (0 if any executable is found, otherwise 1).
+  -h, --help     Display this help.
+  -v, --version  Output the version number.
+";
+
+// Load the dependencies.
+$root = dirname(__DIR__);
+require is_file($autoload = "$root/../../autoload.php") ? $autoload : "$root/vendor/autoload.php";
+
+// Parse the command line arguments.
+$options = ["a" => "all", "h" => "help", "s" => "silent", "v" => "version"];
+$values = getopt(implode(array_keys($options)), $options, $index);
+$positionals = array_slice($argv, $index);
+
+// Print the usage.
+$help = isset($values["h"]) || isset($values["help"]);
+$version = isset($values["v"]) || isset($values["version"]);
+if ($help || $version) {
+	print $help ? trim(usage) : json_decode(file_get_contents("$root/composer.json") ?: "{}")->version;
+	exit(0);
+}
+
+// Check the requirements.
+if (!$positionals) {
+	print "You must provide the name of a command to find.";
+	exit(1);
+}
+
+// Find the instances of the provided executable.
+$silent = isset($values["s"]) || isset($values["silent"]);
+$finder = which($positionals[0]);
+
+try {
+	$paths = isset($values["a"]) || isset($values["all"]) ? $finder->all(throwIfNotFound: true) : [$finder->first(throwIfNotFound: true)];
+	if (!$silent) print implode(PHP_EOL, $paths);
+}
 catch (Throwable $e) {
 	if (!$silent) fwrite(STDERR, $e->getMessage());
 	exit(1);
