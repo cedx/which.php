@@ -9,7 +9,9 @@ This function takes the name of the command to locate, and returns a `ResultSet`
 
 ### **all(bool $throwIfNotFound = false)**: string[]
 The `ResultSet->all()` method returns the absolute paths of all instances of an executable found in the system path.
-If the executable could not be located, it returns an empty array, or throws a `RuntimeException` if the `$throwIfNotFound` parameter is set to `true`.
+If the executable could not be located, it returns an empty array, or throws
+a [`RuntimeException`](https://www.php.net/manual/en/class.runtimeexception.php)
+if the `$throwIfNotFound` parameter is set to `true`.
 
 ```php
 <?php use function which\which;
@@ -26,7 +28,9 @@ catch (RuntimeException $e) {
 
 ### **first(bool $throwIfNotFound = false)**: string
 The `ResultSet->first()` method returns the absolute path of the first instance of an executable found in the system path.
-If the executable could not be located, it returns an empty string, or throws a `RuntimeException` if the `$throwIfNotFound` parameter is set to `true`.
+If the executable could not be located, it returns an empty string, or throws
+a [`RuntimeException`](https://www.php.net/manual/en/class.runtimeexception.php)
+if the `$throwIfNotFound` parameter is set to `true`.
 
 ```php
 <?php use function which\which;
