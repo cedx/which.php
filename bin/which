@@ -33,7 +33,7 @@ $help = isset($values["h"]) || isset($values["help"]);
 $version = isset($values["v"]) || isset($values["version"]);
 if ($help || $version) {
 	print $help ? trim(usage) : json_decode(file_get_contents("$root/composer.json") ?: "{}")->version;
-	exit(0);
+	exit;
 }
 
 // Check the requirements.
@@ -52,5 +52,5 @@ try {
 }
 catch (Throwable $e) {
 	if (!$silent) fwrite(STDERR, $e->getMessage());
-	exit(1);
+	exit(2);
 }
