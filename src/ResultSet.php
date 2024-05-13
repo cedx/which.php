@@ -35,7 +35,7 @@ final readonly class ResultSet {
 	 * @throws \RuntimeException The command has not been found.
 	 */
 	function first(bool $throwIfNotFound = false): string {
-		$executable = $this->stream()->current()?->getPathname() ?? ""; // @phpstan-ignore-line
+		$executable = $this->stream()->current()?->getPathname() ?? ""; // @phpstan-ignore nullCoalesce.expr, nullsafe.neverNull
 		if (!$executable && $throwIfNotFound) {
 			$paths = implode(Finder::isWindows() ? ";" : PATH_SEPARATOR, $this->finder->paths);
 			throw new \RuntimeException("No '$this->command' in ($paths).");
