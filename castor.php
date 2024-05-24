@@ -1,7 +1,7 @@
 <?php
 use Castor\Attribute\{AsContext, AsTask};
 use Castor\Context;
-use function Castor\{exit_code, finder, fs, request, run, variable};
+use function Castor\{exit_code, finder, fs, http_download, run, variable};
 
 #[AsContext(default: true)]
 function context(): Context {
@@ -25,7 +25,7 @@ function doc(): void {
 	);
 
 	fs()->remove("docs/api");
-	file_put_contents("var/phpDocumentor.phar", request("GET", "https://phpdoc.org/phpDocumentor.phar")->getContent());
+	http_download("https://phpdoc.org/phpDocumentor.phar", "var/phpDocumentor.phar");
 	run("php var/phpDocumentor.phar --config=etc/phpdoc.xml");
 	fs()->copy("docs/favicon.ico", "docs/api/images/favicon.ico");
 }
