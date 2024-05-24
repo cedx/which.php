@@ -22,7 +22,7 @@ final readonly class ResultSet {
 		$executables = array_unique(array_map(fn(\SplFileInfo $file) => $file->getPathname(), [...$this->stream()]));
 		if (!$executables && $throwIfNotFound) {
 			$paths = implode(Finder::isWindows() ? ";" : PATH_SEPARATOR, $this->finder->paths);
-			throw new \RuntimeException("No '$this->command' in ($paths).");
+			throw new \RuntimeException("No '$this->command' in ($paths).", 404);
 		}
 
 		return array_values($executables);
@@ -38,7 +38,7 @@ final readonly class ResultSet {
 		$executable = $this->stream()->current()?->getPathname() ?? ""; // @phpstan-ignore nullCoalesce.expr, nullsafe.neverNull
 		if (!$executable && $throwIfNotFound) {
 			$paths = implode(Finder::isWindows() ? ";" : PATH_SEPARATOR, $this->finder->paths);
-			throw new \RuntimeException("No '$this->command' in ($paths).");
+			throw new \RuntimeException("No '$this->command' in ($paths).", 404);
 		}
 
 		return $executable;
