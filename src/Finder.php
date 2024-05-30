@@ -108,8 +108,7 @@ final readonly class Finder {
 		$basePath = (string) getcwd();
 		foreach (["", ...self::isWindows() ? $this->extensions : []] as $extension) {
 			$resolvedPath = Path::makeAbsolute(Path::join($directory, "$command$extension"), $basePath);
-			if ($this->isExecutable($resolvedPath))
-				yield new \SplFileInfo(strtr($resolvedPath, ["/" => DIRECTORY_SEPARATOR]));
+			if ($this->isExecutable($resolvedPath)) yield new \SplFileInfo(strtr($resolvedPath, ["/" => DIRECTORY_SEPARATOR]));
 		}
 	}
 }
