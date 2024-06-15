@@ -4,12 +4,11 @@
 Find the instances of an executable in the system path, in [PHP](https://www.php.net).
 
 ## Documentation
-- [User guide](https://docs.belin.io/which.php)
-- [API reference](https://docs.belin.io/which.php/api)
+- [User guide](https://cedx.github.io/which.php/wiki)
+- [Examples](https://github.com/cedx/which.php/tree/main/example)
 
 ## Development
 - [Git repository](https://github.com/cedx/which.php)
-- [Packagist package](https://packagist.org/packages/cedx/which.php)
 - [Submit an issue](https://github.com/cedx/which.php/issues)
 
 ## License
