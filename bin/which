@@ -2,7 +2,7 @@
 <?php
 use function which\which;
 
-// Give a friendly name to the process.
+// Give the process a friendly name.
 @cli_set_process_title("Which for PHP");
 
 // The usage information.
