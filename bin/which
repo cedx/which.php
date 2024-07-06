@@ -1,6 +1,7 @@
 #!/usr/bin/env php
 <?php
 use function which\which;
+cli_set_process_title("Which for PHP");
 
 // The usage information.
 const usage = "
