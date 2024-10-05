@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 use function which\which;
 
 // Finds the first instance of an executable.

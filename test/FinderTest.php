@@ -1,4 +1,5 @@
-<?php namespace which;
+<?php declare(strict_types=1);
+namespace which;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\{Test, TestDox};

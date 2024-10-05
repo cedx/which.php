@@ -1,4 +1,5 @@
-<?php namespace which;
+<?php declare(strict_types=1);
+namespace which;
 
 /**
  * Finds the instances of the specified command in the system path.

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 use function which\which;
 
 // Finds all instances of an executable and returns them one at a time.

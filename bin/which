@@ -1,5 +1,5 @@
 #!/usr/bin/env php
-<?php
+<?php declare(strict_types=1);
 use function which\which;
 
 // Give the process a friendly name.
