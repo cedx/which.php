@@ -42,7 +42,7 @@ if ($help || $version) {
 // Check the requirements.
 if (!$positionals) {
 	print "You must provide the name of a command to find.";
-	exit(1);
+	exit(400);
 }
 
 // Find the instances of the provided executable.
@@ -55,5 +55,6 @@ try {
 }
 catch (Throwable $e) {
 	if (!$silent) fwrite(STDERR, $e->getMessage());
-	exit(2);
+	$code = $e->getCode();
+	exit($code >= 400 && $code < 600 ? $code : 500);
 }
