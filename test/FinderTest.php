@@ -16,15 +16,15 @@ final class FinderTest extends TestCase {
 		// It should set the `paths` property to the value of the `PATH` environment variable by default.
 		$pathEnv = getenv("PATH");
 		$paths = $pathEnv ? array_values(array_filter(explode(PATH_SEPARATOR, $pathEnv))) : [];
-		assertThat((new Finder)->paths, equalTo($paths));
+		assertThat(new Finder()->paths, equalTo($paths));
 
 		// It should set the `extensions` property to the value of the `PATHEXT` environment variable by default.
 		$pathExt = getenv("PATHEXT");
 		$extensions = $pathExt ? array_map(mb_strtolower(...), explode(";", $pathExt)) : [".exe", ".cmd", ".bat", ".com"];
-		assertThat((new Finder)->extensions, equalTo($extensions));
+		assertThat(new Finder()->extensions, equalTo($extensions));
 
 		// It should put in lower case the list of file extensions.
-		assertThat((new Finder(extensions: [".EXE", ".JS", ".PS1"]))->extensions, equalTo([".exe", ".js", ".ps1"]));
+		assertThat(new Finder(extensions: [".EXE", ".JS", ".PS1"])->extensions, equalTo([".exe", ".js", ".ps1"]));
 	}
 
 	#[Test, TestDox("find()")]

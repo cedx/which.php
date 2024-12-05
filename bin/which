@@ -6,7 +6,7 @@ use function which\which;
 @cli_set_process_title("Which for PHP");
 
 // The usage information.
-$usage = trim("
+$usage = mb_trim("
 Find the instances of an executable in the system path.
 
 Usage:
