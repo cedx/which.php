@@ -6,19 +6,23 @@ use Symfony\Component\Filesystem\Path;
 /**
  * Finds the instances of an executable in the system path.
  */
-final readonly class Finder {
+final class Finder {
 
 	/**
 	 * The list of executable file extensions.
 	 * @var string[]
 	 */
-	public array $extensions;
+	public array $extensions {
+		set => $this->extensions = array_map(mb_strtolower(...), $value);
+	}
 
 	/**
 	 * The list of system paths.
 	 * @var string[]
 	 */
-	public array $paths;
+	public array $paths {
+		set => $this->paths = array_values(array_filter(array_map(fn($item) => preg_replace('/^"|"$/', "", $item), $value)));
+	}
 
 	/**
 	 * Creates a new finder.
@@ -36,8 +40,8 @@ final readonly class Finder {
 			$extensions = $pathExt ? explode(";", $pathExt) : [".exe", ".cmd", ".bat", ".com"];
 		}
 
-		$this->extensions = array_map(mb_strtolower(...), $extensions);
-		$this->paths = array_values(array_filter(array_map(fn($item) => preg_replace('/^"|"$/', "", $item), $paths)));
+		$this->extensions = $extensions;
+		$this->paths = $paths;
 	}
 
 	/**
