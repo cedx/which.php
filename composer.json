@@ -39,7 +39,6 @@
 		"phpunit/phpunit": "^11.5.3"
 	},
 	"scripts": {
-		"start": "@php bin/which --help",
 		"test": "phpunit --configuration=etc/phpunit.xml"
 	},
 	"support": {
