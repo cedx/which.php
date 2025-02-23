@@ -47,10 +47,10 @@ if (!$positionals) {
 
 // Find the instances of the provided executable.
 $silent = isset($values["s"]) || isset($values["silent"]);
-$finder = which($positionals[0]);
+$resultSet = which($positionals[0]);
 
 try {
-	$paths = isset($values["a"]) || isset($values["all"]) ? $finder->all(throwIfNotFound: true) : [$finder->first(throwIfNotFound: true)];
+	$paths = isset($values["a"]) || isset($values["all"]) ? $resultSet->all(throwIfNotFound: true) : [$resultSet->first(throwIfNotFound: true)];
 	if (!$silent) print implode(PHP_EOL, $paths);
 }
 catch (Throwable $e) {
