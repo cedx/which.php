@@ -17,7 +17,7 @@ Arguments:
 
 Options:
 	-a, --all      List all executable instances found (instead of just the first one).
-	-s, --silent   Silence the output, just return the exit code (0 if any executable is found, otherwise 1).
+	-s, --silent   Silence the output, just return the exit code (0 if any executable is found, otherwise 404).
 	-h, --help     Display this help.
 	-v, --version  Output the version number.
 ");
