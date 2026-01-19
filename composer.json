@@ -10,10 +10,10 @@
 	],
 	"autoload": {
 		"files": ["src/index.php"],
-		"psr-4": {"which\\": "src/"}
+		"psr-4": {"Belin\\Which\\": "src/"}
 	},
 	"autoload-dev": {
-		"psr-4": {"which\\": "test/"}
+		"psr-4": {"Belin\\Which\\": "test/"}
 	},
 	"config": {
 		"platform-check": false

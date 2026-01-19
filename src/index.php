@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-namespace which;
+namespace Belin\Which;
 
 /**
  * Finds the instances of the specified command in the system path.
