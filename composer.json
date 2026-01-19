@@ -9,7 +9,7 @@
 		{"email": "cedx@outlook.com", "homepage": "https://cedric-belin.fr", "name": "Cédric Belin"}
 	],
 	"autoload": {
-		"files": ["src/index.php"],
+		"files": ["src/Main.php"],
 		"psr-4": {"Belin\\Which\\": "src/"}
 	},
 	"autoload-dev": {
