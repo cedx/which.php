@@ -1,4 +1,4 @@
-<phpunit cacheDirectory="../var/phpunit" testdox="true"
+<phpunit cacheDirectory="../var/PHPUnit" testdox="true"
 	displayDetailsOnTestsThatTriggerDeprecations="true"
 	displayDetailsOnTestsThatTriggerErrors="true"
 	displayDetailsOnTestsThatTriggerNotices="true"
@@ -12,7 +12,7 @@
 		</include>
 	</source>
 	<testsuites>
-		<testsuite name="main">
+		<testsuite name="Main">
 			<directory>../test</directory>
 		</testsuite>
 	</testsuites>
