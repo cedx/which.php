@@ -1,6 +1,5 @@
 /**/*.user
 /.idea/
 /.vs/
-/*/obj/
 /var/
 /vendor/
