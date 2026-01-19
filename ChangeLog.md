@@ -1,5 +1,14 @@
 # Changelog
 
+## Version [12.0.0](https://github.com/cedx/which.php/compare/v11.2.0...v12.0.0)
+- Breaking change: raised the required [PHP](https://www.php.net) version.
+- Breaking change: removed the `ResultSet->stream()` method.
+- Breaking change: the `ResultSet` methods are now implemented as properties.
+- Breaking change: using PHP 8.5 features, like the pipe operator.
+- The `ResultSet` class now implements `IteratorAggregate` interface.
+- Removed the command line interface.
+- Updated the package dependencies.
+
 ## Version [11.2.0](https://github.com/cedx/which.php/compare/v11.1.0...v11.2.0)
 - Updated the package dependencies.
 
