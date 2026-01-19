@@ -9,7 +9,7 @@ use function PHPUnit\Framework\{assertThat, countOf, equalTo, isEmpty, isFalse, 
  * Tests the features of the {@see Finder} class.
  */
 #[TestDox("Finder")]
-final class FinderTest extends TestCase {
+final class FinderTests extends TestCase {
 
 	#[Test, TestDox("__construct()")]
 	function constructor(): void {
