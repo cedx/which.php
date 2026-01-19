@@ -64,7 +64,7 @@ final class ResultSet {
 	 * Returns a stream of instances of the searched command.
 	 * @return \Generator<int, \SplFileInfo> A stream of the search results.
 	 */
-	function stream(): \Generator {
+	function getIterator(): \Traversable {
 		return $this->finder->find($this->command);
 	}
 }
