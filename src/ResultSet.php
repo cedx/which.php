@@ -3,23 +3,27 @@ namespace Belin\Which;
 
 /**
  * Provides convenient access to the stream of search results.
+ * @implements \IteratorAggregate<int, \SplFileInfo>
  */
-final class ResultSet {
+final class ResultSet implements \IteratorAggregate {
 
 	/**
-	 * The list of executable file extensions.
+	 * All instances of the searched command.
 	 * @var string[]
 	 */
-	// TODO public array $all {
-	// 	get => [];
-	// }
+	public array $all {
+		get => iterator_to_array($this->getIterator())
+			|> (fn($list) => array_map(fn(\SplFileInfo $file) => $file->getPathname(), $list))
+			|> array_unique(...)
+			|> array_values(...);
+	}
 
 	/**
-	 * The list of system paths.
+	 * The first instance of the searched command.
 	 */
-	// TODO public ?string $first {
-	// 	get => "TODO";
-	// }
+	public ?string $first {
+		get => $this->getIterator()->current()?->getPathname(); // @phpstan-ignore nullsafe.neverNull
+	}
 
 	/**
 	 * Creates a new result set.
@@ -29,40 +33,8 @@ final class ResultSet {
 	function __construct(private readonly string $command, private readonly Finder $finder) {}
 
 	/**
-	 * Returns all instances of the searched command.
-	 * @param bool $throwIfNotFound Value indicating whether to throw an exception if the command is not found.
-	 * @return string[] All search results, or an empty array if the command is not found.
-	 * @throws \RuntimeException The command has not been found.
-	 */
-	function all(bool $throwIfNotFound = false): array {
-		$executables = array_unique(array_map(fn(\SplFileInfo $file) => $file->getPathname(), [...$this->stream()]));
-		if (!$executables && $throwIfNotFound) {
-			$paths = implode(Finder::isWindows() ? ";" : PATH_SEPARATOR, $this->finder->paths);
-			throw new \RuntimeException("No '$this->command' in ($paths).", 404);
-		}
-
-		return array_values($executables);
-	}
-
-	/**
-	 * Returns the first instance of the searched command.
-	 * @param bool $throwIfNotFound Value indicating whether to throw an exception if the command is not found.
-	 * @return string The first search result, or an empty string if the command is not found.
-	 * @throws \RuntimeException The command has not been found.
-	 */
-	function first(bool $throwIfNotFound = false): string {
-		$executable = $this->stream()->current()?->getPathname() ?? ""; // @phpstan-ignore nullCoalesce.expr, nullsafe.neverNull
-		if (!$executable && $throwIfNotFound) {
-			$paths = implode(Finder::isWindows() ? ";" : PATH_SEPARATOR, $this->finder->paths);
-			throw new \RuntimeException("No '$this->command' in ($paths).", 404);
-		}
-
-		return $executable;
-	}
-
-	/**
-	 * Returns a stream of instances of the searched command.
-	 * @return \Generator<int, \SplFileInfo> A stream of the search results.
+	 * Returns a new iterator that allows iterating the results of this set.
+	 * @return \Generator<int, \SplFileInfo> An iterator for the results of this set.
 	 */
 	function getIterator(): \Traversable {
 		return $this->finder->find($this->command);
