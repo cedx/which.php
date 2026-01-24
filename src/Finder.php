@@ -31,7 +31,7 @@ final class Finder {
 	 * @param string[] $paths The system path. Defaults to the `PATH` environment variable.
 	 * @param string[] $extensions The executable file extensions. Defaults to the `PATHEXT` environment variable.
 	 */
-	function __construct(array $paths = [], array $extensions = []) {
+	public function __construct(array $paths = [], array $extensions = []) {
 		if (!$paths) {
 			$pathEnv = getenv("PATH") ?: "";
 			$paths = $pathEnv ? explode(self::isWindows() ? ";" : PATH_SEPARATOR, $pathEnv) : [];
@@ -50,7 +50,7 @@ final class Finder {
 	 * Gets a value indicating whether the current platform is Windows.
 	 * @return bool `true` if the current platform is Windows, otherwise `false`.
 	 */
-	static function isWindows(): bool {
+	public static function isWindows(): bool {
 		return PHP_OS_FAMILY == "Windows" || in_array(getenv("OSTYPE"), ["cygwin", "msys"]);
 	}
 
@@ -59,7 +59,7 @@ final class Finder {
 	 * @param string $command The command to be resolved.
 	 * @return \Generator<int, \SplFileInfo> The paths of the executables found.
 	 */
-	function find(string $command): \Generator {
+	public function find(string $command): \Generator {
 		foreach ($this->paths as $directory) yield from $this->findExecutables($directory, $command);
 	}
 
@@ -68,7 +68,7 @@ final class Finder {
 	 * @param string $file The path of the file to be checked.
 	 * @return bool `true` if the specified file is executable, otherwise `false`.
 	 */
-	function isExecutable(string $file): bool {
+	public function isExecutable(string $file): bool {
 		$fileInfo = new \SplFileInfo($file);
 		if (!$fileInfo->isFile()) return false;
 		return self::isWindows() ? $this->checkFileExtension($fileInfo) : $this->checkFilePermissions($fileInfo);

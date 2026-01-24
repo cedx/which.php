@@ -12,7 +12,7 @@ use function PHPUnit\Framework\{assertThat, countOf, equalTo, isEmpty, isFalse, 
 final class FinderTests extends TestCase {
 
 	#[Test, TestDox("__construct()")]
-	function constructor(): void {
+	public function constructor(): void {
 		// It should set the `paths` property to the value of the `PATH` environment variable by default.
 		$pathEnv = getenv("PATH");
 		$paths = $pathEnv ? explode(PATH_SEPARATOR, $pathEnv) |> array_filter(...) |> array_values(...) : [];
@@ -28,7 +28,7 @@ final class FinderTests extends TestCase {
 	}
 
 	#[Test, TestDox("find()")]
-	function find(): void {
+	public function find(): void {
 		$finder = new Finder(["res"]);
 
 		// It should return the path of the `Executable.cmd` file on Windows.
@@ -47,7 +47,7 @@ final class FinderTests extends TestCase {
 	}
 
 	#[Test, TestDox("isExecutable()")]
-	function isExecutable(): void {
+	public function isExecutable(): void {
 		$finder = new Finder;
 
 		// It should return `false` if the searched command is not executable or not found.

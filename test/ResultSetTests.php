@@ -12,7 +12,7 @@ use function PHPUnit\Framework\{assertThat, countOf, isEmpty, stringEndsWith};
 final class ResultSetTests extends TestCase {
 
 	#[Test, TestDox("all")]
-	function all(): void {
+	public function all(): void {
 		$paths = ["res"];
 
 		// It should return the path of the `Executable.cmd` file on Windows.
@@ -37,7 +37,7 @@ final class ResultSetTests extends TestCase {
 	}
 
 	#[Test, TestDox("first")]
-	function first(): void {
+	public function first(): void {
 		$paths = ["res"];
 
 		// It should return the path of the `Executable.cmd` file on Windows.

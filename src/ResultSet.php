@@ -30,13 +30,13 @@ final class ResultSet implements \IteratorAggregate {
 	 * @param string $command The searched command.
 	 * @param Finder $finder The finder used to perform the search.
 	 */
-	function __construct(private readonly string $command, private readonly Finder $finder) {}
+	public function __construct(private readonly string $command, private readonly Finder $finder) {}
 
 	/**
 	 * Returns a new iterator that allows iterating the results of this set.
 	 * @return \Generator<int, \SplFileInfo> An iterator for the results of this set.
 	 */
-	function getIterator(): \Traversable {
+	public function getIterator(): \Traversable {
 		return $this->finder->find($this->command);
 	}
 }
