@@ -32,8 +32,8 @@
 		"symfony/filesystem": "^8.0.1"
 	},
 	"require-dev": {
-		"phpstan/phpstan": "^2.1.36",
-		"phpunit/phpunit": "^12.5.6"
+		"phpstan/phpstan": "^2.1.37",
+		"phpunit/phpunit": "^12.5.7"
 	},
 	"support": {
 		"docs": "https://github.com/cedx/which.php/wiki",
