@@ -13,7 +13,7 @@ final class Finder {
 	 * @var string[]
 	 */
 	public array $extensions {
-		set => $this->extensions = array_map(mb_strtolower(...), $value);
+		set => array_map(mb_strtolower(...), $value);
 	}
 
 	/**
@@ -21,7 +21,7 @@ final class Finder {
 	 * @var string[]
 	 */
 	public array $paths {
-		set => $this->paths = array_map(fn($item) => preg_replace('/^"|"$/', "", $item), $value)
+		set => array_map(fn($item) => preg_replace('/^"|"$/', "", $item), $value)
 			|> array_filter(...)
 			|> array_values(...);
 	}
