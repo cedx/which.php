@@ -26,11 +26,24 @@ final class ResultSet implements \IteratorAggregate {
 	}
 
 	/**
+	 * The searched command.
+	 */
+	private readonly string $command;
+
+	/**
+	 * The finder used to perform the search.
+	 */
+	private readonly Finder $finder;
+
+	/**
 	 * Creates a new result set.
 	 * @param string $command The searched command.
 	 * @param Finder $finder The finder used to perform the search.
 	 */
-	public function __construct(private readonly string $command, private readonly Finder $finder) {}
+	public function __construct(string $command, Finder $finder) {
+		$this->command = $command;
+		$this->finder = $finder;
+	}
 
 	/**
 	 * Returns a new iterator that allows iterating the results of this set.
