@@ -59,7 +59,7 @@ final class Finder {
 	 * @param string $command The command to be resolved.
 	 * @return \Generator<int, \SplFileInfo> The paths of the executables found.
 	 */
-	public function find(string $command): \Generator {
+	public function find(string $command): \Traversable {
 		foreach ($this->paths as $directory) yield from $this->findExecutables($directory, $command);
 	}
 
@@ -111,7 +111,7 @@ final class Finder {
 	 * @param string $command The command to be resolved.
 	 * @return \Generator<int, \SplFileInfo> The paths of the executables found.
 	 */
-	private function findExecutables(string $directory, string $command): \Generator {
+	private function findExecutables(string $directory, string $command): \Traversable {
 		$basePath = (string) getcwd();
 		foreach (["", ...self::isWindows() ? $this->extensions : []] as $extension) {
 			$resolvedPath = Path::makeAbsolute(Path::join($directory, "$command$extension"), $basePath);
