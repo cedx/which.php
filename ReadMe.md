@@ -2,7 +2,7 @@
 Find the instances of an executable in the system path, in [PHP](https://www.php.net).
 
 ## Documentation
-- [User guide](https://github.com/cedx/which.php/wiki)
+- [User guide](https://github.com/cedx/which.php/tree/main/docs)
 - [Examples](https://github.com/cedx/which.php/tree/main/example)
 
 ## Development

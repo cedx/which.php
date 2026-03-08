@@ -39,7 +39,7 @@
 		"test": "pwsh Invoke.ps1 Test"
 	},
 	"support": {
-		"docs": "https://github.com/cedx/which.php/wiki",
+		"docs": "https://github.com/cedx/which.php/tree/main/docs",
 		"issues": "https://github.com/cedx/which.php/issues"
 	}
 }
