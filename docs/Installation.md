@@ -4,7 +4,7 @@
 Before installing **Which for PHP**, you need to make sure you have [PHP](https://www.php.net)
 and [Composer](https://getcomposer.org), the PHP package manager, up and running.
 	
-You can verify if you're already good to go with the following command:
+You can verify if you're already good to go with the following commands:
 
 ```shell
 php --version
