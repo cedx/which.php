@@ -21,6 +21,6 @@ jobs:
           extensions: curl, intl, mbstring, simplexml
           php-version: latest
       - name: Install dependencies
-        uses: ./Invoke.ps1 Install
+        run: ./Invoke.ps1 Install
       - name: Run tests
         run: ./Invoke.ps1 Tests
