@@ -33,7 +33,7 @@
 	},
 	"require-dev": {
 		"phpstan/phpstan": "^2.1.54",
-		"phpunit/phpunit": "^13.1.9"
+		"phpunit/phpunit": "^13.1.10"
 	},
 	"support": {
 		"docs": "https://github.com/cedx/which.php/tree/main/docs",
