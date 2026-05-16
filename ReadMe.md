@@ -2,12 +2,12 @@
 Find the instances of an executable in the system path, in [PHP](https://www.php.net).
 
 ## Documentation
-- [User guide](https://github.com/cedx/which.php/tree/main/docs)
-- [Examples](https://github.com/cedx/which.php/tree/main/example)
+- [User guide](https://github.com/CedX/Which.php/tree/main/docs)
+- [Examples](https://github.com/CedX/Which.php/tree/main/example)
 
 ## Development
-- [Git repository](https://github.com/cedx/which.php)
-- [Submit an issue](https://github.com/cedx/which.php/issues)
+- [Git repository](https://github.com/CedX/Which.php)
+- [Submit an issue](https://github.com/CedX/Which.php/issues)
 
 ## License
-[Which for PHP](https://github.com/cedx/which.php) is distributed under the MIT License.
+[Which for PHP](https://github.com/CedX/Which.php) is distributed under the MIT License.
