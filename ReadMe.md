@@ -2,8 +2,8 @@
 Find the instances of an executable in the system path, in [PHP](https://www.php.net).
 
 ## Documentation
-- [User guide](https://github.com/CedX/Which.php/tree/main/docs)
-- [Examples](https://github.com/CedX/Which.php/tree/main/example)
+- [User guide](https://github.com/CedX/Which.php/tree/main/Documentation)
+- [Examples](https://github.com/CedX/Which.php/tree/main/Examples)
 
 ## Development
 - [Git repository](https://github.com/CedX/Which.php)

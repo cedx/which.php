@@ -8,12 +8,12 @@
 
 	<source>
 		<include>
-			<directory>../src</directory>
+			<directory>../Sources</directory>
 		</include>
 	</source>
 	<testsuites>
 		<testsuite name="Default">
-			<directory suffix="Tests.php">../test</directory>
+			<directory suffix="Tests.php">../Tests</directory>
 		</testsuite>
 	</testsuites>
 </phpunit>

@@ -13,14 +13,14 @@ final class ResultSetTests extends TestCase {
 
 	#[Test, TestDox("all")]
 	public function all(): void {
-		$paths = ["res"];
+		$paths = ["Resources"];
 
 		// It should return the path of the `Executable.cmd` file on Windows.
 		$executables = which("Executable", paths: $paths)->all;
 		if (!Finder::isWindows()) assertEmpty($executables);
 		else {
 			assertCount(1, $executables);
-			assertStringEndsWith("\\res\\Executable.cmd", $executables[0]);
+			assertStringEndsWith("\\Resources\\Executable.cmd", $executables[0]);
 		}
 
 		// It should return the path of the `Executable.sh` file on POSIX.
@@ -28,7 +28,7 @@ final class ResultSetTests extends TestCase {
 		if (Finder::isWindows()) assertEmpty($executables);
 		else {
 			assertCount(1, $executables);
-			assertStringEndsWith("/res/Executable.sh", $executables[0]);
+			assertStringEndsWith("/Resources/Executable.sh", $executables[0]);
 		}
 
 		// It should return an empty array if the searched command is not executable or not found.
@@ -38,17 +38,17 @@ final class ResultSetTests extends TestCase {
 
 	#[Test, TestDox("first")]
 	public function first(): void {
-		$paths = ["res"];
+		$paths = ["Resources"];
 
 		// It should return the path of the `Executable.cmd` file on Windows.
 		$executable = which("Executable", paths: $paths)->first;
-		if (Finder::isWindows()) assertStringEndsWith("\\res\\Executable.cmd", $executable ?? "");
+		if (Finder::isWindows()) assertStringEndsWith("\\Resources\\Executable.cmd", $executable ?? "");
 		else assertEmpty($executable);
 
 		// It should return the path of the `Executable.sh` file on POSIX.
 		$executable = which("Executable.sh", paths: $paths)->first;
 		if (Finder::isWindows()) assertEmpty($executable);
-		else assertStringEndsWith("/res/Executable.sh", $executable ?? "");
+		else assertStringEndsWith("/Resources/Executable.sh", $executable ?? "");
 
 		// It should return an empty string if the searched command is not executable or not found.
 		assertEmpty(which("NotExecutable.sh", paths: $paths)->first);

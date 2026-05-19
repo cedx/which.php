@@ -29,17 +29,17 @@ final class FinderTests extends TestCase {
 
 	#[Test, TestDox("find()")]
 	public function find(): void {
-		$finder = new Finder(["res"]);
+		$finder = new Finder(["Resources"]);
 
 		// It should return the path of the `Executable.cmd` file on Windows.
 		$executables = [...$finder->find("Executable")];
 		assertCount(Finder::isWindows() ? 1 : 0, $executables);
-		if (Finder::isWindows()) assertStringEndsWith("\\res\\Executable.cmd", $executables[0]->getPathname());
+		if (Finder::isWindows()) assertStringEndsWith("\\Resources\\Executable.cmd", $executables[0]->getPathname());
 
 		// It should return the path of the `Executable.sh` file on POSIX.
 		$executables = [...$finder->find("Executable.sh")];
 		assertCount(Finder::isWindows() ? 0 : 1, $executables);
-		if (!Finder::isWindows()) assertStringEndsWith("/res/Executable.sh", $executables[0]->getPathname());
+		if (!Finder::isWindows()) assertStringEndsWith("/Resources/Executable.sh", $executables[0]->getPathname());
 
 		// It should return an empty array if the searched command is not executable or not found.
 		assertEmpty([...$finder->find("NotExecutable.sh")]);
@@ -51,13 +51,13 @@ final class FinderTests extends TestCase {
 		$finder = new Finder;
 
 		// It should return `false` if the searched command is not executable or not found.
-		assertFalse($finder->isExecutable("res/NotExecutable.sh"));
+		assertFalse($finder->isExecutable("Resources/NotExecutable.sh"));
 		assertFalse($finder->isExecutable("foo/bar/baz.qux"));
 
 		// It should return `false` for a POSIX executable, when test is run on Windows.
-		assertEquals(!Finder::isWindows(), $finder->isExecutable("res/Executable.sh"));
+		assertEquals(!Finder::isWindows(), $finder->isExecutable("Resources/Executable.sh"));
 
 		// It should return `false` for a Windows executable, when test is run on POSIX.
-		assertEquals(Finder::isWindows(), $finder->isExecutable("res/Executable.cmd"));
+		assertEquals(Finder::isWindows(), $finder->isExecutable("Resources/Executable.cmd"));
 	}
 }

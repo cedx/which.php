@@ -9,7 +9,7 @@ function Install-ComposerPackage {
 		[string] $Package
 	)
 
-	$argumentList = , ($Package ? "require" : "install")
+	$argumentList = @($Package ? "require" : "install")
 	if ($Package) { $argumentList += $Package }
 	composer @argumentList
 }
