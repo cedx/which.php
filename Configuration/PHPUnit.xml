@@ -1,4 +1,4 @@
-<phpunit cacheDirectory="../var/PHPUnit" testdox="true"
+<phpunit cacheDirectory="../Temp/PHPUnit" testdox="true"
 	displayDetailsOnTestsThatTriggerDeprecations="true"
 	displayDetailsOnTestsThatTriggerErrors="true"
 	displayDetailsOnTestsThatTriggerNotices="true"

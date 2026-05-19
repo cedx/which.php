@@ -1,5 +1,5 @@
 /**/*.user
 /.idea/
 /.vs/
-/var/
+/Temp/
 /vendor/
